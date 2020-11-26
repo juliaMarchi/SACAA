@@ -18,4 +18,4 @@ export default class PessoasController {
   public async destroy({}: HttpContextContract) {}
 }
 
-//oioi
+//tchau tchau
