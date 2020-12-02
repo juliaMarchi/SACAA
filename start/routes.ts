@@ -6,5 +6,5 @@ Route.on('/').render('welcome')
 Route.get('cadastro', 'PessoasController.index')
 
 Route.get('test', async () => {
-  return Database.query().select('*').from('pessoas')
+  return Database.query().select('*').from('Pessoa')
 })
