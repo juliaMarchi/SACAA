@@ -1,0 +1,63 @@
+<div>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" value="{{ pessoa.nome || '' }}">
+    </div>
+    <div>
+        <label for="nascimento">Nascimento</label>
+        <input type="date" name="nascimento" value="{{ pessoa.nascimento  || '' }}">
+    </div>
+    <div>
+        <label for="cpf">CPF</label>
+        <input type="number" name="cpf" value="{{ pessoa.cpf || '' }}">
+    </div>
+    <div>
+        <label for="cnpj">CNPJ</label>
+        <input type="number" name="cnpj" value="{{ pessoa.cnpj || '' }}">
+    </div>
+    <div>
+        <label>Você é uma ONG?</label>
+        <input type="radio" name="ong" value="{{ pessoa.ong }}">
+        <label for="ong">Sim</label><br>
+        <input type="radio" name="ong" value="{{ pessoa.ong }}">
+        <label for="ong">Não</label><br>
+    </div>
+    <div>
+        <label for="cep">CEP</label>
+        <input type="number" name="cep" value="{{ pessoa.cep || '' }}">
+    </div>
+    <div>
+        <label for="estado">Estado</label>
+        <input type="text" name="estado" value="{{ pessoa.estado || '' }}">
+    </div>
+    <div>
+        <label for="cidade">Cidade</label>
+        <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}">
+    </div>
+    <div>
+        <label for="rua">Rua</label>
+        <input type="text" name="rua" value="{{ pessoa.rua || '' }}">
+    </div>
+    <div>
+        <label for="numero">Número</label>
+        <input type="number" name="numero" value="{{ pessoa.numero || '' }}">
+    </div>
+    <div>
+        <label for="complemento">Complemento</label>
+        <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}">
+    </div>
+    <div>
+        <label for="enderecoFoto">Adicione uma foto sua</label>
+        <input type="text" name="enderecoFoto" value="{{ pessoa.enderecoFoto || '' }}">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" value="{{ pessoa.email || '' }}">
+    </div>
+    <div>
+        <label for="senha">Senha</label>
+        <input type="text" name="senha" value="{{ pessoa.senha || '' }}">
+    </div>
+    <button type="reset">Limpar</button>
+    <button type="submit">Criar conta</button>
+</div>

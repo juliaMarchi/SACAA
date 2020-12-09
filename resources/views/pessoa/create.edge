@@ -1,0 +1,6 @@
+@section('conteudo')
+  <h2>Novo Usuário</h2>
+  <form action="{{ route('PessoasController.store') }}" method="POST">
+    @include('pessoa.form')
+  </form>
+@endsection

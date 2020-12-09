@@ -6,7 +6,7 @@ export default class Pessoas extends BaseSchema {
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id').primary
+      table.increments('idPessoa').primary
       table.string('nome').notNullable
       table.date('nascimento').notNullable
       table.integer('cpf')
