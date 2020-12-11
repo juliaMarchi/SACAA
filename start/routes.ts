@@ -4,8 +4,10 @@ import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.on('/').render('welcome')
 
-Route.get('cadastro', 'PessoasController.create')
+Route.get('/cadastro', 'PessoasController.create')
 
-Route.get('index', 'PessoasController.index')
+Route.post('/cadastro', 'PessoasController.store');
+
+Route.get('/index', 'PessoasController.index')
 
 Route.resource('pessoas', 'PessoasController');

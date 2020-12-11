@@ -17,9 +17,9 @@
     </div>
     <div>
         <label>Você é uma ONG?</label>
-        <input type="radio" name="ong" value="{{ pessoa.ong }}">
+        <input type="radio" name="ong" value="{{ pessoa.ong || 1 }}">
         <label for="ong">Sim</label><br>
-        <input type="radio" name="ong" value="{{ pessoa.ong }}">
+        <input type="radio" name="ong" value="{{ pessoa.ong || 0 }}">
         <label for="ong">Não</label><br>
     </div>
     <div>
@@ -33,6 +33,10 @@
     <div>
         <label for="cidade">Cidade</label>
         <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}">
+    </div>
+    <div>
+        <label for="bairro">Bairro</label>
+        <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}">
     </div>
     <div>
         <label for="rua">Rua</label>

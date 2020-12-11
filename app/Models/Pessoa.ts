@@ -9,10 +9,10 @@ export default class Pessoa extends BaseModel {
   public nome: string[100]
 
   @column({ columnName: 'cpf' })
-  public cpf: number
+  public cpf: string
 
   @column({ columnName: 'cnpj' })
-  public cnpj: number
+  public cnpj: string
 
   @column.date({ columnName: 'nascimento' })
   public nascimento: DateTime
@@ -21,13 +21,16 @@ export default class Pessoa extends BaseModel {
   public ong: boolean
 
   @column({ columnName: 'cep' })
-  public cep: number
+  public cep: string
 
   @column({ columnName: 'estado' })
   public estado: string[100]
 
   @column({ columnName: 'cidade' })
   public cidade: string[250]
+
+  @column({ columnName: 'bairro' })
+  public bairro: string[40]
 
   @column({ columnName: 'rua' })
   public rua: string[250]

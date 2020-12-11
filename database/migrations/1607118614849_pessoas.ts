@@ -9,10 +9,10 @@ export default class Pessoas extends BaseSchema {
       table.increments('idPessoa').primary
       table.string('nome').notNullable
       table.date('nascimento').notNullable
-      table.integer('cpf')
-      table.integer('cnpj')
+      table.string('cpf')
+      table.string('cnpj')
       table.boolean('ong').notNullable
-      table.integer('cep').notNullable
+      table.string('cep').notNullable
       table.string('estado').notNullable
       table.string('cidade').notNullable
       table.string('bairro').notNullable
