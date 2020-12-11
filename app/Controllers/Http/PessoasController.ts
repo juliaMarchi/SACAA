@@ -14,9 +14,7 @@ export default class PessoasController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const data = request.only(['nome']);
     const pessoa = await Pessoa.create(request.all());
-    console.log(request.all());
     return pessoa.idPessoa;
   }
 

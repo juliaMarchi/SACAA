@@ -6,17 +6,17 @@ export default class Pessoas extends BaseSchema {
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
-      table.string('cpf')
-      table.string('cnpj')
-      table.string('cep').notNullable
+      table.string('cnpj').alter()
+      table.string('cpf').alter()
+      table.string('cep').alter()
     })
   }
 
   public async down () {
     this.schema.table(this.tableName, (table) => {
-      table.dropColumn('cpf')
-      table.dropColumn('cnpj')
-      table.dropColumn('cep')
+      table.integer('cpf').alter()
+      table.integer('cnpj').alter()
+      table.integer('cep').alter()
     })
   }
 }
