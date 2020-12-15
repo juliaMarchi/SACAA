@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" value="{{ animal.nome || '' }}">
+    </div>
+    <div>
+        <label for="nascimento">Nascimento</label>
+        <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}">
+    </div>
+    <div>
+        <label for="raca">Raça</label>
+        <input type="string" name="raca" value="{{ animal.raca || '' }}">
+    </div> 
+    <div>
+        <label>Porte</label>
+        <input type="radio" name="porte" value="pequeno">
+        <label for="porte">Pequeno</label><br>
+        <input type="radio" name="porte" value="medio">
+        <label for="porte">Médio</label><br>
+        <input type="radio" name="porte" value="grande">
+        <label for="porte">Grande</label><br>
+      </div>
+    <div>
+        <label for="enderecoFoto">Adicione uma foto do seu animal</label>
+        <input type="text" name="enderecoFoto" value="{{ animal.enderecoFoto || '' }}">
+    </div>
+    <button type="reset">Limpar</button>
+    <button type="submit">Criar conta</button>
+    <a href="">Cancelar</a>
+</div>
