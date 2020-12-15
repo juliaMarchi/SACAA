@@ -8,6 +8,8 @@ Route.get('/cadastro', 'PessoasController.create')
 
 Route.post('/cadastro', 'PessoasController.store');
 
+Route.get('/lista', 'PessoasController.show');
+
 Route.get('/index', 'PessoasController.index')
 
 Route.resource('pessoas', 'PessoasController');
