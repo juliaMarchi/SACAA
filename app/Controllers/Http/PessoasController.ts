@@ -18,19 +18,28 @@ export default class PessoasController {
     return pessoa.idPessoa;
   }
 
-  public async show({ view }: HttpContextContract) {
-    const pessoa =  await Pessoa.query().first();
+  public async show({ view, params }: HttpContextContract) {
+    const pessoa =  await Pessoa.find(params.idPessoa)
     console.log(pessoa);
     return view.render('pessoa/show', { pessoa });
   }
 
-  public async edit({}: HttpContextContract) {}
+  public async list({ view }: HttpContextContract){
+    const pessoa =  await Pessoa.all()
+    return view.render('pessoa/list', { pessoa });
+  }
 
-  public async update({ params, request }: HttpContextContract) {
+  public async edit({ view, params }: HttpContextContract) {
+    const pessoa = await Pessoa.find(params.idPessoa);
+    return view.render('pessoa/edit', { pessoa })
+    //retornar o form pra editar uma pessoa.
+  }
+
+  public async update({ request, params }: HttpContextContract) {
     const pessoa = await Pessoa.find(params.idPessoa);
 
     if(pessoa){
-      pessoa.merge(request.only())
+      pessoa.merge(request.all())
       pessoa.save();
     }
   }
