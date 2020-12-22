@@ -13,16 +13,12 @@
     </div> 
     <div>
         <label>Porte</label>
-        <input type="radio" name="porte" value="pequeno">
-        <label for="porte">Pequeno</label><br>
-        <input type="radio" name="porte" value="medio">
-        <label for="porte">Médio</label><br>
-        <input type="radio" name="porte" value="grande">
-        <label for="porte">Grande</label><br>
-      </div>
-    <div>
-        <label for="enderecoFoto">Adicione uma foto do seu animal</label>
-        <input type="text" name="enderecoFoto" value="{{ animal.enderecoFoto || '' }}">
+        @each(porte in portes)
+          <div>
+            <input type="radio" name="porte" value="{{ porte.value }}" id="porte_{{ porte.value }}" />
+            <label for="porte_{{ porte.value }}">{{ porte.description }}</label>
+          </div>
+        @endeach
     </div>
     <button type="reset">Limpar</button>
     <button type="submit">Criar conta</button>

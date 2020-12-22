@@ -8,8 +8,22 @@ export default class AnimalsController {
   }
 
   public async create ({ view }: HttpContextContract) {
+    const portes = [
+      {
+        value: "pequeno",
+        description: "Pequeno",
+      },
+      {
+        value: "medio",
+        description: "Médio",
+      },
+      {
+        value: "grande",
+        description: "Grande",
+      },
+    ];
     const animal = new Animal();
-    return view.render('animal/create', { animal });
+    return view.render('animal/create', { portes, animal });
   }
 
   public async store ({ request }: HttpContextContract) {

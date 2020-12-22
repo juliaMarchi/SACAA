@@ -1,14 +1,13 @@
 /* eslint-disable prettier/prettier */
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Telefones extends BaseSchema {
-  protected tableName = 'telefones'
+export default class Caracteristicas extends BaseSchema {
+  protected tableName = 'caracteristicas'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('idTelefone').primary
-      table.integer('idPessoa').unsigned().references('idPessoa').inTable('pessoas')
-      table.string('numero').notNullable
+      table.increments('idCaracteristica').primary
+      table.string('descricao')
       table.timestamps(true)
     })
   }

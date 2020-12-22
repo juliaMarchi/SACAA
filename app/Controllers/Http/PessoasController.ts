@@ -2,6 +2,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import View from '@ioc:Adonis/Core/View';
 import Pessoa from 'App/Models/Pessoa';
+import Telefone from 'App/Models/Telefone';
 
 export default class PessoasController {
   public async index({ view }: HttpContextContract) {
@@ -14,7 +15,20 @@ export default class PessoasController {
   }
 
   public async store({ request }: HttpContextContract) {
-    const pessoa = await Pessoa.create(request.all());
+    const dados = request.all();
+    const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','senha']));
+    if(dados['telefone1']){
+      const telefone1 = new Telefone();
+      telefone1.numero = dados['telefone1'];
+      telefone1.idPessoa = pessoa.idPessoa;
+      telefone1.save();
+    }
+    if(dados['telefone2']){
+      const telefone2 = new Telefone();
+      telefone2.numero = dados['telefone2'];
+      telefone2.idPessoa = pessoa.idPessoa;
+      telefone2.save();
+    }
     return pessoa.idPessoa;
   }
 
