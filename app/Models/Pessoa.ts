@@ -63,7 +63,13 @@ export default class Pessoa extends BaseModel {
   @hasMany(() => Telefone, {foreignKey:'idPessoa'})
   public telefones: HasMany<typeof Telefone>
 
-  @manyToMany(() => Caracteristica )
+  @manyToMany(() => Caracteristica,{
+    localKey: 'idPessoa',
+    pivotForeignKey: 'idPessoa',
+    relatedKey: 'idCaracteristica',
+    pivotRelatedForeignKey: 'idCaracteristica',
+    pivotTable: 'pessoa_caracteristica'
+  } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
   getTelefone1(){

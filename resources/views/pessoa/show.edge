@@ -3,4 +3,9 @@
     <p>{{ pessoa.nascimento }}</p>
     <p>{{ pessoa.estado }}</p>
     <p>{{ pessoa.cidade }}</p>
+    <ul>
+        @each(caract in pessoa.caracteristicas)
+          <li> {{ caract.descricao}} </li>
+        @endeach
+      </ul>
 </div>

@@ -1,0 +1,19 @@
+version: '3.3'
+volumes:
+  data_tccalexiajulia:
+services:
+  db_tccalexiajulia:
+    image: mysql:latest
+    volumes:
+      - data_tccalexiajulia:/var/lib/mysql
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+    environment:
+      - MYSQL_USER=user
+      - MYSQL_DATABASE=sacaa
+      - MYSQL_PASSWORD=12345
+      - MYSQL_ROOT_PASSWORD=root
+    
+    ports:
+      - "3306:3306"

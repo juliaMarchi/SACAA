@@ -3,6 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import View from '@ioc:Adonis/Core/View';
 import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
+import Caracteristica from 'App/Models/Caracteristica';
 
 export default class PessoasController {
   public async index({ view }: HttpContextContract) {
@@ -32,8 +33,31 @@ export default class PessoasController {
     return pessoa.idPessoa;
   }
 
+  public async renderPerfil({view, params}){
+    const pessoa = await Pessoa.find(params.idPessoa)
+    const caracteristicas = await Caracteristica.all()
+    console.log(caracteristicas)
+    return view.render('pessoa/perfil', { pessoa, caracteristicas });
+  }
+
+
+  public async savePerfil({request, params}){
+    const pessoa = await Pessoa.find(params.idPessoa)
+    await pessoa.related("caracteristicas").sync(request.only(['caracteristicas'])['caracteristicas'])
+    await pessoa.preload("caracteristicas")
+
+    return pessoa
+
+  }
+
+
+
+
+
   public async show({ view, params }: HttpContextContract) {
     const pessoa =  await Pessoa.find(params.idPessoa)
+    //carrega as caracteristicas da pessoa
+    await pessoa.preload('caracteristicas')
     console.log(pessoa);
     return view.render('pessoa/show', { pessoa });
   }

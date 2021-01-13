@@ -8,7 +8,11 @@ Route.resource('pessoas', 'PessoasController');
 Route.get('/index', 'PessoasController.index');
 Route.get('/cadastro', 'PessoasController.create');
 Route.post('/cadastro', 'PessoasController.store');
-Route.get('/lista', 'PessoasController.show');
+Route.get('/lista', 'PessoasController.list');
+Route.get('/show/:idPessoa', 'PessoasController.show');
+Route.get('/perfil/:idPessoa', 'PessoasController.renderPerfil');
+Route.post('/perfil/:idPessoa', 'PessoasController.savePerfil');
+
 
 Route.resource('animais', 'AnimalsController');
 Route.get('/indexAnimal', 'AnimalsController.index');
