@@ -36,7 +36,6 @@ export default class PessoasController {
   public async renderPerfil({view, params}){
     const pessoa = await Pessoa.find(params.idPessoa)
     const caracteristicas = await Caracteristica.all()
-    console.log(caracteristicas)
     return view.render('pessoa/perfil', { pessoa, caracteristicas });
   }
 
@@ -44,21 +43,16 @@ export default class PessoasController {
   public async savePerfil({request, params}){
     const pessoa = await Pessoa.find(params.idPessoa)
     await pessoa.related("caracteristicas").sync(request.only(['caracteristicas'])['caracteristicas'])
-    await pessoa.preload("caracteristicas")
+    await pessoa.preload("caracteristicas")//carregar dados das relações
 
     return pessoa
 
   }
 
-
-
-
-
   public async show({ view, params }: HttpContextContract) {
     const pessoa =  await Pessoa.find(params.idPessoa)
     //carrega as caracteristicas da pessoa
     await pessoa.preload('caracteristicas')
-    console.log(pessoa);
     return view.render('pessoa/show', { pessoa });
   }
 
