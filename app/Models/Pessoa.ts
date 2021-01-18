@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Telefone from "App/Models/Telefone"
