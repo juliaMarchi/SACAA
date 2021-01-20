@@ -8,6 +8,14 @@
         <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}">
     </div>
     <div>
+        <label for="idTipoAnimal">Selecione o tipo do seu animal:</label>
+        <select name="idTipoAnimal" id="idTipoAnimal">
+            @each(tipo in tipoAnimais)
+                <option value="{{tipo.idTipoAnimal}}" >{{tipo.descricao}}</option>
+            @endeach
+        </select>
+    </div>
+    <div>
         <label for="raca">Raça</label>
         <input type="string" name="raca" value="{{ animal.raca || '' }}">
     </div> 

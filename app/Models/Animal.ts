@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import TipoAnimal from 'App/Models/TipoAnimal'
 
 export default class Animal extends BaseModel {

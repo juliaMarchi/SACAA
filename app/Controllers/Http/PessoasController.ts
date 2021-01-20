@@ -57,8 +57,8 @@ export default class PessoasController {
   }
 
   public async list({ view }: HttpContextContract){
-    const pessoa =  await Pessoa.all()
-    return view.render('pessoa/list', { pessoa });
+    const pessoas =  await Pessoa.all()
+    return view.render('pessoa/list', { pessoas });
   }
 
   public async edit({ view, params }: HttpContextContract) {

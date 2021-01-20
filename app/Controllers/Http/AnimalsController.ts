@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Animal from 'App/Models/Animal';
+import TipoAnimal from 'App/Models/TipoAnimal';
 
 export default class AnimalsController {
   public async index ({ view }: HttpContextContract) {
@@ -23,17 +24,25 @@ export default class AnimalsController {
       },
     ];
     const animal = new Animal();
-    return view.render('animal/create', { portes, animal });
+    const tipoAnimais = await TipoAnimal.all();
+    console.log(tipoAnimais);
+    return view.render('animal/create', { portes, animal, tipoAnimais });
   }
 
   public async store ({ request }: HttpContextContract) {
-    const animal = await Animal.create(request.all());
+    const dados = request.all();
+    const animal = await Animal.create(dados);
     return animal.idAnimal;
   }
 
   public async show ({ view }: HttpContextContract) {
     const animal =  await Animal.query().first();
-    return view.render('pessoa/show', { animal });
+    return view.render('animal/show', { animal });
+  }
+
+  public async list({ view }: HttpContextContract){
+    const animais =  await Animal.all()
+    return view.render('animal/list', { animais });
   }
 
   public async edit ({}: HttpContextContract) {

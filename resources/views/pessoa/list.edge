@@ -1,0 +1,8 @@
+@section('conteudo')
+  <h2>Pessoas cadastradas</h2>
+  <ul>
+      @each(pessoa in pessoas)
+        <li>{{ pessoa.nome }}</li>
+      @endeach
+  </ul>
+@endsection
