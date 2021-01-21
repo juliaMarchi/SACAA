@@ -4,6 +4,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Telefone from "App/Models/Telefone"
 import Caracteristica from 'App/Models/Caracteristica'
+import Adocao from 'App/Models/Adocao'
+import Doacao from 'App/Models/Doacao'
 
 export default class Pessoa extends BaseModel {
   @column({ isPrimary: true, columnName: 'idPessoa' })
@@ -78,4 +80,10 @@ export default class Pessoa extends BaseModel {
   getTelefone2(){
     return this.telefones.entries[1];
   }
+
+  @hasMany(() => Adocao, {foreignKey:'idAdocao'})
+  public adocao: HasMany<typeof Adocao>
+
+  @hasMany(() => Doacao, {foreignKey:'idDoacao'})
+  public doacao: HasMany<typeof Doacao>
 }

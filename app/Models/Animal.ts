@@ -1,14 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import TipoAnimal from 'App/Models/TipoAnimal'
+import Adocao from 'App/Models/Adocao'
+import Doacao from 'App/Models/Doacao'
 
 export default class Animal extends BaseModel {
-  @column({ isPrimary: true })
+  @column({ isPrimary: true, columnName: 'idAnimal' })
   public idAnimal: number
-
-  @column({ columnName: 'idTipoAnimal '})
-  public idTipoAnimal: number
 
   @column({ columnName: 'nome' })
   public nome: string[45]
@@ -33,5 +32,11 @@ export default class Animal extends BaseModel {
 
   @belongsTo(() => TipoAnimal)
   public tipoAnimal: BelongsTo<typeof TipoAnimal> 
+
+  @hasMany(() => Adocao, {foreignKey:'idAdocao'})
+  public adocao: HasMany<typeof Adocao>
+
+  @hasMany(() => Doacao, {foreignKey:'idDoacao'})
+  public doacao: HasMany<typeof Doacao>
 
 }
