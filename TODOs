@@ -1,0 +1,15 @@
+//1 Incluir a flag ativa na doação
+//2 Fazer autenticação de usuários
+     //https://preview.adonisjs.com/guides/auth/introduction
+
+//3 Criar o controler para adoção
+   //3.1 create
+       //Buscar todos os animais com doação ativa
+       //Fazer o matching com o usuário logado
+       //Listar os potenciais animais
+   //3.2 store 
+       //Criar uma adoção entre o usuário logado e o animal escolhido
+       //marcar a flag ativa da doação do animal como falsa
+
+
+//4 Fazer a upload das fotos

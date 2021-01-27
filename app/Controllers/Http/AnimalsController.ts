@@ -2,6 +2,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Animal from 'App/Models/Animal';
 import TipoAnimal from 'App/Models/TipoAnimal';
+import Doacao from 'App/Models/Doacao';
+import Pessoa from 'App/Models/Pessoa';
 
 export default class AnimalsController {
   public async index ({ view }: HttpContextContract) {
@@ -32,6 +34,23 @@ export default class AnimalsController {
   public async store ({ request }: HttpContextContract) {
     const dados = request.all();
     const animal = await Animal.create(dados);
+
+    //TODO: Pegar o usuário logado
+    const usuario = await Pessoa.find(1);
+
+    //Criar uma doacao com o usuário e com o animal
+
+    //TODO: incluir flag ativo na doacao
+    const doacao = new Doacao();
+    //doacao.ativa = true;
+    
+    await doacao.save()
+
+    await doacao.related('animal').associate(animal);
+    await doacao.related('pessoa').associate(usuario);
+    
+
+
     return animal.idAnimal;
   }
 
