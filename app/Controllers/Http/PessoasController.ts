@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import View from '@ioc:Adonis/Core/View';
 import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
+import { HttpContext } from '@adonisjs/core/build/standalone';
 
 export default class PessoasController {
   public async index({ view }: HttpContextContract) {
@@ -12,7 +14,7 @@ export default class PessoasController {
 
   public async create({ view }: HttpContextContract) {
     const pessoa = new Pessoa();
-    return view.render('pessoa/create', { pessoa });
+    return view.render('pessoa', { pessoa });
   }
 
   public async store({ request }: HttpContextContract) {
@@ -38,7 +40,6 @@ export default class PessoasController {
     const caracteristicas = await Caracteristica.all()
     return view.render('pessoa/perfil', { pessoa, caracteristicas });
   }
-
 
   public async savePerfil({request, params}){
     const pessoa = await Pessoa.find(params.idPessoa)
@@ -82,5 +83,44 @@ export default class PessoasController {
     if(pessoa){
       pessoa.delete();
     }
+  }
+
+  public async register({ auth, request, response }: HttpContextContract){
+    /**
+     * Validate user details
+     */
+    const validationSchema = schema.create({
+      email: schema.string({ trim: true }, [
+        rules.email(),
+        rules.unique({ table: 'pessoas', column: 'email' }),
+      ]),
+      senha: schema.string({ trim: true }, [
+        rules.confirmed(),
+      ]),
+    })
+
+    const userDetails = await request.validate({
+      schema: validationSchema,
+    })
+
+    /**
+     * Create a new user
+     */
+    const pessoa = new Pessoa()
+    pessoa.email = userDetails.email
+    pessoa.senha = userDetails.senha
+    await pessoa.save()
+
+    + await auth.login(pessoa)
+    + response.redirect('/dashboard')
+    
+  }
+
+  public async login({ auth, request, response }: HttpContextContract){
+    const email = request.input('email')
+    const password = request.input('password')
+    await auth.attempt(email, password)
+
+    response.redirect('/dashboard')
   }
 }
