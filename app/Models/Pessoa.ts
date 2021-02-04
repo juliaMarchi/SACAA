@@ -53,8 +53,11 @@ export default class Pessoa extends BaseModel {
   @column({ columnName: 'email' })
   public email: string[450]
 
-  @column({ columnName: 'senha' })
-  public senha: string[45]
+  @column({ columnName: 'password' })
+  public password: string[45]
+
+  @column({ columnName: 'remember_me_token' })
+  public rememberMeToken: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

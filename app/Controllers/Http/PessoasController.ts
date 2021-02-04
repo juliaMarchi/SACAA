@@ -14,12 +14,12 @@ export default class PessoasController {
 
   public async create({ view }: HttpContextContract) {
     const pessoa = new Pessoa();
-    return view.render('pessoa', { pessoa });
+    return view.render('pessoa/create', { pessoa });
   }
 
   public async store({ request }: HttpContextContract) {
     const dados = request.all();
-    const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','senha']));
+    const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','password']));
     if(dados['telefone1']){
       const telefone1 = new Telefone();
       telefone1.numero = dados['telefone1'];
@@ -83,37 +83,6 @@ export default class PessoasController {
     if(pessoa){
       pessoa.delete();
     }
-  }
-
-  public async register({ auth, request, response }: HttpContextContract){
-    /**
-     * Validate user details
-     */
-    const validationSchema = schema.create({
-      email: schema.string({ trim: true }, [
-        rules.email(),
-        rules.unique({ table: 'pessoas', column: 'email' }),
-      ]),
-      senha: schema.string({ trim: true }, [
-        rules.confirmed(),
-      ]),
-    })
-
-    const userDetails = await request.validate({
-      schema: validationSchema,
-    })
-
-    /**
-     * Create a new user
-     */
-    const pessoa = new Pessoa()
-    pessoa.email = userDetails.email
-    pessoa.senha = userDetails.senha
-    await pessoa.save()
-
-    + await auth.login(pessoa)
-    + response.redirect('/dashboard')
-    
   }
 
   public async login({ auth, request, response }: HttpContextContract){

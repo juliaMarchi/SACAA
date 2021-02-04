@@ -21,7 +21,7 @@ export default class Pessoas extends BaseSchema {
       table.string('complemento')
       table.string('enderecoFoto')
       table.string('email').notNullable
-      table.string('senha').notNullable
+      table.string('password').notNullable
       table.timestamps(true)
     })
   }
