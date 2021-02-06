@@ -29,8 +29,10 @@
     "@adonisjs/repl": "^1.1.5",
     "@adonisjs/session": "^4.0.5",
     "@adonisjs/view": "^3.1.0",
+    "@phc/argon2": "^1.0.9",
     "luxon": "^1.25.0",
     "mysql": "^2.18.1",
+    "phc-bcrypt": "^1.0.4",
     "proxy-addr": "^2.0.6",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.19"

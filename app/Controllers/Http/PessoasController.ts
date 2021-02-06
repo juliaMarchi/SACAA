@@ -92,4 +92,14 @@ export default class PessoasController {
 
     response.redirect('/dashboard')
   }
+
+  public async logout({ auth, request, response }: HttpContextContract){
+    await auth.logout()
+
+    response.redirect('/')
+  }
+
+
+
+
 }

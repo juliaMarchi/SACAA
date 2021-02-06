@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany, ManyToMany, manyToMany, beforeSave } from '@ioc:Adonis/Lucid/Orm'
+import Hash from '@ioc:Adonis/Core/Hash'
+
 import Telefone from "App/Models/Telefone"
 import Caracteristica from 'App/Models/Caracteristica'
 import Adocao from 'App/Models/Adocao'
@@ -89,4 +91,13 @@ export default class Pessoa extends BaseModel {
 
   @hasMany(() => Doacao, {foreignKey:'idDoacao'})
   public doacao: HasMany<typeof Doacao>
+
+
+  @beforeSave()
+  public static async hashPassword (pessoa: Pessoa) {
+    if (pessoa.$dirty.password) {
+      pessoa.password = await Hash.make(pessoa.password)
+    }
+  }
+
 }

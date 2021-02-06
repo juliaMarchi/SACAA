@@ -15,11 +15,15 @@ Route.get('/dashboard', async ({ auth }) => {
 Route.on('login').render('login')
 Route.post('/login', 'PessoasController.login')
 
+Route.get('/logout', 'PessoasController.logout');
+
+
+
 //Route.resource('pessoas', 'PessoasController');
 Route.get('/pessoas/index', 'PessoasController.index');
 Route.get('/pessoas/cadastro', 'PessoasController.create');
 Route.post('/pessoas/cadastro', 'PessoasController.store');
-Route.get('/pessoas', 'PessoasController.list');
+Route.get('/pessoas', 'PessoasController.list').middleware('auth:web');
 Route.get('/pessoas/:idPessoa', 'PessoasController.show');
 Route.get('/pessoas/:idPessoa/perfil', 'PessoasController.renderPerfil');
 Route.post('/pessoas/:idPessoa/perfil', 'PessoasController.savePerfil');
