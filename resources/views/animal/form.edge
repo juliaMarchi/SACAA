@@ -1,34 +1,37 @@
 <div>
     <div>
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" value="{{ animal.nome || '' }}">
+        <label for="basic-url" class="form-label">Nome</label>
+        <input type="text" name="nome" value="{{ animal.nome || '' }}" class="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
     </div>
     <div>
-        <label for="nascimento">Nascimento</label>
-        <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}">
+        <label for="basic-url" class="form-label">Nascimento</label>
+        <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}" class="form-control" placeholder="Nascimento" aria-label="Nascimento" aria-describedby="basic-addon1">
     </div>
     <div>
-        <label for="idTipoAnimal">Selecione o tipo do seu animal:</label>
-        <select name="idTipoAnimal" id="idTipoAnimal">
+        <label for="basic-url" class="form-label">Selecione o tipo do seu animal:</label>
+        <select name="idTipoAnimal" id="idTipoAnimal" class="form-select" aria-label="Default select example">
+            <option selected>Clique para selecionar</option>
             @each(tipo in tipoAnimais)
-                <option value="{{tipo.idTipoAnimal}}" >{{tipo.descricao}}</option>
+                <option value="{{tipo.idTipoAnimal}}">{{tipo.descricao}}</option>
             @endeach
         </select>
     </div>
     <div>
-        <label for="raca">Raça</label>
-        <input type="string" name="raca" value="{{ animal.raca || '' }}">
+        <label for="basic-url" class="form-label">Raça</label>
+        <input type="string" name="raca" value="{{ animal.raca || '' }}" class="form-control" placeholder="Raça" aria-label="Raça" aria-describedby="basic-addon1">
     </div> 
     <div>
-        <label>Porte</label>
+        <label for="basic-url" class="form-label">Porte</label>
         @each(porte in portes)
-          <div>
-            <input type="radio" name="porte" value="{{ porte.value }}" id="porte_{{ porte.value }}" />
-            <label for="porte_{{ porte.value }}">{{ porte.description }}</label>
-          </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="porte" value="{{ porte.value }}" id="porte_{{ porte.value }}" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">{{ porte.description }}</label>
+            </div>
         @endeach
     </div>
-    <button type="reset">Limpar</button>
-    <button type="submit">Cadastrar</button>
-    <a href="">Cancelar</a>
+</div>
+<div>
+    <button type="reset" class="btn btn-dark">Limpar</button>
+    <button type="submit" class="btn btn-dark">Cadastrar</button>
+    <a href="" class="btn btn-dark">Cancelar</a>
 </div>

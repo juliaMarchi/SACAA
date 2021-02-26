@@ -98,8 +98,4 @@ export default class PessoasController {
 
     response.redirect('/')
   }
-
-
-
-
 }

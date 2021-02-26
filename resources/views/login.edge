@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-</head>
-<body>
+@layout('base')
+
+@section('conteudo')
+  <h2>Login</h2>
 
   <form action="{{ route('PessoasController.login') }}" method="post">
     <div>
-      <label for="email">Email</label>
-      <input type="text" name="email" value="{{ flashMessages.get('email') || '' }}" />
+      <label for="basic-url" class="form-label">Email</label>
+      <input type="text" name="email" value="{{ flashMessages.get('email') || '' }}" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1"/>
       <p>{{ flashMessages.get('auth.errors.uid') || '' }}</p>
     </div>
 
     <div>
-      <label for="password">Password</label>
-      <input type="password" name="password" />
+      <label for="basic-url" class="form-label">Senha</label>
+      <input type="password" name="password" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1"/>
       <p>{{ flashMessages.get('auth.errors.password') || '' }}</p>
     </div>
 
     <div>
-      <button type="submit">Login</button>
+      <button type="submit" class="btn btn-dark">Login</button>
     </div>
   </form>
-
-</body>
-</html>
+@endsection

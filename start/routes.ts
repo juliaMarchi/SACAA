@@ -4,9 +4,6 @@ import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.on('/').render('welcome')
 
-Route.on('register').render('register')
-Route.post('register', 'PessoasController.register')
-
 Route.get('/dashboard', async ({ auth }) => {
     const user = await auth.authenticate()
     return `Hello user! Your email address is ${user.email}`
@@ -14,10 +11,7 @@ Route.get('/dashboard', async ({ auth }) => {
 
 Route.on('login').render('login')
 Route.post('/login', 'PessoasController.login')
-
 Route.get('/logout', 'PessoasController.logout');
-
-
 
 //Route.resource('pessoas', 'PessoasController');
 Route.get('/pessoas/index', 'PessoasController.index');
