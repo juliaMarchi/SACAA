@@ -23,16 +23,21 @@ export default class PessoasController {
     if(dados['telefone1']){
       const telefone1 = new Telefone();
       telefone1.numero = dados['telefone1'];
-      telefone1.idPessoa = pessoa.idPessoa;
-      telefone1.save();
+      await telefone1.save();
+
+      await telefone1.related('pessoa').associate(pessoa);
+
     }
     if(dados['telefone2']){
       const telefone2 = new Telefone();
       telefone2.numero = dados['telefone2'];
-      telefone2.idPessoa = pessoa.idPessoa;
       telefone2.save();
+
+      await telefone2.related('pessoa').associate(pessoa);
     }
-    return pessoa.idPessoa;
+
+    
+    return pessoa.id;
   }
 
   public async renderPerfil({view, params}){

@@ -6,10 +6,10 @@ export default class Doacaos extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('idDoacao').primary
+      table.increments('id').primary
       table.date('data').notNullable
-      table.integer('idAnimal').unsigned().references('idAnimal').inTable('animals')
-      table.integer('idPessoa').unsigned().references('idPessoa').inTable('pessoas')
+      table.integer('animal_id').unsigned().references('id').inTable('animals')
+      table.integer('pessoa_id').unsigned().references('id').inTable('pessoas')
       table.timestamps(true)
     })
   }

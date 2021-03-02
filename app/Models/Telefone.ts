@@ -4,10 +4,10 @@ import Pessoa from 'App/Models/Pessoa'
 
 export default class Telefone extends BaseModel {
   @column({ isPrimary: true })
-  public idTelefone: number
+  public id: number
 
-  @column({ columnName: 'idPessoa' })
-  public idPessoa: number
+  @column({ columnName: 'pessoa_id' })
+  public pessoaId: number
 
   @column({ columnName: 'numero' })
   public numero: string

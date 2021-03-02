@@ -6,7 +6,7 @@ export default class TipoAnimals extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('idTipoAnimal').primary
+      table.increments('id').primary
       table.string('descricao').notNullable
       table.timestamps(true)
     })

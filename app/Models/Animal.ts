@@ -6,8 +6,8 @@ import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
 
 export default class Animal extends BaseModel {
-  @column({ isPrimary: true, columnName: 'idAnimal' })
-  public idAnimal: number
+  @column({ isPrimary: true, columnName: 'id' })
+  public id: number
 
   @column({ columnName: 'nome' })
   public nome: string[45]
@@ -23,6 +23,10 @@ export default class Animal extends BaseModel {
 
   @column({ columnName: 'enderecoFoto' })
   public enderecoFoto: string[300]
+
+  @column({ columnName: 'tipoanimal_id' })
+  public tipoAnimalId: number
+
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

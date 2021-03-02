@@ -10,8 +10,8 @@ import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
 
 export default class Pessoa extends BaseModel {
-  @column({ isPrimary: true, columnName: 'idPessoa' })
-  public idPessoa: number
+  @column({ isPrimary: true, columnName: 'id' })
+  public id: number
 
   @column({ columnName: 'nome' })
   public nome: string[100]
@@ -67,14 +67,14 @@ export default class Pessoa extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Telefone, {foreignKey:'idPessoa'})
+  @hasMany(() => Telefone, {foreignKey:'id'})
   public telefones: HasMany<typeof Telefone>
 
   @manyToMany(() => Caracteristica,{
-    localKey: 'idPessoa',
-    pivotForeignKey: 'idPessoa',
-    relatedKey: 'idCaracteristica',
-    pivotRelatedForeignKey: 'idCaracteristica',
+    localKey: 'id',
+    pivotForeignKey: 'pessoa_id',
+    relatedKey: 'caracteristica_id',
+    pivotRelatedForeignKey: 'id',
     pivotTable: 'pessoa_caracteristica'
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
@@ -86,10 +86,10 @@ export default class Pessoa extends BaseModel {
     return this.telefones.entries[1];
   }
 
-  @hasMany(() => Adocao, {foreignKey:'idAdocao'})
+  @hasMany(() => Adocao, {foreignKey:'adocao_id'})
   public adocao: HasMany<typeof Adocao>
 
-  @hasMany(() => Doacao, {foreignKey:'idDoacao'})
+  @hasMany(() => Doacao, {foreignKey:'doacao_id'})
   public doacao: HasMany<typeof Doacao>
 
 

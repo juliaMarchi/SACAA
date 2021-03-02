@@ -32,26 +32,26 @@ export default class AnimalsController {
   }
 
   public async store ({ request }: HttpContextContract) {
+    
+    
     const dados = request.all();
-    const animal = await Animal.create(dados);
+    console.log(dados)
+    
+    const tipoAnimal = await TipoAnimal.find(dados['idTipoAnimal']);
+    console.log(tipoAnimal)
+
+    const x = request.only(['nome','raca','nascimento','porte']);
+    const animal = await Animal.create(x);
+
+    await animal.related('tipoAnimal').associate(tipoAnimal);
 
     //TODO: Pegar o usuário logado
     const usuario = await Pessoa.find(1);
 
-    //Criar uma doacao com o usuário e com o animal
-
-    //TODO: incluir flag ativo na doacao
-    const doacao = new Doacao();
-    //doacao.ativa = true;
-    
-    await doacao.save()
-
-    await doacao.related('animal').associate(animal);
-    await doacao.related('pessoa').associate(usuario);
-    
+   
 
 
-    return animal.idAnimal;
+    return animal.id;
   }
 
   public async show ({ view }: HttpContextContract) {

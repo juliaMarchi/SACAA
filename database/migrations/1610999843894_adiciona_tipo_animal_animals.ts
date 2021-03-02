@@ -6,7 +6,7 @@ export default class AdicionaTipoAnimalAnimals extends BaseSchema {
 
   public async up () {
     this.schema.table(this.tableName, (table) => {
-      table.integer('idTipoAnimal').unsigned().references('idTipoAnimal').inTable('tipo_animals')
+      table.integer('tipoanimal_id').unsigned().references('id').inTable('tipo_animals')
 
     })
   }

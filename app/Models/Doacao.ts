@@ -4,8 +4,8 @@ import Animal from 'App/Models/Animal'
 import Pessoa from 'App/Models/Pessoa'
 
 export default class Doacao extends BaseModel {
-  @column({ isPrimary: true, columnName: 'idDoacao' })
-  public idDoacao: number
+  @column({ isPrimary: true, columnName: 'id' })
+  public id: number
 
   @column({ columnName: 'data' })
   public data: Date

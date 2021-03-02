@@ -4,8 +4,8 @@ import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Animal from 'App/Models/Animal'
 
 export default class TipoAnimal extends BaseModel {
-  @column({ isPrimary: true, columnName: 'idTipoAnimal' })
-  public idTipoAnimal: number
+  @column({ isPrimary: true, columnName: 'id' })
+  public id: number
 
   @column({ columnName: 'descricao' })
   public descricao: string
@@ -16,6 +16,6 @@ export default class TipoAnimal extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Animal, {foreignKey:'idTipoAnimal'})
+  @hasMany(() => Animal, {foreignKey:'tipoanimal_id'})
   public animal: HasMany<typeof Animal>
 }

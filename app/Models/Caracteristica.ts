@@ -2,8 +2,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Caracteristica extends BaseModel {
-  @column({ isPrimary: true, columnName: 'idCaracteristica' })
-  public idCaracteristica: number
+  @column({ isPrimary: true, columnName: 'id' })
+  public id: number
 
   @column({ columnName: 'descricao' })
   public descricao: string

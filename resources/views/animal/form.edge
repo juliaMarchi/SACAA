@@ -12,7 +12,7 @@
         <select name="idTipoAnimal" id="idTipoAnimal" class="form-select" aria-label="Default select example">
             <option selected>Clique para selecionar</option>
             @each(tipo in tipoAnimais)
-                <option value="{{tipo.idTipoAnimal}}">{{tipo.descricao}}</option>
+                <option value="{{tipo.id}}">{{tipo.descricao}}</option>
             @endeach
         </select>
     </div>

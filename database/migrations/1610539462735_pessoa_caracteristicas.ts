@@ -6,8 +6,8 @@ export default class PessoaCaracteristicas extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.integer('idPessoa').unsigned().references('idPessoa').inTable('pessoas')
-      table.integer('idCaracteristica').unsigned().references('idCaracteristica').inTable('caracteristicas')
+      table.integer('pessoa_id').unsigned().references('id').inTable('pessoas')
+      table.integer('caracteristica_id').unsigned().references('id').inTable('caracteristicas')
       
       table.timestamps(true)
     })
