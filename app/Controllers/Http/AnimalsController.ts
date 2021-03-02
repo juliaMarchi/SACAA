@@ -32,8 +32,9 @@ export default class AnimalsController {
   }
 
   public async store ({ request }: HttpContextContract) {
-    const dados = request.all();
-    const animal = await Animal.create(dados);
+    
+    const x = request.only(['nome','raca','nascimento','porte']);
+    const animal = await Animal.create(x);
 
     //TODO: Pegar o usuário logado
     const usuario = await Pessoa.find(1);
@@ -49,8 +50,6 @@ export default class AnimalsController {
     await doacao.related('animal').associate(animal);
     await doacao.related('pessoa').associate(usuario);
     
-
-
     return animal.idAnimal;
   }
 
