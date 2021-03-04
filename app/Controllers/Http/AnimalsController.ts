@@ -33,17 +33,12 @@ export default class AnimalsController {
 
   public async store ({ request }: HttpContextContract) {
     
-<<<<<<< HEAD
     
     const dados = request.all();
     console.log(dados)
     
     const tipoAnimal = await TipoAnimal.find(dados['idTipoAnimal']);
     console.log(tipoAnimal)
-=======
-    const x = request.only(['nome','raca','nascimento','porte']);
-    const animal = await Animal.create(x);
->>>>>>> 6ce02566cefc87e85d9f5b6a987d8a532f155b98
 
     const x = request.only(['nome','raca','nascimento','porte']);
     const animal = await Animal.create(x);
@@ -53,17 +48,10 @@ export default class AnimalsController {
     //TODO: Pegar o usuário logado
     const usuario = await Pessoa.find(1);
 
-<<<<<<< HEAD
    
 
 
     return animal.id;
-=======
-    await doacao.related('animal').associate(animal);
-    await doacao.related('pessoa').associate(usuario);
-    
-    return animal.idAnimal;
->>>>>>> 6ce02566cefc87e85d9f5b6a987d8a532f155b98
   }
 
   public async show ({ view }: HttpContextContract) {

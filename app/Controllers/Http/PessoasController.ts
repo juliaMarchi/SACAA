@@ -17,7 +17,7 @@ export default class PessoasController {
     return view.render('pessoa/create', { pessoa });
   }
 
-  public async store({ request }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     const dados = request.all();
     const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','password']));
     if(dados['telefone1']){
@@ -36,8 +36,8 @@ export default class PessoasController {
       await telefone2.related('pessoa').associate(pessoa);
     }
 
+    response.redirect('/login')
     
-    return pessoa.id;
   }
 
   public async renderPerfil({view, params}){
@@ -95,7 +95,7 @@ export default class PessoasController {
     const password = request.input('password')
     await auth.attempt(email, password)
 
-    response.redirect('/dashboard')
+    response.redirect('/animais/cadastro')
   }
 
   public async logout({ auth, request, response }: HttpContextContract){
