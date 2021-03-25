@@ -11,6 +11,8 @@ export default class AdicionaRememberTokens extends BaseSchema {
   }
 
   public async down () {
-    this.schema.dropTable(this.tableName)
+    this.schema.table(this.tableName, table => {
+      table.dropColumn('remember_me_token')
+    })
   }
 }

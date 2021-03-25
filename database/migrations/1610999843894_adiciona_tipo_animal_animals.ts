@@ -12,6 +12,9 @@ export default class AdicionaTipoAnimalAnimals extends BaseSchema {
   }
 
   public async down () {
-    this.schema.dropTable(this.tableName)
+    this.schema.table(this.tableName, table => {
+      table.dropForeign(['tipoanimal_id'])
+      table.dropColumn('tipoanimal_id')
+    })
   }
 }

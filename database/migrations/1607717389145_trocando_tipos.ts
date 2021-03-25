@@ -12,11 +12,5 @@ export default class Pessoas extends BaseSchema {
     })
   }
 
-  public async down () {
-    this.schema.table(this.tableName, (table) => {
-      table.integer('cpf').alter()
-      table.integer('cnpj').alter()
-      table.integer('cep').alter()
-    })
-  }
+  public async down () {}
 }
