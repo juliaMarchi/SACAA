@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DateTime } from 'luxon'
 import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Animal from 'App/Models/Animal'
@@ -9,6 +10,9 @@ export default class Doacao extends BaseModel {
 
   @column({ columnName: 'data' })
   public data: Date
+
+  @column({ columnName: 'ativo' })
+  public ativo: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

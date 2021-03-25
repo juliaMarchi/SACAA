@@ -32,8 +32,7 @@ export default class AnimalsController {
   }
 
   public async store ({ request }: HttpContextContract) {
-    
-    
+     
     const dados = request.all();
     console.log(dados)
     
@@ -47,9 +46,6 @@ export default class AnimalsController {
 
     //TODO: Pegar o usuário logado
     const usuario = await Pessoa.find(1);
-
-   
-
 
     return animal.id;
   }
