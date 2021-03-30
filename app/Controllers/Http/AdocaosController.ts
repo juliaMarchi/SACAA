@@ -9,7 +9,9 @@ export default class AdocaosController {
   public async index ({}: HttpContextContract) {
   }
 
-  public async create ({}: HttpContextContract) {
+  public async create ({ view }: HttpContextContract) {
+     
+    const adocao = new Adocao();
     
     const res = Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=4 and d.ativo=true")
     const animaisMatch = []
@@ -20,11 +22,23 @@ export default class AdocaosController {
     }
 
     console.log(animaisMatch)
+    return view.render('adocao/create', { animaisMatch, adocao });
 
     //select animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id where pc.pessoa_id = 4;
+    
   }
 
-  public async store ({}: HttpContextContract) {
+  public async store ({ request, auth }: HttpContextContract) {
+    
+    const logado = await auth.user;
+    //animal que o usuario escolheu?
+
+    const dados = request.only(['data','animal_id']);
+    const adocao = await Adocao.create({...dados, pessoa_id: logado?.id});
+
+    await Database.from('doacaos').where('ativo', 'true').update({ account_status: 'false' })
+
+    return adocao;
   }
 
   public async show ({}: HttpContextContract) {

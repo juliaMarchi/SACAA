@@ -98,7 +98,7 @@ export default class PessoasController {
     response.redirect('/animais/cadastro')
   }
 
-  public async logout({ auth, request, response }: HttpContextContract){
+  public async logout({ auth, response }: HttpContextContract){
     await auth.logout()
 
     response.redirect('/')
