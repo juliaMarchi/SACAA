@@ -22,3 +22,6 @@ Route.get('/animais/index', 'AnimalsController.index');
 Route.get('/animais/cadastro', 'AnimalsController.create');
 Route.post('/animais/cadastro', 'AnimalsController.store');
 Route.get('/animais', 'AnimalsController.list');
+
+Route.on('/home').render('home').middleware('auth:web');
+Route.get('/adocaos/list', 'AdocaosController.list').middleware('auth:web');
