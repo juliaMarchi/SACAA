@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany, ManyToMany, manyToMany, } from '@ioc:Adonis/Lucid/Orm'
 import TipoAnimal from 'App/Models/TipoAnimal'
 import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
+import Caracteristica from 'App/Models/Caracteristica'
 
 export default class Animal extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
@@ -42,5 +43,16 @@ export default class Animal extends BaseModel {
 
   @hasMany(() => Doacao, {foreignKey:'idDoacao'})
   public doacao: HasMany<typeof Doacao>
+
+  @manyToMany(() => Caracteristica,{
+    localKey: 'id',
+    pivotForeignKey: 'animal_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'caracteristica_id',
+    pivotTable: 'animal_caracteristica'
+  } )
+  public caracteristicas: ManyToMany<typeof Caracteristica>
+
+
 
 }

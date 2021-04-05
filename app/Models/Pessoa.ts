@@ -73,8 +73,8 @@ export default class Pessoa extends BaseModel {
   @manyToMany(() => Caracteristica,{
     localKey: 'id',
     pivotForeignKey: 'pessoa_id',
-    relatedKey: 'caracteristica_id',
-    pivotRelatedForeignKey: 'id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'caracteristica_id',
     pivotTable: 'pessoa_caracteristica'
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>

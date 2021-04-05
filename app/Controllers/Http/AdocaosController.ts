@@ -9,17 +9,29 @@ export default class AdocaosController {
   public async index ({}: HttpContextContract) {
   }
 
-  public async list ({ view }: HttpContextContract) {
-     
+  public async list ({ auth, view }: HttpContextContract) {
+    
+    const logado = await auth.user
+    
     const adocao = new Adocao();
     
-    const res = Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=4 and d.ativo=true")
+    const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join 'pessoa_caracteristica as pc' on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true",[logado.id])
     const animaisMatch = []
+    
 
-    for(const animal_id in res){
-        const animal = await Animal.find(animal_id)
-        animaisMatch.push(animal)
-        console.log(animal_id)
+    
+
+    
+    res.forEach(v => console.log(v));
+    
+    
+    for(const r in res){
+        const animal = await Animal.find(r.animal_id)
+        if(animal){
+          animaisMatch.push(animal)
+          console.log(animal_id)
+        }
+        
     }
 
     console.log(animaisMatch)
