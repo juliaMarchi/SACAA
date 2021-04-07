@@ -15,26 +15,16 @@ export default class AdocaosController {
     
     const adocao = new Adocao();
     
-    const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join 'pessoa_caracteristica as pc' on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true",[logado.id])
+    const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true",[logado.id])
     const animaisMatch = []
     
-
-    
-
-    
-    res.forEach(v => console.log(v));
-    
-    
-    for(const r in res){
-        const animal = await Animal.find(r.animal_id)
+    for(const r in res[0]){
+        const animal = await Animal.find(res[0][r].animal_id)
         if(animal){
           animaisMatch.push(animal)
-          console.log(animal_id)
         }
-        
     }
 
-    console.log(animaisMatch)
     return view.render('adocao/list', { animaisMatch, adocao });
 
     //select animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id where pc.pessoa_id = 4;
