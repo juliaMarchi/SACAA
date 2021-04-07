@@ -1,11 +1,11 @@
 @layout('base')
 
 @section('conteudo')
-  <h2>Login</h2>
+  <h2 class="text-4xl text-blue-500 font-bold">Login</h2>
 
   <form action="{{ route('PessoasController.login') }}" method="post">
     <div>
-      <label for="basic-url" class="form-label">Email</label>
+      <label for="basic-url" class="">Email</label>
       <input type="text" name="email" value="{{ flashMessages.get('email') || '' }}" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1"/>
       <p>{{ flashMessages.get('auth.errors.uid') || '' }}</p>
     </div>
