@@ -8,7 +8,7 @@
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "compile-assets": "npx tailwindcss-cli@latest build ./resources/styles/index.css -o ./public/css/tailwind.css"
+    "compile-assets": "npx tailwindcss-cli@latest build ./resources/styles/index.css -o ./public/css/index.css"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^3.0.6",
