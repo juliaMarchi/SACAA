@@ -9,11 +9,25 @@ export default class AdocaosController {
   public async index ({}: HttpContextContract) {
   }
 
-  public async list ({ auth, view }: HttpContextContract) {
+  public async list ({ view }: HttpContextContract){
+
+    const res = await Database.rawQuery("select * from doacaos where ativo=true")
+    const animais = []
+    
+    for(const r in res[0]){
+        const animal = await Animal.find(res[0][r].animal_id)
+        if(animal){
+          animais.push(animal)
+        }
+        console.log(animal)
+    }
+
+    return view.render('adocao/list', { animais });
+  }
+
+  public async listMatch ({ auth, view }: HttpContextContract) {
     
     const logado = await auth.user
-    
-    const adocao = new Adocao();
     
     const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true",[logado.id])
     const animaisMatch = []
@@ -25,22 +39,25 @@ export default class AdocaosController {
         }
     }
 
-    return view.render('adocao/list', { animaisMatch, adocao });
+    return view.render('adocao/list', { animaisMatch });
 
     //select animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id where pc.pessoa_id = 4;
     
   }
 
-  public async store ({ request, auth }: HttpContextContract) {
+  public async store ({ request, auth, params }: HttpContextContract) {
     
     const logado = await auth.user;
-    //animal que o usuario escolheu?
 
-    const dados = request.only(['data']);
-    const adocao = await Adocao.create(dados);
-    await adocao.related('animal').associate(request.only([animal_id]));
+    const animal = await Animal.find(params.idAnimal);
+    const adocao = new Adocao();
 
-    await Database.from('doacaos').where('ativo', 'true').update({ account_status: 'false' })
+    await adocao.related('animal').associate(animal);
+    await adocao.related('pessoa').associate(logado);
+    await adocao.save();
+
+    //await Database.from('doacaos').where('ativo', 'true').update({ ativo: 'false' })
+    //animal id de doacaos = animal id que eu peguei
 
     return adocao;
   }

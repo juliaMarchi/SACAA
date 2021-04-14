@@ -4,9 +4,14 @@
 
     <h2>Animais disponíveis</h2>
     <ul>
-        @each(animal in animaisMatch)
-        <li>{{ animal.nome }}</li>
+        @each(animal in animais)
+        <li>{{ animal.nome }}
+            <a href="/adocaos/realiza/{{ animal.id }}">Adotar</a>
+        </li>
+        
         @endeach
     </ul>
+
+
 
 @endsection
