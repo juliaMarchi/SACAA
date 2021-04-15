@@ -14,12 +14,20 @@ export default class Adocao extends BaseModel {
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
+  //faltava incluir as colunas das foreignKeys.
+  @column()
+  public pessoaId:number
+
+  @column()
+  public animalId:number
+
+
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
   
-  @belongsTo(() => Animal, {localKey: 'animal_id', foreignKey: 'id'})
+  @belongsTo(() => Animal)
   public animal: BelongsTo<typeof Animal>
 
-  @belongsTo(() => Pessoa, {localKey: 'pessoa_id', foreignKey: 'id'})
+  @belongsTo(() => Pessoa)
   public pessoa: BelongsTo<typeof Pessoa>
 }

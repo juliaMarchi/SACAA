@@ -20,6 +20,12 @@ export default class Doacao extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @column()
+  public pessoaId:number
+
+  @column()
+  public animalId:number
+
   @belongsTo(() => Animal)
   public animal: BelongsTo<typeof Animal>
 
