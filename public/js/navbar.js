@@ -14,4 +14,7 @@
     document.querySelector('button[aria-controls="mobile-menu"]').addEventListener('click', () => {
         toggleUserMenu('#mobile-menu');
     });
+    document.querySelector('#buscar-menu').addEventListener('click', () => {
+        toggleUserMenu('div[role="menu"][aria-labelledby="buscar-menu"]');
+    });
 })();

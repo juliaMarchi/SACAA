@@ -4,6 +4,7 @@ import Animal from 'App/Models/Animal';
 import TipoAnimal from 'App/Models/TipoAnimal';
 import Doacao from 'App/Models/Doacao';
 import Pessoa from 'App/Models/Pessoa';
+import authConfig from 'Config/auth';
 
 export default class AnimalsController {
   public async index ({ view }: HttpContextContract) {
@@ -31,8 +32,10 @@ export default class AnimalsController {
     return view.render('animal/create', { portes, animal, tipoAnimais });
   }
 
-  public async store ({ request }: HttpContextContract) {
-     
+  public async store ({ request, auth }: HttpContextContract) {
+    
+    const logado = await auth.user;
+
     const dados = request.all();
     console.log(dados)
     
@@ -44,8 +47,7 @@ export default class AnimalsController {
 
     await animal.related('tipoAnimal').associate(tipoAnimal);
 
-    //TODO: Pegar o usuário logado
-    const usuario = await Pessoa.find(1);
+    const usuario = await Pessoa.find(logado);
 
     return animal.id;
   }

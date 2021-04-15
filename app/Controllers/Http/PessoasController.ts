@@ -52,7 +52,6 @@ export default class PessoasController {
     await pessoa.preload("caracteristicas")//carregar dados das relações
 
     return pessoa
-
   }
 
   public async show({ view, params }: HttpContextContract) {
@@ -95,7 +94,7 @@ export default class PessoasController {
     const password = request.input('password')
     await auth.attempt(email, password)
 
-    response.redirect('/animais/cadastro')
+    response.redirect('/home')
   }
 
   public async logout({ auth, response }: HttpContextContract){
