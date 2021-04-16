@@ -4,6 +4,7 @@ import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
 import Animal from 'App/Models/Animal'
 import Database from '@ioc:Adonis/Lucid/Database'
+import TipoAnimal from 'App/Models/TipoAnimal'
 
 export default class AdocaosController {
   public async index ({}: HttpContextContract) {
@@ -43,6 +44,25 @@ export default class AdocaosController {
 
     //select animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id where pc.pessoa_id = 4;
     
+  }
+
+  public async listTipoAnimal ({ view, params }: HttpContextContract){
+
+    //como pegar o animal que o usuário clicou?
+    const tipoAnimal = "cachorro";
+
+    const res = await Database.rawQuery("select * from animals as a inner join tipo_animals as t where t.descricao=? and t.id=a.tipoanimal_id", [tipoAnimal])
+    const animaisPorTipo = []
+    
+    for(const r in res[0]){
+        const animal = await Animal.find(res[0][r].animal_id)
+        if(animal){
+          animaisPorTipo.push(animal)
+        }
+        console.log(animal)
+    }
+
+    return view.render('adocao/listTipoAnimal', { animaisPorTipo });
   }
 
   public async store ({ request, auth, params }: HttpContextContract) {

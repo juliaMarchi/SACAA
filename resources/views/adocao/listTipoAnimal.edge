@@ -2,9 +2,9 @@
 
 @section('conteudo')
 
-    <h2>Animais disponíveis</h2>
+    <h2>Animais disponíveis por tipo</h2>
     <ul>
-        @each(animal in animais)
+        @each(animal in animaisPorTipo)
             <li>{{ animal.nome }}
                 <a href="/adocaos/realiza/{{ animal.id }}">Adotar</a>
             </li>
