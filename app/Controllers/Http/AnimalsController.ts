@@ -27,9 +27,8 @@ export default class AnimalsController {
       },
     ];
     const animal = new Animal();
-    const tipoAnimais = await TipoAnimal.all();
-    console.log(tipoAnimais);
-    return view.render('animal/create', { portes, animal, tipoAnimais });
+    const tiposAnimais = await TipoAnimal.all();
+    return view.render('animal/create', { portes, animal, tiposAnimais });
   }
 
   public async store ({ request, auth }: HttpContextContract) {

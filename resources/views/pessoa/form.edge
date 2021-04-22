@@ -1,78 +1,111 @@
-<div class="input-group mb-3">
-    <div>
-        <label for="basic-url" class="form-label">Nome</label>
-        <input type="text" name="nome" value="{{ pessoa.nome || '' }}" class="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Nascimento</label>
-        <input type="date" name="nascimento" value="{{ pessoa.nascimento  || '' }}" class="form-control" aria-label="Nascimento" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">CPF</label>
-        <input type="number" name="cpf" value="{{ pessoa.cpf || '' }}" class="form-control" placeholder="CPF" aria-label="CPF" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">CNPJ</label>
-        <input type="number" name="cnpj" value="{{ pessoa.cnpj || '' }}" class="form-control" placeholder="CNPJ" aria-label="CNPJ" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Você é uma ONG?</label>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="ong" value="{{ pessoa.ong || 1 }}" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">Sim</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="ong" value="{{ pessoa.ong ||  0}}" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">Não</label>
+<div>
+    <div class="tab">
+        <div>
+            <label for="basic-url" class="text-green-900 text-base">Você é uma ONG?</label>
+            <div class="flex justify-start mt-4">
+                <div>
+                    <input type="radio" name="ong" value="{{ pessoa.ong || 1 }}" id="flexRadioDefault2" checked>
+                    <label class="text-green-900 text-base mr-8" for="flexRadioDefault2">Sim</label>
+                </div>
+                <div>
+                    <input type="radio" name="ong" value="{{ pessoa.ong || 0 }}" id="flexRadioDefault2" checked>
+                    <label class="text-green-900 text-base" for="flexRadioDefault2">Não</label>
+                </div>
+            </div>
         </div>
     </div>
-    <div>
-        <label for="basic-url" class="form-label">CEP</label>
-        <input type="number" name="cep" value="{{ pessoa.cep || '' }}" class="form-control" placeholder="CEP" aria-label="CEP" aria-describedby="basic-addon1">
+
+    <div class="tab">
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-4">Nome</label>
+            <input type="text" name="nome" value="{{ pessoa.nome || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Nome" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-4">Nascimento</label>
+            <input type="date" name="nascimento" value="{{ pessoa.nascimento  || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-4">CPF</label>
+            <input type="number" name="cpf" value="{{ pessoa.cpf || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="CPF" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-4">CNPJ</label>
+            <input type="number" name="cnpj" value="{{ pessoa.cnpj || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="CNPJ" aria-describedby="basic-addon1">
+        </div>
     </div>
-    <div>
-        <label for="basic-url" class="form-label">Estado</label>
-        <input type="text" name="estado" value="{{ pessoa.estado || '' }}" class="form-control" placeholder="Estado" aria-label="Estado" aria-describedby="basic-addon1">
+    
+    <div class="tab">
+        <div class="flex justify-start">
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1">CEP</label>
+                <input type="number" name="cep" value="{{ pessoa.cep || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="CEP" aria-describedby="basic-addon1">
+            </div>
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1 ml-4">Estado</label>
+                <input type="text" name="estado" value="{{ pessoa.estado || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Estado" aria-describedby="basic-addon1">
+            </div>
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1 ml-4">Cidade</label>
+                <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Cidade" aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+        <div class="flex justify-start">
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1">Bairro</label>
+                <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Bairro" aria-describedby="basic-addon1">
+            </div>
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1 ml-4">Rua</label>
+                <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Rua" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="flex justify-start">
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1">Número</label>
+                <input type="number" name="numero" value="{{ pessoa.numero || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Número da casa" aria-describedby="basic-addon1">
+            </div>
+            <div>
+                <label for="basic-url" class="text-green-900 text-base mr-1 ml-4">Complemento</label>
+                <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Complemento" aria-describedby="basic-addon1">
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="basic-url" class="form-label">Cidade</label>
-        <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}" class="form-control" placeholder="Cidade" aria-label="Cidade" aria-describedby="basic-addon1">
+
+    <div class="tab">
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-1">Telefone</label>
+            <input type="number" name="telefone1" value="{{ pessoa.telefone1 || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-1">Outro telefone(opcional)</label>
+            <input type="number" name="telefone2" value="{{ pessoa.telefone2 || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
+        </div>
     </div>
-    <div>
-        <label for="basic-url" class="form-label">Bairro</label>
-        <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}" class="form-control" placeholder="Bairro" aria-label="Bairro" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Rua</label>
-        <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="form-control" placeholder="Rua" aria-label="Rua" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Número</label>
-        <input type="number" name="numero" value="{{ pessoa.numero || '' }}" class="form-control" placeholder="Número da casa" aria-label="Número da casa" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Complemento</label>
-        <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}" class="form-control" placeholder="Complemento" aria-label="Complemento" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Telefone 1</label>
-        <input type="number" name="telefone1" value="{{ pessoa.telefone1 || '' }}" class="form-control" placeholder="Telefone 1" aria-label="Telefone 1" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Telefone 2</label>
-        <input type="number" name="telefone2" value="{{ pessoa.telefone2 || '' }}" class="form-control" placeholder="Telefone 2" aria-label="Telefone 2" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Email</label>
-        <input type="email" name="email" value="{{ pessoa.email || '' }}" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-    </div>
-    <div>
-        <label for="basic-url" class="form-label">Senha</label>
-        <input type="text" name="password" value="{{ pessoa.password || '' }}" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1">
+
+    <div class="tab">
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-1">Email</label>
+            <input type="email" name="email" value="{{ pessoa.email || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Email" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <label for="basic-url" class="text-green-900 text-base mr-1">Senha</label>
+            <input type="password" name="password" value="{{ pessoa.password || '' }}" class="mb-4 h-8 border border-green-600 bg-white rounded-lg" aria-label="Senha" aria-describedby="basic-addon1">
+        </div>
+    </div>    
+</div>
+
+<div>
+    <div class="flex justify-end">
+      <button class="text-green-800 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium mx-5 mt-5" type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+      <button class="text-green-800 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium mx-5 mt-5" type="button" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
     </div>
 </div>
+
 <div>
-    <button type="reset" class="btn btn-dark">Limpar</button>
-    <button type="submit" class="btn btn-dark">Criar conta</button>
-    <a href="" class="btn btn-dark">Cancelar</a>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
 </div>

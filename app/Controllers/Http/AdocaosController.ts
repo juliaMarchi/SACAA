@@ -48,19 +48,12 @@ export default class AdocaosController {
 
   public async listTipoAnimal ({ view, params }: HttpContextContract){
 
-    //como pegar o animal que o usuário clicou?
-    const tipoAnimal = "cachorro";
-
-    const res = await Database.rawQuery("select * from animals as a inner join tipo_animals as t where t.descricao=? and t.id=a.tipoanimal_id", [tipoAnimal])
-    const animaisPorTipo = []
+    const tipoAnimal = params.tipoAnimal;
     
-    for(const r in res[0]){
-        const animal = await Animal.find(res[0][r].animal_id)
-        if(animal){
-          animaisPorTipo.push(animal)
-        }
-        console.log(animal)
-    }
+    const animaisPorTipo = await Animal
+                                    .query()
+                                    .whereHas('tipoAnimal', (builder) => {builder.where('descricao',tipoAnimal)})
+                                    .andWhereHas('doacao',(builder) => {builder.where('ativo',true)});
 
     return view.render('adocao/listTipoAnimal', { animaisPorTipo });
   }
