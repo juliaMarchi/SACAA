@@ -26,7 +26,6 @@ export default class PessoasController {
       await telefone1.save();
 
       await telefone1.related('pessoa').associate(pessoa);
-
     }
     if(dados['telefone2']){
       const telefone2 = new Telefone();

@@ -2,75 +2,120 @@
 /* eslint-disable one-var */
 /* eslint-disable eqeqeq */
 
-var currentTab = 0; // Current tab is set to be the first tab (0)
-showTab(currentTab); // Display the current tab
+let currentTab = 1;
+showTab(currentTab);
 
-function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-  // ... and fix the Previous/Next buttons:
-  if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
+function showTab(step = null) {
+  if(step === null) return;
+  const firstStepNumber = document.querySelector('.tab:first-child').dataset.step;
+  const lastStepNumber = document.querySelector('.tab:last-child').dataset.step;
+  const currentTabElement = document.querySelector('.tab:not(.hidden)');
+  const nextTabElement = document.querySelector(`.tab[data-step="${step}"]`);
+
+  currentTabElement.classList.remove('hidden');
+  currentTabElement.classList.add('hidden');
+  nextTabElement.classList.remove('hidden');
+
+  if (step == firstStepNumber) {
+    document.getElementById("prevBtn").classList.add('hidden');
   } else {
-    document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById("prevBtn").classList.remove('hidden');
   }
-  if (n == (x.length - 1)) {
+  if (step == lastStepNumber) {
     document.getElementById("nextBtn").innerHTML = "Criar conta";
   } else {
     document.getElementById("nextBtn").innerHTML = "Próximo";
   }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n)
+
+  fixStepIndicator(step);
 }
 
-function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
+function next() {
+  const lastStepNumber = document.querySelector('.tab:last-child').dataset.step;  
+  const currentStep = document.querySelector('.tab:not(.hidden)').dataset.step;
+
+  if(!validateForm()) return false;
+
+  const nextStep = parseInt(currentStep) + 1;
+  if (nextStep > lastStepNumber) {
+    document.querySelector('#js-form-pessoa').submit();
     return false;
   }
-  // Otherwise, display the correct tab:
+  currentTab = nextStep;
+
+  showTab(currentTab);
+}
+
+function previous() {
+  const firstStepNumber = document.querySelector('.tab:first-child').dataset.step;
+  const currentStep = document.querySelector('.tab:not(.hidden)').dataset.step;
+
+  const prevStep = parseInt(currentStep) - 1;
+  if (currentStep < firstStepNumber) return false;
+  
+  currentTab = prevStep;
+
   showTab(currentTab);
 }
 
 function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, i, valid = true;
-  x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
-  // A loop that checks every input field in the current tab:
-  for (i = 0; i < y.length; i++) {
-    // If a field is empty...
-    if (y[i].value == "") {
-      // add an "invalid" class to the field:
-      y[i].className += " invalid";
-      // and set the current valid status to false:
+  let valid = true;
+  const currentTabElement = document.querySelector(`.tab[data-step="${currentTab}"]`);
+  const tabInputs = currentTabElement.querySelectorAll(".tab *:not([data-radio-input-group].hidden) input");
+
+  tabInputs.forEach(input => {
+    if(input.value === '') {
+      input.classList.remove('invalid');
+      input.classList.add('invalid');
+
       valid = false;
     }
-  }
-  // If the valid status is true, mark the step as finished and valid:
+  });
+
   if (valid) {
-    document.getElementsByClassName("step")[currentTab].className += " finish";
+    const currentStepIndicator = document.querySelector(`.step[data-step="${currentTab}"]`);
+    currentStepIndicator.classList.remove('finish');
+    currentStepIndicator.classList.add('finish');
   }
-  return valid; // return the valid status
+
+  return valid;
 }
 
-function fixStepIndicator(n) {
-  // This function removes the "active" class of all steps...
-  var i, x = document.getElementsByClassName("step");
-  for (i = 0; i < x.length; i++) {
-    x[i].className = x[i].className.replace(" active", "");
-  }
-  //... and adds the "active" class to the current step:
-  x[n].className += " active";
+function fixStepIndicator(step) {
+  const currentStepIndicator = document.querySelector(`.step[data-step="${currentTab}"]`);
+  const stepIndicators = Array.from(document.querySelectorAll('.step'));
+
+  stepIndicators.forEach(stepIndicator => {
+    stepIndicator.classList.remove('active');
+  });
+  currentStepIndicator.classList.add('active');
 }
+
+document.querySelector('#prevBtn').addEventListener('click', () => {
+  previous();
+});
+
+document.querySelector('#nextBtn').addEventListener('click', () => {
+  next();
+});
+
+Array.from(
+  document.querySelectorAll('input[type="radio"][name="ong"]')
+).forEach(radioButton => {
+  radioButton.addEventListener('change', event => {
+    const radioGroup = event.target.dataset.radioGroup;
+    const formGroups = document.querySelectorAll(`*[data-radio-input-group]:not([data-radio-input-group~="${radioGroup}"])`);
+    
+    Array.from(document.querySelectorAll('.tab *[data-radio-input-group].hidden')).forEach(element => {
+      element.classList.remove('hidden');
+    });
+
+    Array.from(formGroups).forEach(formGroup => {
+      const inputsToHide = formGroup.querySelectorAll('input');
+      Array.from(inputsToHide).forEach(input => {
+        input.value = "";
+      });
+      formGroup.classList.add('hidden')
+    });
+  });
+});

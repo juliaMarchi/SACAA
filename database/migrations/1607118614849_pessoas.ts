@@ -8,7 +8,7 @@ export default class Pessoas extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary
       table.string('nome').notNullable
-      table.date('nascimento').notNullable
+      table.date('nascimento')
       table.string('cpf')
       table.string('cnpj')
       table.boolean('ong').notNullable
