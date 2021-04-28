@@ -2,12 +2,26 @@
 
 @section('conteudo')
 
-    <h2>Animais disponíveis</h2>
-    <ul>
-        @each(animal in animais)
-            <li>{{ animal.nome }}
-                <a href="/adocaos/realiza/{{ animal.id }}">Adotar</a>
-            </li>
-        @endeach
-    </ul>
+    <header>
+        @include('cabecalho')
+    </header>
+
+    <body class="bg-fundo">
+        <div class="flex justify-center">
+            <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
+                <h1 class="text-center text-md text-white">Animais disponíveis</h1>
+            </div>
+        </div>
+        <div>
+            <ul>
+                @each(animal in animais)
+                    <div class="bg-green-50">
+                        <li>{{ animal.nome }}
+                            <a href="/adocaos/realiza/{{ animal.id }}">Adotar</a>
+                        </li>
+                    </div>
+                @endeach
+            </ul>            
+        </div>
+    </body>
 @endsection

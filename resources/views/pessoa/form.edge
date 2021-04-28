@@ -4,11 +4,11 @@
             <label for="basic-url" class="text-green-900 text-base">Você é uma ONG?</label>
             <div class="flex justify-start mt-4">
                 <div>
-                    <input data-radio-group="ong" type="radio" name="ong" value="{{ pessoa.ong || true }}" id="ongRadio">
+                    <input data-radio-group="ong" type="radio" name="ong" value="{{ pessoa.ong || 1 }}" id="ongRadio">
                     <label class="text-green-900 text-base mr-8" for="ongRadio">Sim</label>
                 </div>
                 <div>
-                    <input data-radio-group="pessoa" type="radio" name="ong" value="{{ pessoa.ong || false }}" id="pessoaRadio" checked>
+                    <input data-radio-group="pessoa" type="radio" name="ong" value="{{ pessoa.ong || 0 }}" id="pessoaRadio" checked>
                     <label class="text-green-900 text-base" for="pessoaRadio">Não</label>
                 </div>
             </div>
@@ -47,9 +47,9 @@
                 <label for="basic-url" class="text-green-900 text-base mr-1">Bairro</label>
                 <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}" class="mb-4 h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Bairro" aria-describedby="basic-addon1">
             </div>
-            <div>
+            <div class="flex flex-1">
                 <label for="basic-url" class="text-green-900 text-base mr-1 ml-4">Rua</label>
-                <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="mb-4 h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Rua" aria-describedby="basic-addon1">
+                <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="flex-1 mb-4 h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Rua" aria-describedby="basic-addon1">
             </div>
         </div>
         <div class="flex justify-start">
