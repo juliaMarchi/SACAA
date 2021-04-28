@@ -75,6 +75,20 @@ export default class AdocaosController {
     return adocao;
   }
 
+  public async listAdocaosAbertas({ request, auth, view }: HttpContextContract){
+    
+    const logado = await auth.user
+
+    const listAdocaos = await Adocao.query()
+      .whereHas('animal', (builder) => {
+        builder.whereHas('doacao', (builder2) => {
+          builder2.where('pessoa', logado)
+        })
+      })
+    
+    return view.render('adocao/listAberta', {listAdocaos})
+  }
+
   public async show ({}: HttpContextContract) {
   }
 

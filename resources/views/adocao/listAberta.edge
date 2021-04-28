@@ -1,0 +1,13 @@
+@layout('base')
+
+@section('conteudo')
+
+    <h2>Animais não efetivados </h2>
+    <ul>
+        @each(adocaos in listAdocaos)
+            <li>{{ adocaos.animal.nome }}
+                <a href="/adocaos/efetiva/{{ adocaos.id }}">Efetivar</a>
+            </li>
+        @endeach
+    </ul>
+@endsection

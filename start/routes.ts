@@ -27,4 +27,5 @@ Route.get('/home', 'HomeController.index').middleware('auth:web');
 Route.get('/adocaos/list', 'AdocaosController.list').middleware('auth:web');
 Route.get('/adocaos/listMatch', 'AdocaosController.listMatch').middleware('auth:web');
 Route.get('/adocaos/listTipoAnimal/:tipoAnimal', 'AdocaosController.listTipoAnimal').middleware('auth:web');
+Route.get('/adocaos/listAbertas', 'AdocaosController.listAdocaosAbertas').middleware('auth:web');
 Route.get('/adocaos/realiza/:idAnimal', 'AdocaosController.store').middleware('auth:web');

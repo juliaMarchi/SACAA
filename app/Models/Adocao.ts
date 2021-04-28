@@ -21,6 +21,8 @@ export default class Adocao extends BaseModel {
   @column()
   public animalId:number
 
+  @column()
+  public efetivado: boolean
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
