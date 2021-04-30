@@ -61,7 +61,6 @@ export default class AdocaosController {
   public async store ({ request, auth, params }: HttpContextContract) {
     
     const logado = await auth.user;
-
     const animal = await Animal.find(params.idAnimal);
     const adocao = new Adocao();
 
@@ -69,14 +68,11 @@ export default class AdocaosController {
     await adocao.related('pessoa').associate(logado);
     await adocao.save();
 
-    //await Database.from('doacaos').where('ativo', 'true').update({ ativo: 'false' })
-    //animal id de doacaos = animal id que eu peguei
-
     return adocao;
   }
 
   public async listAdocaosAbertas({ request, auth, view }: HttpContextContract){
-    
+
     const logado = await auth.user
 
     const listAdocaos = await Adocao.query()
@@ -87,6 +83,11 @@ export default class AdocaosController {
       })
     
     return view.render('adocao/listAberta', {listAdocaos})
+  }
+
+  public async efetivarAdocao({}: HttpContextContract){
+    //animal id de doacaos = animal id que eu peguei
+    await Database.from('doacaos').where('ativo', 'true').update({ ativo: 'false' })
   }
 
   public async show ({}: HttpContextContract) {

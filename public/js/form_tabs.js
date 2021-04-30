@@ -9,17 +9,17 @@ function showTab(step = null) {
   if(step === null) return;
   const firstStepNumber = document.querySelector('.tab:first-child').dataset.step;
   const lastStepNumber = document.querySelector('.tab:last-child').dataset.step;
-  const currentTabElement = document.querySelector('.tab:not(.hidden)');
+  const currentTabElement = document.querySelector('.tab:not(.hidden_tab)');
   const nextTabElement = document.querySelector(`.tab[data-step="${step}"]`);
 
-  currentTabElement.classList.remove('hidden');
-  currentTabElement.classList.add('hidden');
-  nextTabElement.classList.remove('hidden');
+  currentTabElement.classList.remove('hidden_tab');
+  currentTabElement.classList.add('hidden_tab');
+  nextTabElement.classList.remove('hidden_tab');
 
   if (step == firstStepNumber) {
-    document.getElementById("prevBtn").classList.add('hidden');
+    document.getElementById("prevBtn").classList.add('hidden_tab');
   } else {
-    document.getElementById("prevBtn").classList.remove('hidden');
+    document.getElementById("prevBtn").classList.remove('hidden_tab');
   }
   if (step == lastStepNumber) {
     document.getElementById("nextBtn").innerHTML = "Criar conta";
@@ -32,7 +32,7 @@ function showTab(step = null) {
 
 function next() {
   const lastStepNumber = document.querySelector('.tab:last-child').dataset.step;  
-  const currentStep = document.querySelector('.tab:not(.hidden)').dataset.step;
+  const currentStep = document.querySelector('.tab:not(.hidden_tab)').dataset.step;
 
   if(!validateForm()) return false;
 
@@ -48,7 +48,7 @@ function next() {
 
 function previous() {
   const firstStepNumber = document.querySelector('.tab:first-child').dataset.step;
-  const currentStep = document.querySelector('.tab:not(.hidden)').dataset.step;
+  const currentStep = document.querySelector('.tab:not(.hidden_tab)').dataset.step;
 
   const prevStep = parseInt(currentStep) - 1;
   if (currentStep < firstStepNumber) return false;
@@ -61,7 +61,7 @@ function previous() {
 function validateForm() {
   let valid = true;
   const currentTabElement = document.querySelector(`.tab[data-step="${currentTab}"]`);
-  const tabInputs = currentTabElement.querySelectorAll(".tab *:not([data-radio-input-group].hidden) input");
+  const tabInputs = currentTabElement.querySelectorAll(".tab *:not([data-radio-input-group].hidden_tab) input");
 
   tabInputs.forEach(input => {
     if(input.value === '') {
@@ -106,8 +106,8 @@ Array.from(
     const radioGroup = event.target.dataset.radioGroup;
     const formGroups = document.querySelectorAll(`*[data-radio-input-group]:not([data-radio-input-group~="${radioGroup}"])`);
     
-    Array.from(document.querySelectorAll('.tab *[data-radio-input-group].hidden')).forEach(element => {
-      element.classList.remove('hidden');
+    Array.from(document.querySelectorAll('.tab *[data-radio-input-group].hidden_tab')).forEach(element => {
+      element.classList.remove('hidden_tab');
     });
 
     Array.from(formGroups).forEach(formGroup => {
@@ -115,7 +115,7 @@ Array.from(
       Array.from(inputsToHide).forEach(input => {
         input.value = "";
       });
-      formGroup.classList.add('hidden')
+      formGroup.classList.add('hidden_tab')
     });
   });
 });

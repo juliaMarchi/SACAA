@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> 
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/form_tabs.css">
-  
-  <title>Me Adote</title>
-</head>
-<body>
-  @include('cabecalho')
-  <main id="root">
-    @!section('conteudo')
-  </main>
-  @!section('scripts')
-</body>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/form_tabs.css">
+    
+    <title>Me Adote</title>
+  </head>
+  <body class="bg-fundo">
+    @if(auth.isLoggedIn)
+      @include('cabecalho')
+    @endif
+    
+    <main id="root">
+      @!section('conteudo')
+    </main>
+
+    @!section('scripts')
+  </body>
 </html>
