@@ -1,12 +1,29 @@
 @layout('base')
 
 @section('conteudo')
-    <h2>Animais não efetivados </h2>
-    <ul>
-        @each(adocaos in listAdocaos)
-            <li>{{ adocaos.animal.nome }}
-                <a href="/adocaos/efetiva/{{ adocaos.id }}">Efetivar</a>
-            </li>
-        @endeach
-    </ul>
+    <div class="flex justify-center">
+        <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
+            <h1 class="text-center text-md text-white text-lg">Animais não efetivados </h1>
+        </div>
+    </div>
+    <div>
+        <ul class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+            @each(adocaos in listAdocaos)
+                @component('components/card')
+                    @slot('header')
+                        <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
+                        <h1>{{ adocaos.animal.nome }}</h1>
+                    @endslot
+                    @slot('body')
+                        <p>Tipo</p>
+                        <p>{{ adocaos.animal.raca }}</p>
+                        <p>{{ adocaos.animal.porte }}</p>
+                    @endslot
+                    @slot('footer')
+                        <button href="/adocaos/efetiva/{{ adocaos.id }}">Efetivar</button>
+                    @endslot
+                @endcomponent
+            @endeach
+        </ul>            
+    </div>
 @endsection

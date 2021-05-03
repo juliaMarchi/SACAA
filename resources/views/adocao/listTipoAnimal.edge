@@ -1,13 +1,29 @@
 @layout('base')
 
 @section('conteudo')
-
-    <h2>Animais disponíveis por tipo</h2>
-    <ul>
-        @each(animal in animaisPorTipo)
-            <li>{{ animal.nome }}
-                <a href="/adocaos/realiza/{{ animal.id }}">Adotar</a>
-            </li>
-        @endeach
-    </ul>
+    <div class="flex justify-center">
+        <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
+            <h1 class="text-center text-md text-white text-lg">Animais disponíveis por tipo</h1>
+        </div>
+    </div>
+    <div>
+        <ul class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
+            @each(animal in animaisPorTipo)
+                @component('components/card')
+                    @slot('header')
+                        <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
+                        <h1>{{ animal.nome }}</h1>
+                    @endslot
+                    @slot('body')
+                        <p>Tipo</p>
+                        <p>{{ animal.raca }}</p>
+                        <p>{{ animal.porte }}</p>
+                    @endslot
+                    @slot('footer')
+                        <button>Ver mais</button>
+                    @endslot
+                @endcomponent
+            @endeach
+        </ul>            
+    </div>
 @endsection
