@@ -3,4 +3,9 @@
     <p>{{ animal.nascimento }}</p>
     <p>{{ animal.raca }}</p>
     <p>{{ animal.porte }}</p>
+    <ul>
+        @each(caract in animal.caracteristicas)
+          <li> {{ caract.descricao}} </li>
+        @endeach
+    </ul>
 </div>

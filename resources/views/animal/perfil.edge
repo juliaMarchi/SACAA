@@ -1,0 +1,14 @@
+@section('conteudo')
+  <form action="{{ route('AnimalsController.savePerfil',{idAnimal:animal.idAnimal}) }}" method="POST">
+    <input type="hidden" name="idAnimal" value="{{animal.idAnimal}}"/>
+    <label for="caracteristicas">Selecione as características do animal:</label>
+    
+    <select name="caracteristicas" id="caracteristicas" multiple>
+      @each(caract in caracteristicas)
+        <option value="{{caract.idCaracteristica}}" >{{caract.descricao}}</option>
+      @endeach
+    </select>
+    
+    <input type="submit" value="Submit">
+  </form>
+@endsection

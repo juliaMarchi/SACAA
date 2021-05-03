@@ -10,6 +10,19 @@ export default class AdocaosController {
   public async index ({}: HttpContextContract) {
   }
 
+  public async store ({ request, auth, params }: HttpContextContract) {
+    
+    const logado = await auth.user;
+    const animal = await Animal.find(params.idAnimal);
+    const adocao = new Adocao();
+
+    await adocao.related('animal').associate(animal);
+    await adocao.related('pessoa').associate(logado);
+    await adocao.save();
+
+    return adocao;
+  }
+
   public async list ({ view }: HttpContextContract){
 
     const res = await Database.rawQuery("select * from doacaos where ativo=true")
@@ -58,19 +71,6 @@ export default class AdocaosController {
     return view.render('adocao/listTipoAnimal', { animaisPorTipo });
   }
 
-  public async store ({ request, auth, params }: HttpContextContract) {
-    
-    const logado = await auth.user;
-    const animal = await Animal.find(params.idAnimal);
-    const adocao = new Adocao();
-
-    await adocao.related('animal').associate(animal);
-    await adocao.related('pessoa').associate(logado);
-    await adocao.save();
-
-    return adocao;
-  }
-
   public async listAdocaosAbertas({ request, auth, view }: HttpContextContract){
 
     const logado = await auth.user
@@ -85,20 +85,12 @@ export default class AdocaosController {
     return view.render('adocao/listAberta', {listAdocaos})
   }
 
-  public async efetivarAdocao({}: HttpContextContract){
+  public async adotar({}: HttpContextContract){
     //animal id de doacaos = animal id que eu peguei
     await Database.from('doacaos').where('ativo', 'true').update({ ativo: 'false' })
   }
 
-  public async show ({}: HttpContextContract) {
-  }
-
-  public async edit ({}: HttpContextContract) {
-  }
-
-  public async update ({}: HttpContextContract) {
-  }
-
-  public async destroy ({}: HttpContextContract) {
+  public async efetivarAdocao({}: HttpContextContract){
+    
   }
 }

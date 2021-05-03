@@ -14,7 +14,7 @@
             <label for="basic-url" class="text-black text-base mr-2">Tipo do seu animal:</label>
             <select name="idTipoAnimal" id="idTipoAnimal" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Default select example">
                 <option selected>Clique para selecionar</option>
-                @each(tipo in tipoAnimais)
+                @each(tipo in tiposAnimais)
                     <option value="{{tipo.id}}">{{tipo.descricao}}</option>
                 @endeach
             </select>

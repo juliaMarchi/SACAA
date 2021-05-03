@@ -1,11 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import View from '@ioc:Adonis/Core/View';
 import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
-import { HttpContext } from '@adonisjs/core/build/standalone';
 
 export default class PessoasController {
   public async index({ view }: HttpContextContract) {

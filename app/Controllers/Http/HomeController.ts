@@ -7,7 +7,5 @@ export default class AdocaosController {
         const tiposAnimais = await TipoAnimal.all()
 
         return view.render('home', { tiposAnimais })
-
-
     }
 }
