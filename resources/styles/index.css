@@ -17,14 +17,6 @@
   @apply text-gray-800 text-xl font-bold mb-5;
 }
 
-.card {
-  @apply flex flex-col shadow-xl max-w-full bg-white rounded-lg m-2 mt-16;
-}
-
-.card-header {
-  @apply flex flex-col items-center justify-center w-full p-2 border-b border-gray-300;
-}
-
 .card-header img {
   @apply shadow-lg rounded-full max-w-full w-48 h-48 object-cover border-2 border-green-500 mb-2 -mt-16;
 }
@@ -33,16 +25,8 @@
   @apply font-bold text-2xl text-green-500;
 }
 
-.card-body {
-  @apply flex flex-col flex-1 mt-4 w-full p-2;
-}
-
 .card-body p {
   @apply font-normal text-gray-800 text-base text-center;
-}
-
-.card-footer {
-  @apply w-full p-0;
 }
 
 .card-footer button {

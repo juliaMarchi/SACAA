@@ -1,11 +1,11 @@
-<div class="card">
-    <div class="card-header">
+<div class="card flex flex-col shadow-xl max-w-full bg-white rounded-lg m-2 mt-16">
+    <div class="card-header flex flex-col items-center justify-center w-full p-2 border-b border-gray-300">
         {{{ $slots.header() }}}
     </div>
-    <div class="card-body">
+    <div class="card-body flex flex-col flex-1 mt-4 w-full p-2">
         {{{ $slots.body() }}}
     </div>
-    <div class="card-footer">
+    <div class="card-footer w-full p-0">
         {{{ $slots.footer() }}}
     </div>
 </div>
