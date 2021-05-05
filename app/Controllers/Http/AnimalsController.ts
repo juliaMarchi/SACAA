@@ -2,13 +2,10 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Animal from 'App/Models/Animal';
 import TipoAnimal from 'App/Models/TipoAnimal';
-import Pessoa from 'App/Models/Pessoa';
+import Doacao from 'App/Models/Doacao';
 import Caracteristica from 'App/Models/Caracteristica';
 
 export default class AnimalsController {
-  public async index ({ view }: HttpContextContract) {
-    return view.render('animal/index', { message: 'estamos na index pelo controller' })
-  }
 
   public async create ({ view }: HttpContextContract) {
     const portes = [
@@ -44,10 +41,10 @@ export default class AnimalsController {
     
     await animal.related('tipoAnimal').associate(tipoAnimal);
 
-    //fazer alguma coisa aqui
-    const usuario = await Pessoa.find(logado);
-
-    return animal.id;
+    //criando doação
+    const doacao = await Doacao.create({pessoaId: logado?.id, animalId: animal.id, ativo: true});
+    
+    return {animalId: animal.id, doacaoId: doacao.id};
   }
 
   public async renderPerfil({view, params}){
