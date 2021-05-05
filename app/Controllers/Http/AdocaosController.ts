@@ -25,23 +25,26 @@ export default class AdocaosController {
 
   public async list ({ view }: HttpContextContract){
 
+    //TODO: mudar consulta
     const res = await Database.rawQuery("select * from doacaos where ativo=true")
     const animais = []
+    const tiposAnimais = await TipoAnimal.all()
     
     for(const r in res[0]){
         const animal = await Animal.find(res[0][r].animal_id)
         if(animal){
-          animais.push(animal)
+          animal.preload("tipoAnimal");
+          animais.push(animal);
         }
         console.log(animal)
     }
-
-    return view.render('adocao/list', { animais });
+    return view.render('adocao/list', { animais, tiposAnimais });
   }
 
   public async listMatch ({ auth, view }: HttpContextContract) {
     
     const logado = await auth.user
+    const tiposAnimais = await TipoAnimal.all()
     
     const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true",[logado.id])
     const animaisMatch = []
@@ -53,7 +56,7 @@ export default class AdocaosController {
         }
     }
 
-    return view.render('adocao/listMatch', { animaisMatch });
+    return view.render('adocao/listMatch', { animaisMatch, tiposAnimais });
 
     //select animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id where pc.pessoa_id = 4;
     
@@ -62,18 +65,20 @@ export default class AdocaosController {
   public async listTipoAnimal ({ view, params }: HttpContextContract){
 
     const tipoAnimal = params.tipoAnimal;
+    const tiposAnimais = await TipoAnimal.all()
     
     const animaisPorTipo = await Animal
                                     .query()
                                     .whereHas('tipoAnimal', (builder) => {builder.where('descricao',tipoAnimal)})
                                     .andWhereHas('doacao',(builder) => {builder.where('ativo',true)});
 
-    return view.render('adocao/listTipoAnimal', { animaisPorTipo });
+    return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }
 
   public async listAdocaosAbertas({ request, auth, view }: HttpContextContract){
 
     const logado = await auth.user
+    const tiposAnimais = await TipoAnimal.all()
 
     const listAdocaos = await Adocao.query()
       .whereHas('animal', (builder) => {
@@ -82,7 +87,7 @@ export default class AdocaosController {
         })
       })
     
-    return view.render('adocao/listAberta', {listAdocaos})
+    return view.render('adocao/listAberta', {listAdocaos, tiposAnimais})
   }
 
   public async adotar({}: HttpContextContract){

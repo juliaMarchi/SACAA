@@ -8,24 +8,22 @@ Route.post('/login', 'PessoasController.login')
 Route.get('/logout', 'PessoasController.logout');
 
 //Route.resource('pessoas', 'PessoasController');
-Route.get('/pessoas/index', 'PessoasController.index');
 Route.get('/pessoas/cadastro', 'PessoasController.create');
 Route.post('/pessoas/cadastro', 'PessoasController.store');
 Route.get('/pessoas', 'PessoasController.list').middleware('auth:web');
-Route.get('/pessoas/:idPessoa', 'PessoasController.show');
-Route.post('/pessoas/:idPessoa/editar', 'PessoasController.edit');
-Route.post('/pessoas/:idPessoa/editar', 'PessoasController.update');
-Route.get('/pessoas/:idPessoa/perfil', 'PessoasController.renderPerfil');
-Route.post('/pessoas/:idPessoa/perfil', 'PessoasController.savePerfil');
+Route.get('/pessoas/:idPessoa', 'PessoasController.show').middleware('auth:web');
+Route.get('/pessoas/:idPessoa/editar', 'PessoasController.edit').middleware('auth:web');
+Route.post('/pessoas/:idPessoa/editar', 'PessoasController.update').middleware('auth:web');
+Route.get('/pessoas/:idPessoa/perfil', 'PessoasController.renderPerfil').middleware('auth:web');
+Route.post('/pessoas/:idPessoa/perfil', 'PessoasController.savePerfil').middleware('auth:web');
 
 //Route.resource('animais', 'AnimalsController');
-Route.get('/animais/index', 'AnimalsController.index');
-Route.get('/animais/cadastro', 'AnimalsController.create');
-Route.post('/animais/cadastro', 'AnimalsController.store');
-Route.get('/animais', 'AnimalsController.list');
-Route.get('/animais/:idAnimal', 'AnimalsController.show');
-Route.get('/animais/:idAnimal/perfil', 'AnimalsController.renderPerfil');
-Route.post('/animais/:idAnimal/perfil', 'AnimalsController.savePerfil');
+Route.get('/animais/cadastro', 'AnimalsController.create').middleware('auth:web');
+Route.post('/animais/cadastro', 'AnimalsController.store').middleware('auth:web');
+Route.get('/animais', 'AnimalsController.list').middleware('auth:web');
+Route.get('/animais/:idAnimal', 'AnimalsController.show').middleware('auth:web');
+Route.get('/animais/:idAnimal/perfil', 'AnimalsController.renderPerfil').middleware('auth:web');
+Route.post('/animais/:idAnimal/perfil', 'AnimalsController.savePerfil').middleware('auth:web');
 
 Route.get('/home', 'HomeController.index').middleware('auth:web');
 Route.get('/adocaos/list', 'AdocaosController.list').middleware('auth:web');
