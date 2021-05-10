@@ -5,9 +5,6 @@ import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
 
 export default class PessoasController {
-  public async index({ view }: HttpContextContract) {
-    return view.render('pessoa/index', { message: 'estamos na index pelo controller' })
-  }
 
   public async create({ view }: HttpContextContract) {
     const pessoa = new Pessoa();

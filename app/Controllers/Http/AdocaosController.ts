@@ -7,8 +7,6 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import TipoAnimal from 'App/Models/TipoAnimal'
 
 export default class AdocaosController {
-  public async index ({}: HttpContextContract) {
-  }
 
   public async store ({ request, auth, params }: HttpContextContract) {
     
@@ -25,20 +23,26 @@ export default class AdocaosController {
 
   public async list ({ view }: HttpContextContract){
 
+    //const animais = await Animal.query().where('ativo', true).preload('tipoAnimal')
+    const doacoes = await Doacao.query().where('ativo', true).preload('animal', doacoesQuery => {
+      doacoesQuery.preload('tipoAnimal')
+    })
+    const animais = doacoes.map(doacao => doacao.animal)
     //TODO: mudar consulta
-    const res = await Database.rawQuery("select * from doacaos where ativo=true")
-    const animais = []
-    const tiposAnimais = await TipoAnimal.all()
+    //const res = await Database.from('doacaos').select('*').where('ativo', 'true')
+    // const res = await Database.rawQuery("select * from doacaos where ativo=true")
+    // const animais = []
+    // const tiposAnimais = await TipoAnimal.query().preload("")
     
-    for(const r in res[0]){
-        const animal = await Animal.find(res[0][r].animal_id)
-        if(animal){
-          animal.preload("tipoAnimal");
-          animais.push(animal);
-        }
-        console.log(animal)
-    }
-    return view.render('adocao/list', { animais, tiposAnimais });
+    // for(const r in res[0]){
+    //     const animal = await Animal.find(res[0][r].animal_id)
+    //     if(animal){
+    //       animal.preload("tipoAnimal");
+    //       animais.push(animal);
+    //     }
+    //     console.log(animal)
+    // }
+    return view.render('adocao/list', { animais });
   }
 
   public async listMatch ({ auth, view }: HttpContextContract) {
@@ -91,8 +95,11 @@ export default class AdocaosController {
   }
 
   public async adotar({}: HttpContextContract){
-    //animal id de doacaos = animal id que eu peguei
-    await Database.from('doacaos').where('ativo', 'true').update({ ativo: 'false' })
+    //como pegar animal que o usuário escolheu
+    const animalId = 1;
+    await Database.from('doacaos').where('ativo', 'true')
+      .andWhere('animal_id', animalId)
+      .update({ ativo: 'false' })
   }
 
   public async efetivarAdocao({}: HttpContextContract){
