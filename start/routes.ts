@@ -16,6 +16,9 @@ Route.get('/pessoas/:idPessoa/editar', 'PessoasController.edit').middleware('aut
 Route.post('/pessoas/:idPessoa/editar', 'PessoasController.update').middleware('auth:web');
 Route.get('/pessoas/:idPessoa/perfil', 'PessoasController.renderPerfil').middleware('auth:web');
 Route.post('/pessoas/:idPessoa/perfil', 'PessoasController.savePerfil').middleware('auth:web');
+Route.get('/perfil', async ({view, auth}) => {
+    return view.render('pessoa.editPerfil', { pessoa: auth.user })
+}).as('perfil').middleware('auth:web')
 
 //Route.resource('animais', 'AnimalsController');
 Route.get('/animais/cadastro', 'AnimalsController.create').middleware('auth:web');

@@ -62,16 +62,18 @@ export default class PessoasController {
   public async edit({ view, params }: HttpContextContract) {
     const pessoa = await Pessoa.find(params.idPessoa);
     return view.render('pessoa/edit', { pessoa })
-    //retornar o form pra editar uma pessoa.
   }
 
-  public async update({ request, params }: HttpContextContract) {
+  public async update({ request, response, params }: HttpContextContract) {
     const pessoa = await Pessoa.find(params.idPessoa);
+    const data = request.only(['nome', 'nascimento', 'cidade', 'rua']);
 
-    if(pessoa){
-      pessoa.merge(request.all())
+    if(pessoa) {
+      pessoa.merge(data)
       pessoa.save();
     }
+
+    response.redirect().back
   }
   
   public async delete({ params }: HttpContextContract) {

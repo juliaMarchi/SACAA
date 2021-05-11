@@ -22,7 +22,9 @@ function showTab(step = null) {
     document.getElementById("prevBtn").classList.remove('hidden_tab');
   }
   if (step == lastStepNumber) {
-    document.getElementById("nextBtn").innerHTML = "Criar conta";
+    const nextButton = document.getElementById("nextBtn");
+    const buttonLabel = nextButton.dataset.submitLabel || 'Criar Conta';
+    nextButton.innerHTML = buttonLabel;
   } else {
     document.getElementById("nextBtn").innerHTML = "Próximo";
   }

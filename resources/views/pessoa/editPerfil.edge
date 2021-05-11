@@ -1,7 +1,46 @@
 @layout('base')
 
 @section('conteudo')
-  <button href="/pessoas/:idPessoa/editar">Editar Perfil</button>
-  <button>Suas características</button>
-  <button>Excluir perfil</button>
+  <div id="pagina-perfil" class="flex flex-1 min-h-screen">
+    <section class="sidebar w-1/4 bg-white">
+      <button
+        data-section-target="#js-editar-perfil"
+        class="block min-h-8 p-4 font-bold hover:bg-green-500 hover:text-white duration-75 w-full bg-green-500 text-white" href="/pessoas/:idPessoa/editar">
+        Editar Perfil
+      </button>
+      <button
+        data-section-target="#js-caracteristicas"
+        class="block min-h-8 p-4 font-bold hover:bg-green-500 hover:text-white duration-75 w-full">
+        Suas características
+      </button>
+      <button
+        data-section-target="#js-excluir-perfil"
+        class="block min-h-8 p-4 font-bold hover:bg-green-500 hover:text-white duration-75 w-full">
+        Excluir perfil
+      </button>
+    </section>
+    <section class="editable w-3/4 flex flex-col items-center justify-center">
+      <div id="js-editar-perfil">
+        <form
+          id="js-form-pessoa"
+          class="bg-white p-4 rounded"
+          action="{{ route('PessoasController.update', { idPessoa: pessoa.id }) }}"
+          method="POST"
+        >
+          @include('pessoa.formEdit')
+        </form>
+      </div>
+      <div id="js-caracteristicas" class="hidden">
+        <p>Suas característica</p>
+      </div>
+      <div id="js-excluir-perfil" class="hidden">
+        <p>Excluir perfil</p>
+      </div>
+    </section>
+  </div>
+@endsection
+
+@section('scripts')
+  <script src="/js/perfil/sidebar.js"></script>
+  <script src="/js/form_tabs.js"></script>
 @endsection
