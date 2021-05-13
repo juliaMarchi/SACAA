@@ -88,12 +88,20 @@ export default class AdocaosController {
     const tipoAnimal = params.tipoAnimal;
     const tiposAnimais = await TipoAnimal.all()
     
-    const doacoes = await Doacao.query()
-                                .where('ativo', true)
-                                .andWhereHas('animal',(builder)=>{builder.whereHas('tipoAnimal',tipoAnimal)})
-                                .preload('animal')
+    var animaisTipo = await Doacao.query()
+                              .where('ativo',true)
+                              
+                              .whereHas('animal',(builder)=>{
+                                builder.whereHas('tipoAnimal',(builder2)=>{
+                                  builder2.where('descricao',tipoAnimal)
+                                })
+                                
+                              }).preload('animal',(builder)=>{
+                                builder.preload('tipoAnimal')
+                              })
     
-    const animaisPorTipo = doacoes.map(doacao => doacao.animal)
+    
+    var animaisPorTipo = animaisTipo.map(doacao => doacao.animal)
 
     return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }
