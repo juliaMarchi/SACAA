@@ -33,22 +33,42 @@ export default class PessoasController {
     
   }
 
-  public async renderPerfil({view, params}){
-    const pessoa = await Pessoa.find(params.idPessoa)
-    const caracteristicas = await Caracteristica.all()
+  public async renderCaracteristicas({view, auth}){
+    const pessoa = auth.user;
+    //const pessoa = await Pessoa.find(params.idPessoa)
+    const todasCaracteristicas = await Caracteristica.all()
+    await pessoa.preload("caracteristicas")//carregar dados das relações
+    
+    //TODO: Verificar se existe outra forma de checkar um checkbox...
+    const caracteristicas = todasCaracteristicas.map((caract)=>{
+      const objt = {}
+      const flag = pessoa.caracteristicas.find(c=> c.id == caract.id)?"checked":""
+      objt['id'] = caract.id
+      objt['descricao'] = caract.descricao
+      objt['checked'] = flag
+      return objt
+    });
+
+    
     return view.render('pessoa/perfil', { pessoa, caracteristicas });
   }
 
-  public async savePerfil({request, params}){
-    const pessoa = await Pessoa.find(params.idPessoa)
-    await pessoa.related("caracteristicas").sync(request.only(['caracteristicas'])['caracteristicas'])
+  public async saveCaracteristicas({request, auth}){
+
+    //const pessoa = await Pessoa.find(params.idPessoa)
+    const pessoa = auth.user;
+    const selecionadas = request.only(['caracteristicas'])['caracteristicas']
+    if(selecionadas)
+      await pessoa.related("caracteristicas").sync(selecionadas)
     await pessoa.preload("caracteristicas")//carregar dados das relações
 
     return pessoa
   }
 
   public async show({ view, params }: HttpContextContract) {
+    console.log(params.idPessoa)
     const pessoa =  await Pessoa.find(params.idPessoa)
+
     //carrega as caracteristicas da pessoa
     await pessoa.preload('caracteristicas')
     return view.render('pessoa/show', { pessoa });

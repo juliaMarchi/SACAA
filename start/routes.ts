@@ -11,11 +11,13 @@ Route.get('/logout', 'PessoasController.logout');
 Route.get('/pessoas/cadastro', 'PessoasController.create');
 Route.post('/pessoas/cadastro', 'PessoasController.store');
 Route.get('/pessoas', 'PessoasController.list').middleware('auth:web');
+Route.get('/pessoas/caracteristicas', 'PessoasController.renderCaracteristicas').middleware('auth:web');
+Route.post('/pessoas/caracteristicas', 'PessoasController.saveCaracteristicas').middleware('auth:web');
+
 Route.get('/pessoas/:idPessoa', 'PessoasController.show').middleware('auth:web');
+//TODO: deixar igual das caracteristicas...
 Route.get('/pessoas/:idPessoa/editar', 'PessoasController.edit').middleware('auth:web');
 Route.post('/pessoas/:idPessoa/editar', 'PessoasController.update').middleware('auth:web');
-Route.get('/pessoas/:idPessoa/perfil', 'PessoasController.renderPerfil').middleware('auth:web');
-Route.post('/pessoas/:idPessoa/perfil', 'PessoasController.savePerfil').middleware('auth:web');
 Route.get('/perfil', async ({view, auth}) => {
     return view.render('pessoa.editPerfil', { pessoa: auth.user })
 }).as('perfil').middleware('auth:web')

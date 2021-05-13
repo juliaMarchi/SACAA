@@ -1,14 +1,21 @@
 @section('conteudo')
-  <form action="{{ route('PessoasController.savePerfil',{idPessoa:pessoa.idPessoa}) }}" method="POST">
+  <form action="{{ route('PessoasController.saveCaracteristicas') }}" method="POST">
     <input type="hidden" name="idPessoa" value="{{pessoa.idPessoa}}"/>
     <label for="caracteristicas">Selecione suas características:</label>
-    
+    <!--
     <select name="caracteristicas" id="caracteristicas" multiple>
       @each(caract in caracteristicas)
-        <option value="{{caract.idCaracteristica}}" >{{caract.descricao}}</option>
+        <option value="{{caract.id}}" >{{caract.descricao}}</option>
       @endeach
     </select>
-    
+  -->
+
+
+
+    @each(caract in caracteristicas)
+      <input type="checkbox" value="{{caract.id}}" name="caracteristicas[]" {{ caract.checked }}/>{{caract.descricao}} 
+    @endeach
+
     <input type="submit" value="Submit">
   </form>
 @endsection

@@ -14,9 +14,26 @@ export default class AdocaosController {
     const animal = await Animal.find(params.idAnimal);
     const adocao = new Adocao();
 
+    adocao.efetivado = false;
     await adocao.related('animal').associate(animal);
     await adocao.related('pessoa').associate(logado);
     await adocao.save();
+
+    /*
+    await Database.from('doacaos').where('ativo', 'true')
+    .andWhere('animal_id', animal.id)
+    .update({ ativo: 'false' })
+    */
+
+    /*
+    await Doacao.query().where('ativo',true).andWhere('animal_id',animal.id).first().update({ativo: 'false'})
+    */
+    
+    
+    const doacao = await Doacao.query().where('ativo',true).andWhere('animal_id',animal.id).first()
+    doacao.ativo = false;
+    doacao.save()
+    
 
     return adocao;
   }
@@ -71,10 +88,12 @@ export default class AdocaosController {
     const tipoAnimal = params.tipoAnimal;
     const tiposAnimais = await TipoAnimal.all()
     
-    const animaisPorTipo = await Animal
-                                    .query()
-                                    .whereHas('tipoAnimal', (builder) => {builder.where('descricao',tipoAnimal)})
-                                    .andWhereHas('doacao',(builder) => {builder.where('ativo',true)});
+    const doacoes = await Doacao.query()
+                                .where('ativo', true)
+                                .andWhereHas('animal',(builder)=>{builder.whereHas('tipoAnimal',tipoAnimal)})
+                                .preload('animal')
+    
+    const animaisPorTipo = doacoes.map(doacao => doacao.animal)
 
     return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }
@@ -96,13 +115,11 @@ export default class AdocaosController {
 
   public async adotar({}: HttpContextContract){
     //como pegar animal que o usuário escolheu
-    const animalId = 1;
-    await Database.from('doacaos').where('ativo', 'true')
-      .andWhere('animal_id', animalId)
-      .update({ ativo: 'false' })
+
   }
 
-  public async efetivarAdocao({}: HttpContextContract){
+  public async efetivarAdocaoSave({params, auth}: HttpContextContract){
     
+
   }
 }
