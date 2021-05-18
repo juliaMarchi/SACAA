@@ -39,7 +39,7 @@ export default class AnimalsController {
     const x = request.only(['nome','raca','nascimento','porte']);
     const animal = await Animal.create(x);
     
-    await animal.related('tipoAnimal').associate(tipoAnimal);
+    await animal.related('tipoAnimal').associate(tipoAnimal!!);
 
     //criando doação
     const doacao = await Doacao.create({pessoaId: logado?.id, animalId: animal.id, ativo: true});
@@ -47,16 +47,20 @@ export default class AnimalsController {
     return {animalId: animal.id, doacaoId: doacao.id};
   }
 
-  public async renderPerfil({view, params}){
+  public async renderCaracteristicas({view, params}){
     const animal = await Animal.find(params.idAnimal)
     const caracteristicas = await Caracteristica.all()
-    return view.render('animais/perfil', { animal, caracteristicas });
+    await animal!!.preload("caracteristicas")//carregar dados das relações
+    //O QUE COLOCAR AQUIIIII NO RENDERRR SOS
+    return view.render('animais/:idAnimal/caracteristicas', { animal, caracteristicas });
   }
 
-  public async savePerfil({request, params}){
+  public async saveCaracteristicas({request, params}){
     const animal = await Animal.find(params.idAnimal)
-    await animal.related("caracteristicas").sync(request.only(['caracteristicas'])['caracteristicas'])
-    await animal.preload("caracteristicas")//carregar dados das relações
+    const selecionadas = request.only(['caracteristicas'])['caracteristicas']
+    if(selecionadas)
+      await animal!!.related("caracteristicas").sync(selecionadas)
+    await animal!!.preload("caracteristicas")//carregar dados das relações
 
     return animal
   }
@@ -64,7 +68,7 @@ export default class AnimalsController {
   public async show ({ view, params }: HttpContextContract) {
     const animal =  await Animal.find(params.idAnimal)
     //carrega as caracteristicas do animal
-    await animal.preload('caracteristicas')
+    await animal!!.preload('caracteristicas')
     return view.render('animal/show', { animal });
   }
 

@@ -76,14 +76,14 @@ export default class PessoasController {
     return view.render('pessoa/list', { pessoas });
   }
 
-  public async edit({ view, params }: HttpContextContract) {
-    const pessoa = await Pessoa.find(params.idPessoa);
+  public async edit({ view, auth }: HttpContextContract) {
+    const pessoa = auth.user;
     return view.render('pessoa/edit', { pessoa })
   }
 
-  public async update({ request, response, params }: HttpContextContract) {
+  public async update({ request, response, auth }: HttpContextContract) {
 
-    const pessoa = await Pessoa.find(params.idPessoa);
+    const pessoa = auth.user;
     const data = request.only(['nome', 'nascimento', 'cidade', 'rua']);
 
     if(pessoa) {
