@@ -24,6 +24,9 @@ export default class Adocao extends BaseModel {
   @column()
   public efetivado: boolean
 
+  @column()
+  public status: string
+
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
   
