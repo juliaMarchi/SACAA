@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Caracteristica from 'App/Models/Caracteristica'
 import Database from '@ioc:Adonis/Lucid/Database'

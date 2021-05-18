@@ -5,8 +5,6 @@ import Database from '@ioc:Adonis/Lucid/Database'
 import Pessoa from 'App/Models/Pessoa'
 import Caracteristica from 'App/Models/Caracteristica'
 
-
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -23,7 +21,7 @@ export default class PessoaSeeder extends BaseSeeder {
       
       var carac1 = caracteristicas[getRandomInt(0,caracteristicas.length)]
       var carac2 = caracteristicas[getRandomInt(0,caracteristicas.length)]
-      while(carac1 == carac2){
+      while(carac1 === carac2){
         carac2 = caracteristicas[getRandomInt(0,caracteristicas.length)]
       }
       pessoa.related('caracteristicas').saveMany([carac1, carac2])
