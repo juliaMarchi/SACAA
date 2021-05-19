@@ -31,13 +31,15 @@ export default class AnimalSeederSeeder extends BaseSeeder {
   }
 
   private async criaCachorros(){
+    const pessoas = await Pessoa.all()
+    
     const cachorro = await TipoAnimal.query().where('descricao','Cachorro').first()
     var c1 = await Animal.create({nome: 'Cachorro 1',
                          raca: 'Raca 1',
                          porte: 'Porte 1'
                           });
     await c1.related('tipoAnimal').associate(cachorro!!);
-    const p1 = await Pessoa.all()[0]
+    const p1 = await Pessoa.query().where('nome','Ze').first()
     await Doacao.create({pessoaId: p1?.id, animalId: c1.id, ativo: true})
 
     var c1 = await Animal.create({nome: 'Cachorro 2',
@@ -45,7 +47,7 @@ export default class AnimalSeederSeeder extends BaseSeeder {
                          porte: 'Porte 2'
                           });
     await c1.related('tipoAnimal').associate(cachorro!!);
-    const p2 = await Pessoa.all()[1]
+    const p2 = pessoas[1]
     await Doacao.create({pessoaId: p2?.id, animalId: c1.id, ativo: true})
 
     var c1 = await Animal.create({nome: 'Cachorro 3',
@@ -53,18 +55,21 @@ export default class AnimalSeederSeeder extends BaseSeeder {
                          porte: 'Porte 3'
                           });
     await c1.related('tipoAnimal').associate(cachorro!!);
-    const p3 = await Pessoa.all()[2]
+    const p3 = pessoas[2]
     await Doacao.create({pessoaId: p3?.id, animalId: c1.id, ativo: false})
   }
 
   private async criaGatos(){
+
+    const pessoas = await Pessoa.all()
+
     const gato = await TipoAnimal.query().where('descricao','Gato').first()
     var c1 = await Animal.create({nome: 'Gato 1',
                          raca: 'Raca gato 1',
                          porte: 'Porte gato 1'
                           });
     await c1.related('tipoAnimal').associate(gato!!);
-    const p1 = await Pessoa.all()[0]
+    const p1 = pessoas[0]
     await Doacao.create({pessoaId: p1?.id, animalId: c1.id, ativo: true})
 
     var c1 = await Animal.create({nome: 'Gato 2',
@@ -72,7 +77,7 @@ export default class AnimalSeederSeeder extends BaseSeeder {
                          porte: 'Porte gato 2'
                           });
     await c1.related('tipoAnimal').associate(gato!!);
-    const p2 = await Pessoa.all()[1]
+    const p2 = pessoas[1]
     await Doacao.create({pessoaId: p2?.id, animalId: c1.id, ativo: true})
 
     var c1 = await Animal.create({nome: 'Gato 3',
@@ -80,7 +85,7 @@ export default class AnimalSeederSeeder extends BaseSeeder {
                          porte: 'Porte gato 3'
                           });
     await c1.related('tipoAnimal').associate(gato!!);
-    const p3 = await Pessoa.all()[2]
+    const p3 = pessoas[2]
     await Doacao.create({pessoaId: p3?.id, animalId: c1.id, ativo: false})  
   }
 

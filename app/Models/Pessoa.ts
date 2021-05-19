@@ -86,10 +86,10 @@ export default class Pessoa extends BaseModel {
     return this.telefones.entries[1];
   }
 
-  @hasMany(() => Adocao, {foreignKey:'adocao_id'})
+  @hasMany(() => Adocao, {foreignKey: 'id'})
   public adocao: HasMany<typeof Adocao>
 
-  @hasMany(() => Doacao, {foreignKey:'doacao_id'})
+  @hasMany(() => Doacao, {foreignKey:'id'})
   public doacao: HasMany<typeof Doacao>
 
 

@@ -6,8 +6,8 @@
 
       <h1 class="text-center text-2xl	text-green-700 pb-10">Características do animal</h1>
 
-      <form class="flex flex-col" action="{{ route('AnimalsController.saveCaracteristicas') }}" method="POST">
-        <input type="hidden" name="idPessoa" value="{{animal.idAnimal}}"/>
+      <form class="flex flex-col" action="{{ route('AnimalsController.saveCaracteristicas', { idAnimal: animal.id }) }}" method="POST">
+        <input type="hidden" name="idAnimal" value="{{animal.id}}"/>
         <label class="mb-5 text-green-800" for="caracteristicas">Selecione as características que combinam com o seu animal!</label>
         <div class="flex">
           @each(caract in caracteristicas)

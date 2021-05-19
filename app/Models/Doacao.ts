@@ -26,9 +26,9 @@ export default class Doacao extends BaseModel {
   @column()
   public animalId:number
 
-  @belongsTo(() => Animal)
+  @belongsTo(() => Animal, {foreignKey:'id'})
   public animal: BelongsTo<typeof Animal>
 
-  @belongsTo(() => Pessoa)
+  @belongsTo(() => Pessoa, {foreignKey:'id'})
   public pessoa: BelongsTo<typeof Pessoa>
 }
