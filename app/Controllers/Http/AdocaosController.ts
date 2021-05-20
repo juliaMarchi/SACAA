@@ -83,19 +83,28 @@ export default class AdocaosController {
 
     //consulta que comecei com stiehl 
     //mapear a relação de adoção e doação(???? não sei to confusa)
-    const logado = await auth.user?.related('doacao')
-      .query()
-      .where('ativo', false)
+    const listAdocaos = await auth.user?.related('doacao')
+      .query().whereHas('animal',(builder)=>{
+        builder.whereHas('adocao',(builder2)=>{
+          builder2.where('status','aguardando')
+        })
+      }).preload('animal',(builder)=>{
+        builder.preload('adocao',(builder2)=>{
+          builder2.where('status','aguardando').preload('pessoa')
+        })
+        builder.preload('tipoAnimal')
+      })
+
 
     const tiposAnimais = await TipoAnimal.all()
-
+    /*
     const listAdocaos = await Adocao.query()
       .whereHas('animal', (builder) => {
         builder.whereHas('doacao', (builder2) => {
           builder2.where('pessoa', logado)
         })
       })
-
+      */
     return view.render('adocao/listAberta', { listAdocaos, tiposAnimais })
   }
 

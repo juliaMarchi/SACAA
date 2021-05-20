@@ -38,10 +38,10 @@ export default class Animal extends BaseModel {
   @belongsTo(() => TipoAnimal)
   public tipoAnimal: BelongsTo<typeof TipoAnimal> 
 
-  @hasMany(() => Adocao, {foreignKey:'id'})
+  @hasMany(() => Adocao)
   public adocao: HasMany<typeof Adocao>
 
-  @hasMany(() => Doacao, {foreignKey:'id'})
+  @hasMany(() => Doacao)
   public doacao: HasMany<typeof Doacao>
 
   @manyToMany(() => Caracteristica,{

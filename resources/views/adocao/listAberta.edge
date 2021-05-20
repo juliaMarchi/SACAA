@@ -15,9 +15,12 @@
                         <h1>{{ adocaos.animal.nome }}</h1>
                     @endslot
                     @slot('body')
-                        <p>Tipo</p>
+                        <p>{{ adocaos.animal.tipoAnimal.descricao }}</p>
                         <p>{{ adocaos.animal.raca }}</p>
                         <p>{{ adocaos.animal.porte }}</p>
+                        @each( x in adocaos.animal.adocao)
+                            <p>{{ x.pessoa.nome }}</p>
+                        @endeach
                     @endslot
                     @slot('footer')
                         <button href="/adocaos/efetiva/{{ adocaos.id }}">Efetivar</button>
