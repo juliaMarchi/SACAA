@@ -20,15 +20,15 @@ export default class Doacao extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @column()
+  @column({ columnName: 'pessoa_id' })
   public pessoaId:number
 
-  @column()
+  @column({ columnName: 'animal_id' })
   public animalId:number
 
-  @belongsTo(() => Animal, {foreignKey:'id'})
+  @belongsTo(() => Animal)
   public animal: BelongsTo<typeof Animal>
 
-  @belongsTo(() => Pessoa, {foreignKey:'id'})
+  @belongsTo(() => Pessoa)
   public pessoa: BelongsTo<typeof Pessoa>
 }

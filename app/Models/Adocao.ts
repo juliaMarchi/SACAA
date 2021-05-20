@@ -15,10 +15,10 @@ export default class Adocao extends BaseModel {
   public createdAt: DateTime
 
   //faltava incluir as colunas das foreignKeys.
-  @column()
+  @column({ columnName: 'pessoa_id' })
   public pessoaId:number
 
-  @column()
+  @column({ columnName: 'animal_id' })
   public animalId:number
 
   @column()
