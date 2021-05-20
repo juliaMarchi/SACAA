@@ -1,0 +1,28 @@
+@layout('base')
+@section('conteudo')
+    <div>
+        <h1>Informações do animal</h1>
+        <p>Nome: {{animal.nome}}</p>
+        <p>Nascimento: {{ animal.nascimento }}</p>
+        <p>Sexo: </p>
+        <p>Raça: {{ animal.raca }}</p>
+        <p>Porte: {{ animal.porte }}</p>
+        <p>Característica do animal: </p>
+        <ul>
+            @each(caract in animal.caracteristicas)
+              <li> {{ caract.descricao}} </li>
+            @endeach
+        </ul>
+    </div>
+    <div>
+        <h1>Informações do doador</h1>
+        <p>Nome: {{ pessoa.nome }}</p>
+        <p>Estado: {{ pessoa.estado }}</p>
+        <p>Cidade: {{ pessoa.cidade }}</p>
+        <p>Bairro: {{ pessoa.bairro }}</p>
+        <p>Telefone: {{ pessoa.telefones.numero }}</p>
+    </div>
+    <div>
+        <button href="">Quero adotar!</button>
+    </div>
+@endsection

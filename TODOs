@@ -1,6 +1,6 @@
-//1- adocao/list.edge, arrumar tipo, linha 18
-//2- Tela das características, fazer funcionar (animal/perfil.edge, pessoa/perfil.edge)
-//3- pessoa/edit.edge e pessoa/editPerfil.edge 
-//4- AdocaoController: Adotar() e Efetivar()
+//1- tela adoção implementar urgente
+//2- fazer a função de rejeitado e efetivado
+//3- fazer a função de busca pro historico de rejeitados e efetivados do doador
+//4- tela minhas adoções
 
 //N- Fazer a upload das fotos
