@@ -28,6 +28,18 @@ export default class AdocaosController {
     return adocao;
   }
 
+  public async show ({ view, params }: HttpContextContract) {
+    const doacao = await Doacao.query()
+                      .where({ id: params.idDoacao })
+                      .preload('pessoa', query => query.preload('telefones'))
+                      .preload('animal', query => query.preload('caracteristicas'))
+                      .first()
+
+      console.log(doacao?.pessoa.telefones)
+
+    return view.render('adocao.detalhesAdocao', { pessoa: doacao?.pessoa, animal: doacao?.animal });
+  }
+
   public async list({ view }: HttpContextContract) {
     //lista de todos os animais disponiveis pra adoção
 
@@ -73,7 +85,7 @@ export default class AdocaosController {
         builder.preload('tipoAnimal')
       })
 
-    var animaisPorTipo = animaisTipo.map(doacao => doacao.animal)
+    var animaisPorTipo = animaisTipo.map(doacao => ({ ...doacao.animal.serialize(), doacaoId: doacao.id }));
 
     return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }

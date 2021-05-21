@@ -29,6 +29,6 @@
   @apply font-normal text-gray-800 text-base text-center;
 }
 
-.card-footer button {
-  @apply w-full self-center bg-gray-100 font-bold text-green-500 mt-2 p-4 rounded-b-lg hover:bg-green-500 hover:text-gray-100 duration-500;
+.card-footer a {
+  @apply inline-block text-center w-full self-center bg-gray-100 font-bold text-green-500 mt-2 p-4 rounded-b-lg hover:bg-green-500 hover:text-gray-100 duration-500;
 }

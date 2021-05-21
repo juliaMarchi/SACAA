@@ -1,28 +1,54 @@
 @layout('base')
 @section('conteudo')
-    <div>
-        <h1>Informações do animal</h1>
-        <p>Nome: {{animal.nome}}</p>
-        <p>Nascimento: {{ animal.nascimento }}</p>
-        <p>Sexo: </p>
-        <p>Raça: {{ animal.raca }}</p>
-        <p>Porte: {{ animal.porte }}</p>
-        <p>Característica do animal: </p>
-        <ul>
-            @each(caract in animal.caracteristicas)
-              <li> {{ caract.descricao}} </li>
-            @endeach
-        </ul>
+    <div class="flex justify-end">
+        <button class="mr-10 my-4 bg-green-600 py-3 px-5 rounded-lg text-white hover:bg-green-50 hover:text-green-800" href="">Quero adotar!</button>
     </div>
-    <div>
-        <h1>Informações do doador</h1>
-        <p>Nome: {{ pessoa.nome }}</p>
-        <p>Estado: {{ pessoa.estado }}</p>
-        <p>Cidade: {{ pessoa.cidade }}</p>
-        <p>Bairro: {{ pessoa.bairro }}</p>
-        <p>Telefone: {{ pessoa.telefones.numero }}</p>
-    </div>
-    <div>
-        <button href="">Quero adotar!</button>
+    <div class="flex space-x-8 mx-10">
+        <div class="w-1/3 bg-green-50 p-10 rounded-lg">
+            <h1 class="text-xl text-green-700 pb-5 border-b-2 border-green-200">Informações do doador</h1>
+            <div class="flex flex-row">
+                <div class="flex-1 text-green-700 space-y-3 mt-3">
+                    <p>Nome:</p>
+                    <p>Estado:</p>
+                    <p>Cidade:</p>
+                    <p>Bairro:</p>
+                    <p>Telefone:</p>
+                </div>
+                <div class="text-right text-green-700 space-y-3 mt-3">
+                    <p>{{ pessoa.nome }}</p>
+                    <p>{{ pessoa.estado }}</p>
+                    <p>{{ pessoa.cidade }}</p>
+                    <p>{{ pessoa.bairro }}</p>
+                    <p>{{ pessoa.telefones.map(tel => tel.numero).join(' | ') }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="w-2/3 bg-green-50 p-10 rounded-lg">
+            <h1 class="text-xl text-green-700 pb-5 border-b-2 border-green-200">Informações do animal</h1>
+            <div class="flex flex-row">
+                <div class="flex-1 text-green-700 space-y-3 mt-3">
+                    <p>Nome:</p>
+                    <p>Nascimento:</p>
+                    <p>Sexo:</p>
+                    <p>Raça:</p>
+                    <p>Porte:</p>
+                    <p>Características do animal:</p>
+                </div>
+                <div class="text-right text-green-700 space-y-3 mt-3">
+                    <p>{{animal.nome}}</p>
+                    <p>{{ animal.datanascimento.toLocaleDateString() }}</p>
+                    <p>Sexo aqui</p>
+                    <p>{{ animal.raca }}</p>
+                    <p>{{ animal.porte }}</p>
+                </div>
+            </div>
+            <div class="text-green-700">
+                <ul class="flex flex-row space-x-10 mt-3">
+                    @each(caract in animal.caracteristicas)
+                    <li> {{ caract.descricao}} </li>
+                    @endeach
+                </ul>
+            </div>
+        </div>
     </div>
 @endsection

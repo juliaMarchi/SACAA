@@ -3,7 +3,7 @@
 @section('conteudo')
     <div class="flex justify-center">
         <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
-            <h1 class="text-center text-md text-white text-lg">Animais não efetivados </h1>
+            <h1 class="text-center text-md text-white text-lg">Adoções em aberto</h1>
         </div>
     </div>
     <div>
@@ -23,7 +23,8 @@
                         @endeach
                     @endslot
                     @slot('footer')
-                        <button href="/adocaos/efetiva/{{ adocaos.id }}">Efetivar</button>
+                        <button href="/adocaos/efetivarAdocaoSave/{{ adocaos.id }}">Efetivar</button>
+                        <button href="/adocaos/efetivarAdocaoRecusado/{{ adocaos.id }}">Recusar</button>
                     @endslot
                 @endcomponent
             @endeach
