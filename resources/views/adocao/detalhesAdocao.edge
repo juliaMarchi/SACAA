@@ -1,7 +1,7 @@
 @layout('base')
 @section('conteudo')
     <div class="flex justify-end">
-        <button class="mr-10 my-4 bg-green-600 py-3 px-5 rounded-lg text-white hover:bg-green-50 hover:text-green-800" href="">Quero adotar!</button>
+        <a href="/adocaos/realiza/{{ animal.id }}" class="mr-10 my-4 bg-green-600 py-3 px-5 rounded-lg text-white hover:bg-green-50 hover:text-green-800">Quero adotar!</a>
     </div>
     <div class="flex space-x-8 mx-10">
         <div class="w-1/3 bg-green-50 p-10 rounded-lg">
@@ -32,22 +32,20 @@
                     <p>Sexo:</p>
                     <p>Raça:</p>
                     <p>Porte:</p>
-                    <p>Características do animal:</p>
+                    <p>Esse animal é:</p>
                 </div>
                 <div class="text-right text-green-700 space-y-3 mt-3">
                     <p>{{animal.nome}}</p>
                     <p>{{ animal.datanascimento.toLocaleDateString() }}</p>
-                    <p>Sexo aqui</p>
+                    <p>{{ animal.sexo }}</p>
                     <p>{{ animal.raca }}</p>
                     <p>{{ animal.porte }}</p>
+                    <ul class="flex flex-row space-x-6 mt-3 justify-end">
+                        @each(caract in animal.caracteristicas)
+                            <li> {{caract.descricao}} </li>
+                        @endeach
+                    </ul>
                 </div>
-            </div>
-            <div class="text-green-700">
-                <ul class="flex flex-row space-x-10 mt-3">
-                    @each(caract in animal.caracteristicas)
-                    <li> {{ caract.descricao}} </li>
-                    @endeach
-                </ul>
             </div>
         </div>
     </div>

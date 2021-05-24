@@ -3,7 +3,7 @@
 @section('conteudo')
     <div class="flex justify-center">
         <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
-            <h1 class="text-center text-md text-white text-lg">Adoções em aberto</h1>
+            <h1 class="text-center text-md text-white text-lg">Doações em aberto</h1>
         </div>
     </div>
     <div>
@@ -12,19 +12,16 @@
                 @component('components/card')
                     @slot('header')
                         <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
-                        <h1>{{ adocaos.animal.nome }}</h1>
+                        <a href="/">{{ adocaos.animal.nome }}</a>
                     @endslot
                     @slot('body')
-                        <p>{{ adocaos.animal.tipoAnimal.descricao }}</p>
-                        <p>{{ adocaos.animal.raca }}</p>
-                        <p>{{ adocaos.animal.porte }}</p>
                         @each( x in adocaos.animal.adocao)
-                            <p>{{ x.pessoa.nome }}</p>
+                            <a href="/">{{ x.pessoa.nome }}</a>
                         @endeach
                     @endslot
                     @slot('footer')
-                        <button href="/adocaos/efetivarAdocaoSave/{{ adocaos.id }}">Efetivar</button>
-                        <button href="/adocaos/efetivarAdocaoRecusado/{{ adocaos.id }}">Recusar</button>
+                        <a href="/adocaos/efetivar/{{ adocaos.id }}">Efetivar</a>
+                        <a href="/adocaos/recusar/{{ adocaos.id }}">Recusar</a>
                     @endslot
                 @endcomponent
             @endeach

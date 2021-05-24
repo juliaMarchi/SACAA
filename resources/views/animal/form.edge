@@ -1,50 +1,66 @@
 <div class="flex justify-start">
     <div>
         <div>
-            <label for="basic-url" class="text-black text-base mr-2">Nome</label>
+            <label for="basic-url" class="text-green-800 text-base mr-2">Nome</label>
             <input type="text" name="nome" value="{{ animal.nome || '' }}" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Nome" aria-describedby="basic-addon1">
         </div>
 
         <div>
-            <label for="basic-url" class="text-black text-base mr-2">Nascimento</label>
-            <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
+            <label for="basic-url" class="text-green-800 text-base mr-2">Nascimento</label>
+            <input type="date" name="nascimento" value="{{ animal.nascimento  || '' }}" class="text-green-800 mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
         </div>
 
-        <div>
-            <label for="basic-url" class="text-black text-base mr-2">Tipo do seu animal:</label>
-            <select name="idTipoAnimal" id="idTipoAnimal" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Default select example">
-                <option selected>Clique para selecionar</option>
-                @each(tipo in tiposAnimais)
-                    <option value="{{tipo.id}}">{{tipo.descricao}}</option>
+        <div class="flex justify-start">
+            <label for="basic-url" class="text-green-800 text-base mr-3">Sexo</label>
+            <div class="mb-4 border border-green-600 bg-green-100 rounded-lg">
+                @each(sexo in sexos)
+                    <div>
+                        <input class="mx-2" type="radio" name="sexo" value="{{ sexo.value }}" id="sexo_{{ sexo.value }}" id="flexRadioDefault2" checked>
+                        <label class="mr-4 text-green-800" for="flexRadioDefault2">{{ sexo.description }}</label>
+                    </div>
                 @endeach
-            </select>
-        </div>
+            </div>
+        </div>        
     </div>
 
     <div class="ml-8">
         <div>
-            <label for="basic-url" class="text-black text-base mr-2">Raça</label>
+            <label for="basic-url" class="text-green-800 text-base mr-2">Tipo do seu animal:</label>
+            <select name="idTipoAnimal" id="idTipoAnimal" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Default select example">
+                <option class="text-green-800" selected>Clique para selecionar</option>
+                @each(tipo in tiposAnimais)
+                    <option class="text-green-800" value="{{tipo.id}}">{{tipo.descricao}}</option>
+                @endeach
+            </select>
+        </div>
+
+        <div>
+            <label for="basic-url" class="text-green-800 text-base mr-2">Raça</label>
             <input type="string" name="raca" value="{{ animal.raca || '' }}" class="mb-4 h-8 border border-green-600 bg-green-100 rounded-lg" aria-label="Raça" aria-describedby="basic-addon1">
         </div> 
+
         <div class="flex justify-start">
-            <label for="basic-url" class="text-black text-base mr-3">Porte</label>
+            <label for="basic-url" class="text-green-800 text-base mr-3">Porte</label>
             <div class="mb-4 border border-green-600 bg-green-100 rounded-lg">
                 @each(porte in portes)
                     <div>
                         <input class="mx-2" type="radio" name="porte" value="{{ porte.value }}" id="porte_{{ porte.value }}" id="flexRadioDefault2" checked>
-                        <label class="mr-4" for="flexRadioDefault2">{{ porte.description }}</label>
+                        <label class="mr-4 text-green-800" for="flexRadioDefault2">{{ porte.description }}</label>
                     </div>
                 @endeach
             </div>
         </div>
     </div>
-    <div>
+    
+    <div class="ml-8">
         <label class="mb-5 text-green-800" for="caracteristicas">Selecione as características que combinam com o seu animal!</label>
-          @each(caract in caracteristicas)
-            <div class="m-5 place-items-start space-y-5">
-              <input class="mr-3" type="checkbox" value="{{caract.id}}" name="caracteristicas[]" {{ caract.checked }}/>{{caract.descricao}}
-            </div> 
-          @endeach
+        <div class="flex flex-wrap content-start mb-4 border border-green-600 bg-green-100 rounded-lg">
+            @each(caract in caracteristicas)
+                <div class="m-5 place-items-start space-y-5 text-green-800">
+                    <input class="mr-3" type="checkbox" value="{{caract.id}}" name="caracteristicas[]" {{ caract.checked }}/>{{caract.descricao}}
+                </div> 
+            @endeach
+        </div>
     </div>
 </div>
 

@@ -35,3 +35,5 @@ Route.get('/adocaos/listTipoAnimal/:tipoAnimal', 'AdocaosController.listTipoAnim
 Route.get('/adocaos/listAbertas', 'AdocaosController.listAdocaosAbertas').middleware('auth:web');
 Route.get('/adocaos/realiza/:idAnimal', 'AdocaosController.store').middleware('auth:web');
 Route.get('/adocaos/:idDoacao', 'AdocaosController.show').middleware('auth:web');
+Route.get('/adocaos/efetivar/:idAdocao', 'AdocaosController.efetivarAdocaoSave').middleware('auth:web');
+Route.get('/adocaos/recusar/:idAdocao', 'AdocaosController.efetivarAdocaoRecusado').middleware('auth:web');
