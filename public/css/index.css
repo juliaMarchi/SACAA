@@ -31861,7 +31861,7 @@ video {
   border-radius: 9999px;
   border-width: 2px;
   height: 12rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   margin-top: -4rem;
   max-width: 100%;
   -o-object-fit: cover;
@@ -31879,6 +31879,19 @@ video {
   color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
 
+.card-header a {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: rgba(6, 95, 70, var(--tw-text-opacity));
+}
+
+.card-header a:hover {
+  --tw-text-opacity: 1;
+  color: rgba(16, 185, 129, var(--tw-text-opacity));
+}
+
 .card-body p {
   font-weight: 400;
   font-size: 1rem;
@@ -31886,6 +31899,20 @@ video {
   text-align: center;
   --tw-text-opacity: 1;
   color: rgba(31, 41, 55, var(--tw-text-opacity));
+}
+
+.card-body a  {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgba(6, 95, 70, var(--tw-text-opacity));
+}
+
+.card-body a:hover {
+  --tw-text-opacity: 1;
+  color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
 
 .card-footer a {

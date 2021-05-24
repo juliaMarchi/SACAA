@@ -9,6 +9,7 @@ export default class Animals extends BaseSchema {
       table.increments('id').primary
       table.string('nome').notNullable
       table.date('nascimento').notNullable
+      table.string('sexo').notNullable
       table.string('raca').notNullable
       table.string('porte').notNullable
       table.string('enderecoFoto')

@@ -16,12 +16,6 @@ export default class Pessoa extends BaseModel {
   @column({ columnName: 'nome' })
   public nome: string[100]
 
-  @column({ columnName: 'cpf' })
-  public cpf: string
-
-  @column({ columnName: 'cnpj' })
-  public cnpj: string
-
   @column.date({ columnName: 'nascimento' })
   public nascimento: DateTime
 
@@ -92,12 +86,10 @@ export default class Pessoa extends BaseModel {
   @hasMany(() => Doacao)
   public doacao: HasMany<typeof Doacao>
 
-
   @beforeSave()
   public static async hashPassword (pessoa: Pessoa) {
     if (pessoa.$dirty.password) {
       pessoa.password = await Hash.make(pessoa.password)
     }
   }
-
 }

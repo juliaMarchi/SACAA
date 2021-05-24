@@ -8,21 +8,14 @@ export default class Adocao extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
   public id: number
 
-  @column({ columnName: 'data' })
-  public data: Date
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
-  //faltava incluir as colunas das foreignKeys.
   @column({ columnName: 'pessoa_id' })
   public pessoaId:number
 
   @column({ columnName: 'animal_id' })
   public animalId:number
-
-  @column()
-  public efetivado: boolean
 
   @column()
   public status: string

@@ -16,6 +16,9 @@ export default class Animal extends BaseModel {
   @column({ columnName: 'nascimento' })
   public datanascimento: Date
 
+  @column({ columnName: 'sexo'})
+  public sexo: string[45]
+
   @column({ columnName: 'raca' })
   public raca: string[45]
 
@@ -27,7 +30,6 @@ export default class Animal extends BaseModel {
 
   @column({ columnName: 'tipoanimal_id' })
   public tipoAnimalId: number
-
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

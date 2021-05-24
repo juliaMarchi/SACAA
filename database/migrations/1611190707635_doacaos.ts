@@ -7,7 +7,6 @@ export default class Doacaos extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary
-      table.date('data').notNullable
       table.integer('animal_id')
         .unsigned()
         .references('id')
@@ -16,6 +15,7 @@ export default class Doacaos extends BaseSchema {
         .unsigned()
         .references('id')
         .inTable('pessoas')
+      table.boolean('ativo').notNullable
       table.timestamps(true)
     })
   }

@@ -8,9 +8,6 @@ export default class Doacao extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
   public id: number
 
-  @column({ columnName: 'data' })
-  public data: Date
-
   @column({ columnName: 'ativo' })
   public ativo: boolean
 

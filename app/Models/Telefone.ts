@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DateTime } from 'luxon'
 import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Pessoa from 'App/Models/Pessoa'

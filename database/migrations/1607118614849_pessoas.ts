@@ -9,8 +9,6 @@ export default class Pessoas extends BaseSchema {
       table.increments('id').primary
       table.string('nome').notNullable
       table.date('nascimento')
-      table.string('cpf')
-      table.string('cnpj')
       table.boolean('ong').notNullable
       table.string('cep').notNullable
       table.string('estado').notNullable

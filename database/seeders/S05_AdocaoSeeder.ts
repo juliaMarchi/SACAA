@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 
 import Animal from 'App/Models/Animal'
@@ -12,7 +13,7 @@ export default class S05_AdocaoSeeder extends BaseSeeder {
     const cachorro = await Animal.query().where('nome','Cachorro 1').first()
     const pessoas = await Pessoa.all()
     const pessoa = pessoas[1]
-    const adocao = await Adocao.create({pessoaId:pessoa?.id, animalId:cachorro?.id, data: DateTime.local().toJSDate()})
+    const adocao = await Adocao.create({pessoaId:pessoa?.id, animalId:cachorro?.id})
 
     const doacao = await cachorro?.related('doacao').query().where('ativo',true).first()
 
