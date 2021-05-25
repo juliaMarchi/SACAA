@@ -108,6 +108,7 @@ export default class AdocaosController {
     //caso o doador aceite o pedido de adoção
     const dado = await Adocao.find(params.idAdocao);
 
+    //PORQUE dado!.animal.id NÃO FUNCIONA?
     const adocao = await Adocao.query().where('status', 'aguardando')
       .andWhere('animal_id', dado!.animal.id).first()
 
@@ -116,16 +117,16 @@ export default class AdocaosController {
   }
 
   public async efetivarAdocaoRecusado({ params }: HttpContextContract) {
-    //caso o doador recuse o pedido de adoção
-    const animal = await Animal.find(params.idAnimal);
+    //caso o doador recuse o pedido de adoção~
+    const dado = await Adocao.find(params.idAdocao);
 
     const doacao = await Doacao.query().where('ativo', false)
-      .andWhere('animal_id', animal!.id).first()
+      .andWhere('animal_id', dado!.animal.id).first()
     doacao!.ativo = true
     doacao!.save()
     
     const adocao = await Adocao.query().where('status', 'aguardando')
-      .andWhere('animal_id', animal!.id).first()
+      .andWhere('animal_id', dado!.animal.id).first()
     adocao!.status = 'recusado'
     adocao!.save()
   }

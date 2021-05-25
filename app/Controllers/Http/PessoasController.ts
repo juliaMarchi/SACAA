@@ -3,6 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
+import { DateTime } from 'luxon';
 
 export default class PessoasController {
 
@@ -67,7 +68,10 @@ export default class PessoasController {
     const pessoa =  await Pessoa.find(params.idPessoa)
     //carrega as caracteristicas da pessoa
     await pessoa!.preload('caracteristicas')
-
+    await pessoa!.preload('telefones')
+    //como funciona esse preload? condição no edge
+    //pq telefone só aparece 1?
+    //como colocar o quadro no meio da tela
     return view.render('pessoa/show', { pessoa });
   }
 

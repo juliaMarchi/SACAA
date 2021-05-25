@@ -1,11 +1,37 @@
-<div>
-    <p>{{ animal.nome }}</p>
-    <p>{{ animal.nascimento }}</p>
-    <p>{{ animal.raca }}</p>
-    <p>{{ animal.porte }}</p>
-    <ul>
-        @each(caract in animal.caracteristicas)
-          <li> {{ caract.descricao}} </li>
-        @endeach
-    </ul>
-</div>
+@layout('base')
+
+@section('conteudo')
+  <div class="flex justify-center items-center">
+    <div class="flex flex-col container space-y-3 max-w-4xl bg-green-50 p-10 rounded-lg">
+      <div class="flex justify-start pb-5 border-b-2 border-green-200 text-green-700">
+        <p class="text-2xl mr-5">{{ animal.nome }}</p>
+        <p class="text-2xl mr-5">Tipo animal</p>
+        <p class="text-base flex flex-wrap content-end">{{ animal.idade }} anos</p>
+      </div>
+
+      <div class="flex flex-row">
+        <div class="flex-1 text-green-700 space-y-3 mt-3">
+            <p>Nome:</p>
+            <p>Nascimento:</p>
+            <p>Sexo:</p>
+            <p>Raça:</p>
+            <p>Porte:</p>
+            <p>Esse animal é:</p>
+        </div>
+
+        <div class="text-right text-green-700 space-y-3 mt-3">
+            <p>{{animal.nome}}</p>
+            <p>{{ animal.datanascimento.toLocaleDateString() }}</p>
+            <p>{{ animal.sexo }}</p>
+            <p>{{ animal.raca }}</p>
+            <p>{{ animal.porte }}</p>
+            <ul class="flex flex-row space-x-6 mt-3 justify-end">
+                @each(caract in animal.caracteristicas)
+                    <li> {{caract.descricao}} </li>
+                @endeach
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

@@ -73,6 +73,10 @@ export default class Pessoa extends BaseModel {
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
+  public get idade() {
+    return Math.floor(DateTime.now().diff(this.nascimento, 'years').years)
+  }
+
   getTelefone1(){
     return this.telefones.entries[0];
   }

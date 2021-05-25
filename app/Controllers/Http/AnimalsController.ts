@@ -84,8 +84,9 @@ export default class AnimalsController {
 
   public async show ({ view, params }: HttpContextContract) {
     const animal =  await Animal.find(params.idAnimal)
-    //carrega as caracteristicas do animal
-    await animal!!.preload('caracteristicas')
+    await animal!.preload('tipoAnimal')
+    await animal!.preload('caracteristicas')
+    // PQ TA DANDO ERRADOOOOO?????????
     return view.render('animal/show', { animal });
   }
 

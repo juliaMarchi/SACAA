@@ -14,7 +14,7 @@ export default class Animal extends BaseModel {
   public nome: string[45]
 
   @column({ columnName: 'nascimento' })
-  public datanascimento: Date
+  public datanascimento: DateTime
 
   @column({ columnName: 'sexo'})
   public sexo: string[45]
@@ -55,6 +55,8 @@ export default class Animal extends BaseModel {
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
-
+  public get idade() {
+    return Math.floor(DateTime.now().diff(this.datanascimento, 'years').years)
+  }
 
 }
