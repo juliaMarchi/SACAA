@@ -56,7 +56,8 @@ export default class Animal extends BaseModel {
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
   public get idade() {
-    return Math.floor(DateTime.now().diff(this.datanascimento, 'years').years)
+    console.log(this.datanascimento);
+    //const idade = Math.floor(DateTime.now().diff(this.datanascimento, 'years').years);
+    return 0;
   }
-
 }

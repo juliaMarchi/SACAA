@@ -20,8 +20,10 @@
                         @endeach
                     @endslot
                     @slot('footer')
-                        <a href="/adocaos/efetivar/{{ adocaos.id }}">Efetivar</a>
-                        <a href="/adocaos/recusar/{{ adocaos.id }}">Recusar</a>
+                        @each( x in adocaos.animal.adocao)
+                            <a href="/adocaos/efetivar/{{ x.id }}">Efetivar</a>
+                            <a href="/adocaos/recusar/{{ x.id }}">Recusar</a>
+                        @endeach
                     @endslot
                 @endcomponent
             @endeach

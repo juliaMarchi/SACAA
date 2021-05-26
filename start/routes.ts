@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.on('/').render('login')
+Route.get('/',  async ({response}) => {
+    return response.redirect('/home')
+})
 
 Route.on('login').render('login')
 Route.post('/login', 'PessoasController.login')

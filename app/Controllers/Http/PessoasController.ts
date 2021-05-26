@@ -69,8 +69,7 @@ export default class PessoasController {
     //carrega as caracteristicas da pessoa
     await pessoa!.preload('caracteristicas')
     await pessoa!.preload('telefones')
-    //como funciona esse preload? condição no edge
-    //pq telefone só aparece 1?
+    console.log(pessoa!.telefones)
     //como colocar o quadro no meio da tela
     return view.render('pessoa/show', { pessoa });
   }

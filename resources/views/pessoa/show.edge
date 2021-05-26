@@ -24,7 +24,7 @@
       </div>
       
       <div class="flex flex-row text-green-700">
-        @if(pessoa.caracteristicas)
+        @if(pessoa.caracteristicas.length > 0)
           <p class="mr-8">{{ pessoa.nome }} é:</p>
           <ul class="flex flex-row space-x-8">
             @each(caract in pessoa.caracteristicas)

@@ -61,7 +61,7 @@ export default class Pessoa extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Telefone, {foreignKey:'id'})
+  @hasMany(() => Telefone)
   public telefones: HasMany<typeof Telefone>
 
   @manyToMany(() => Caracteristica,{

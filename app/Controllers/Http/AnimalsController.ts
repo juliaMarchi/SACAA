@@ -86,7 +86,7 @@ export default class AnimalsController {
     const animal =  await Animal.find(params.idAnimal)
     await animal!.preload('tipoAnimal')
     await animal!.preload('caracteristicas')
-    // PQ TA DANDO ERRADOOOOO?????????
+  
     return view.render('animal/show', { animal });
   }
 
