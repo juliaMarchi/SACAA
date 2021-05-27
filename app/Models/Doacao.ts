@@ -10,18 +10,18 @@ export default class Doacao extends BaseModel {
 
   @column({ columnName: 'ativo' })
   public ativo: boolean
+  
+  @column({ columnName: 'pessoa_id' })
+  public pessoaId:number
+
+  @column({ columnName: 'animal_id' })
+  public animalId:number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-  @column({ columnName: 'pessoa_id' })
-  public pessoaId:number
-
-  @column({ columnName: 'animal_id' })
-  public animalId:number
 
   @belongsTo(() => Animal)
   public animal: BelongsTo<typeof Animal>

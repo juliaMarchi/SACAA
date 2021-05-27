@@ -8,9 +8,6 @@ export default class Adocao extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
   public id: number
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
   @column({ columnName: 'pessoa_id' })
   public pessoaId:number
 
@@ -19,6 +16,9 @@ export default class Adocao extends BaseModel {
 
   @column()
   public status: string
+  
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
