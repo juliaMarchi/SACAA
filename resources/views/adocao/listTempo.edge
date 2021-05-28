@@ -1,23 +1,24 @@
 <div class="flex justify-center">
     <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
-        <h1 class="text-center text-md text-white text-lg">Doações recusadas</h1>
+        <h1 class="text-center text-md text-white text-lg">Últimos adicionados no site</h1>
     </div>
 </div>
 <div>
     <ul class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-        @each(adocaos in recusados.listAdocaos)
+        @each(doacao in list)
             @component('components/card')
                 @slot('header')
                     <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
-                    <a href="/animais/{{ adocaos.animal.id }}">{{ adocaos.animal.nome }}</a>
+                    <h1>{{ doacao.animal.nome }}</h1>
                 @endslot
                 @slot('body')
-                    @each( x in adocaos.animal.adocao)
-                        <a href="/pessoas/{{ x.pessoa.id }}">{{ x.pessoa.nome }}</a>
-                    @endeach
+                    <p>{{ doacao.animal.tipoAnimal.descricao }}</p>
+                    <p>{{ doacao.animal.sexo }}</p>
+                    <p>{{ doacao.animal.raca }}</p>
+                    <p>{{ doacao.animal.porte }}</p>
                 @endslot
                 @slot('footer')
-                    <p>Adoção recusada</p>
+                    <a href="/adocaos/{{ doacao.animal.id }}">Ver mais</a>
                 @endslot
             @endcomponent
         @endeach

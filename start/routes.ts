@@ -36,7 +36,7 @@ Route.get('/adocaos/listMatch', 'AdocaosController.listMatch').middleware('auth:
 Route.get('/adocaos/listTipoAnimal/:tipoAnimal', 'AdocaosController.listTipoAnimal').middleware('auth:web');
 Route.get('/adocaos/listDoacoes', 'AdocaosController.listDoacoes').middleware('auth:web');
 Route.get('/adocaos/listAdocoes', 'AdocaosController.listAdocoes').middleware('auth:web');
-Route.get('/adocaos/realiza/:idAnimal', 'AdocaosController.store').middleware('auth:web');
+Route.get('/adocaos/realiza/:idAnimal', 'AdocaosController.store').middleware(['auth:web', 'verificaDuplaTentativa']);
 Route.get('/adocaos/:idDoacao', 'AdocaosController.show').middleware('auth:web');
 Route.get('/adocaos/efetivar/:idAdocao', 'AdocaosController.efetivarAdocaoSave').middleware('auth:web');
 Route.get('/adocaos/recusar/:idAdocao', 'AdocaosController.efetivarAdocaoRecusado').middleware('auth:web');

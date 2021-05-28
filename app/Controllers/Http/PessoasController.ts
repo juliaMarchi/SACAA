@@ -3,7 +3,6 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
-import { DateTime } from 'luxon';
 
 export default class PessoasController {
 
@@ -60,7 +59,7 @@ export default class PessoasController {
       await pessoa.related("caracteristicas").sync(selecionadas)
     await pessoa.preload("caracteristicas")//carregar dados das relações
 
-    return pessoa
+    return { pessoa }
   }
 
   public async show({ view, params }: HttpContextContract) {
@@ -106,7 +105,6 @@ export default class PessoasController {
 
   public async logout({ auth, response }: HttpContextContract){
     await auth.logout()
-
     response.redirect('/')
   }
 }

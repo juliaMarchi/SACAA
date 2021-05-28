@@ -12,14 +12,13 @@
                     <a href="/animais/{{ adocaos.animal.id }}">{{ adocaos.animal.nome }}</a>
                 @endslot
                 @slot('body')
-                    @each( x in adocaos.animal.adocao)
-                        <a href="/pessoas/{{ x.pessoa.id }}">{{ x.pessoa.nome }}</a>
-                    @endeach
+                    <p>{{ adocaos.animal.tipoAnimal.descricao }}</p>
+                    <p>{{ adocaos.animal.sexo }}</p>
+                    <p>{{ adocaos.animal.raca }}</p>
+                    <p>{{ adocaos.animal.porte }}</p>
                 @endslot
                 @slot('footer')
-                    @each( x in adocaos.animal.adocao)
-                        <p>Aguardando resposta</p>
-                    @endeach
+                    <p>Aguardando</p>
                 @endslot
             @endcomponent
         @endeach

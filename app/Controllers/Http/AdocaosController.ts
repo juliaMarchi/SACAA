@@ -5,7 +5,6 @@ import Doacao from 'App/Models/Doacao'
 import Animal from 'App/Models/Animal'
 import Database from '@ioc:Adonis/Lucid/Database'
 import TipoAnimal from 'App/Models/TipoAnimal'
-import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
 import { AuthContract } from '@ioc:Adonis/Addons/Auth'
 
 export default class AdocaosController {
@@ -30,7 +29,7 @@ export default class AdocaosController {
     
       return adocao;
     }
-    return 'Invalido'
+    return { status: 'fail', message: 'O anunciante não pode realizar a adoção.' }
   }
 
   public async show ({ view, params }: HttpContextContract) {
@@ -40,7 +39,7 @@ export default class AdocaosController {
       .preload('animal', query => query.preload('caracteristicas'))
       .first()
 
-    return view.render('adocao.detalhesAdocao', { pessoa: doacao?.pessoa, animal: doacao?.animal });
+    return view.render('adocao/detalhesAdocao', { pessoa: doacao?.pessoa, animal: doacao?.animal });
   }
 
   public async list({ view }: HttpContextContract) {
@@ -135,7 +134,10 @@ export default class AdocaosController {
         })
       }).preload('animal',(builder)=>{
         builder.preload('adocao',(builder2)=>{
-          builder2.where('status','recusado').preload('pessoa')
+          builder2.where('status','recusado')
+            .preload('pessoa', builder => {
+              builder.select(['id', 'nome']).distinct()
+            })
         })
         builder.preload('tipoAnimal')
       })
@@ -178,19 +180,28 @@ export default class AdocaosController {
 
   private async listMinhasAdocoesAguardando(auth: AuthContract) {
     //lista de animais que estão aguardando: conforme o usuário logado
-    const list = await auth.user?.related('adocao').query().where('status', 'aguardando')
+    const list = await auth.user!.related('adocao').query().where('status', 'aguardando')
+      .preload('animal', (builder) => {
+        builder.preload('tipoAnimal')
+      }).preload('pessoa')
     return { list }
   }
 
   private async listMinhasAdocoesEfetivadas(auth: AuthContract) {
     //lista de animais que foram adotados: conforme o usuário logado
-    const list = await auth.user?.related('adocao').query().where('status', 'efetivado')
+    const list = await auth.user!.related('adocao').query().where('status', 'efetivado')
+      .preload('animal', (builder) => {
+        builder.preload('tipoAnimal')
+      }).preload('pessoa')
     return { list }
   }
 
   private async listMinhasAdocoesRecusadas(auth: AuthContract) {
     //lista de animais que foram recusados: conforme o usuário logado
-    const list = await auth.user?.related('adocao').query().where('status', 'recusado')
+    const list = await auth.user!.related('adocao').query().where('status', 'recusado')
+      .preload('animal', (builder) => {
+        builder.preload('tipoAnimal')
+      }).preload('pessoa')
     return { list }
   }
 
