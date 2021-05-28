@@ -31948,6 +31948,22 @@ video {
   transition-duration: 500ms;
 }
 
+.card-footer p {
+  --tw-bg-opacity: 1;
+  background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  display: inline-block;
+  align-self: center;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  width: 100%;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
