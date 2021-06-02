@@ -10,7 +10,6 @@ export default class VerificaDuplaTentativaAdocao {
     if (adocao !== null) {
       return response.unauthorized({ status: 'fail', message: 'Tentativa de adoção já realizada.' })
     }
-
     await next()
   }
 }

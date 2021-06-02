@@ -9,27 +9,23 @@ import { AuthContract } from '@ioc:Adonis/Addons/Auth'
 
 export default class AdocaosController {
 
-  public async store({ auth, params }: HttpContextContract) {
+  public async store({ auth, params, response }: HttpContextContract) {
 
     const adocao = new Adocao();
     const logado = await auth.user;
     const animal = await Animal.find(params.idAnimal);
     const doacao = await Doacao.query().where('ativo', true)
       .andWhere('animal_id', animal!.id).first()
-    
-    await doacao!.preload('pessoa')
+    await doacao!.preload('pessoa')  
 
-    if(doacao!.pessoa.id !== logado!.id){
-      await adocao.related('pessoa').associate(logado!);
-      await adocao.related('animal').associate(animal!);
-      await adocao.save();
+    await adocao.related('pessoa').associate(logado!);
+    await adocao.related('animal').associate(animal!);
+    await adocao.save();
 
-      doacao!.ativo = false;
-      doacao!.save()
-    
-      return adocao;
-    }
-    return { status: 'fail', message: 'O anunciante não pode realizar a adoção.' }
+    doacao!.ativo = false;
+    doacao!.save()
+  
+    return {'status': 'ok'}
   }
 
   public async show ({ view, params }: HttpContextContract) {
@@ -153,16 +149,18 @@ export default class AdocaosController {
     return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados });
   }
 
-  public async efetivarAdocaoSave({ params }: HttpContextContract) {
+  public async efetivarAdocaoSave({ params, response }: HttpContextContract) {
     //caso o doador aceite o pedido de adoção
     const dado = await Adocao.find(params.idAdocao)
     dado!.status = 'efetivado'
     dado!.save()
 
-    return dado
+    //como regarregar a página?
+    response.redirect().toRoute('AdocaosController.listDoacoes')
+    return
   }
 
-  public async efetivarAdocaoRecusado({ params }: HttpContextContract) {
+  public async efetivarAdocaoRecusado({ params, response }: HttpContextContract) {
     //caso o doador recuse o pedido de adoção
     const dado = await Adocao.find(params.idAdocao);
     await dado!.preload('animal');
@@ -175,7 +173,7 @@ export default class AdocaosController {
     dado!.status = 'recusado'
     dado!.save()
 
-    return dado
+    return response.redirect().toRoute('/adocaos/listDoacoes')
   }
 
   private async listMinhasAdocoesAguardando(auth: AuthContract) {

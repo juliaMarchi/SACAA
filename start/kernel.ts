@@ -40,5 +40,6 @@ Server.middleware.register(['Adonis/Core/BodyParserMiddleware'])
 */
 Server.middleware.registerNamed({
   auth: 'App/Middleware/Auth',
-  verificaDuplaTentativa: 'App/Middleware/VerificaDuplaTentativaAdocao'
+  verificaDuplaTentativa: 'App/Middleware/VerificaDuplaTentativaAdocao',
+  verificaTentativaAdocaoCriador: 'App/Middleware/VerificaTentativaAdocaoCriador'
 })

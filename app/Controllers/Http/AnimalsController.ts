@@ -39,15 +39,11 @@ export default class AnimalsController {
     return view.render('animal/create', { portes, sexos, animal, tiposAnimais, caracteristicas });
   }
 
-  public async store ({ request, auth }: HttpContextContract) {
+  public async store ({ request, auth, view }: HttpContextContract) {
     
     const logado = await auth.user;
     const dados = request.all();
-    console.log(dados) 
-
-    const tipoAnimal = await TipoAnimal.find(dados['idTipoAnimal']);
-    console.log(tipoAnimal)
-    
+    const tipoAnimal = await TipoAnimal.find(dados['idTipoAnimal']);    
     const x = request.only(['nome','raca','nascimento','porte', 'sexo']);
     const animal = await Animal.create(x);
     
@@ -59,9 +55,14 @@ export default class AnimalsController {
       await animal.related("caracteristicas").sync(selecionadas)
 
     //criando doação
-    const doacao = await Doacao.create({pessoaId: logado?.id, animalId: animal.id, ativo: true});
+    await Doacao.create({pessoaId: logado?.id, animalId: animal.id, ativo: true});
     
-    return {animalId: animal.id, doacaoId: doacao.id};
+    //carregando depois de pronto
+    let animal1 = await Animal.find(animal.id)
+    await animal1?.preload('caracteristicas')
+    await animal1?.preload('tipoAnimal')
+
+    return view.render('animal/show', { 'animal': animal1 })
   }
 
   public async renderCaracteristicas({view, params}){
@@ -88,18 +89,5 @@ export default class AnimalsController {
     await animal!.preload('caracteristicas')
   
     return view.render('animal/show', { animal });
-  }
-
-  public async list({ view }: HttpContextContract){
-    const animais =  await Animal.all()
-    return view.render('animal/list', { animais });
-  }
-  
-  public async delete ({ params }: HttpContextContract) {
-    const animal = await Animal.find(params.idAnimal);
-
-    if(animal){
-      animal.delete();
-    }
   }
 }

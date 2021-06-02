@@ -1,5 +1,5 @@
-/* eslint-disable handle-callback-err */
 /* eslint-disable prettier/prettier */
+/* eslint-disable handle-callback-err */
 function requisitarAdocao(event) {
     event.preventDefault();
     const url = event.target.href;
@@ -12,15 +12,9 @@ function requisitarAdocao(event) {
                     icon: "error",
                     confirmButtonText: "Ok",
                 })
+            }else{
+                window.location.href = '/adocaos/listAdocoes';
             }
-        })
-        .catch(error => {
-            Swal.fire({
-                title: 'Houve um erro de conexão.',
-                text: 'Tente novamente mais tarde.',
-                icon: "error",
-                confirmButtonText: "Ok",
-            })
         })
 }
 

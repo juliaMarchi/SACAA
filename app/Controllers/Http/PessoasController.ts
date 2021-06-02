@@ -65,17 +65,11 @@ export default class PessoasController {
   public async show({ view, params }: HttpContextContract) {
 
     const pessoa =  await Pessoa.find(params.idPessoa)
-    //carrega as caracteristicas da pessoa
     await pessoa!.preload('caracteristicas')
     await pessoa!.preload('telefones')
     console.log(pessoa!.telefones)
     //como colocar o quadro no meio da tela
     return view.render('pessoa/show', { pessoa });
-  }
-
-  public async list({ view }: HttpContextContract){
-    const pessoas =  await Pessoa.all()
-    return view.render('pessoa/list', { pessoas });
   }
 
   public async edit({ view, auth }: HttpContextContract) {
