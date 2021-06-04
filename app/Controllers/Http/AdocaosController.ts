@@ -9,7 +9,7 @@ import { AuthContract } from '@ioc:Adonis/Addons/Auth'
 
 export default class AdocaosController {
 
-  public async store({ auth, params, response }: HttpContextContract) {
+  public async store({ auth, params }: HttpContextContract) {
 
     const adocao = new Adocao();
     const logado = await auth.user;
@@ -54,7 +54,7 @@ export default class AdocaosController {
     //lista de animais disponiveis que da "match" com o usuario logado
     const logado = await auth.user
     const tiposAnimais = await TipoAnimal.all()
-    const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true", [logado.id])
+    const res = await Database.rawQuery("select ac.animal_id from animal_caracteristica as ac inner join pessoa_caracteristica as pc on ac.caracteristica_id = pc.caracteristica_id inner join doacaos as d on d.animal_id=ac.animal_id where pc.pessoa_id=? and d.ativo=true", [logado!.id])
     const animaisMatch = []
 
     for (const r in res[0]) {
