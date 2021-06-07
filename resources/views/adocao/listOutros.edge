@@ -1,18 +1,19 @@
 <div>
     <ul class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
-        @each(adocaos in recusados.listAdocaos)
+        @each(doacao in outros.list)
             @component('components/card')
                 @slot('header')
                     <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
-                    <a href="/animais/{{ adocaos.animal.id }}">{{ adocaos.animal.nome }}</a>
+                    <a href="/animais/{{ doacao.animal.id }}">{{ doacao.animal.nome }}</a>
                 @endslot
                 @slot('body')
-                    @each( x in adocaos.animal.adocao)
-                        <a href="/pessoas/{{ x.pessoa.id }}">{{ x.pessoa.nome }}</a>
-                    @endeach
+                <p>{{ doacao.animal.tipoAnimal.descricao }}</p>
+                <p>{{ doacao.animal.sexo }}</p>
+                <p>{{ doacao.animal.raca }}</p>
+                <p>{{ doacao.animal.porte }}</p>
                 @endslot
                 @slot('footer')
-                    <p>Adoção recusada</p>
+                    <p>Aguardando ser adotado</p>
                 @endslot
             @endcomponent
         @endeach

@@ -1,12 +1,16 @@
 @layout('base')
 
 @section('conteudo')
-  <div>
-    <form method="POST" action="{{ route('PessoasController.savePerfil') }}">
-      <h1 class="text-center text-2xl	text-green-700 pb-10">Editar Perfil</h1>
-      @include('pessoa/formEdit')
-      @include('pessoa/perfil')
-      <button class="text-green-900 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md text-base font-medium mt-5" type="submit" value="Submit">Concluir</button>
-    </form>
+  <div class="flex justify-center items-center">
+    <div class="flex flex-col container max-w-5xl bg-green-50 p-10 rounded-lg">
+      <form method="POST" action="{{ route('PessoasController.savePerfil') }}">
+        <h1 class="text-center text-2xl	text-green-700 pb-6 border-b-2 border-green-200">Editar Perfil</h1>
+        @include('pessoa/formEdit')
+        @include('pessoa/perfil')
+        <div class="flex flex-col">
+          <button class="bg-green-200 text-green-900 hover:bg-green-500 hover:text-white px-3 py-2 rounded-md text-base font-medium mt-6" type="submit" value="Submit">Concluir</button>
+        </div>
+      </form>
+    </div>
   </div>
 @endsection

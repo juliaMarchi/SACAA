@@ -78,8 +78,8 @@ export default class AnimalsController {
     const selecionadas = request.only(['caracteristicas'])['caracteristicas']
     if(selecionadas)
       await animal!!.related("caracteristicas").sync(selecionadas)
-    await animal!!.preload("caracteristicas")//carregar dados das relações
-
+    await animal!!.preload("caracteristicas")
+    
     return animal
   }
 

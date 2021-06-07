@@ -1,5 +1,5 @@
-//1. Tela home
-//2. Fazer navegação
-//3. Arrumar tela perfil
+//1. Show de animal e pessoa colocar no meio
+//2. Idade do animal não ta calculando
+//3. Regarregar as páginas atualizadas -> PessoasController: savePerfil()
 
 //N- Fazer a upload das fotos

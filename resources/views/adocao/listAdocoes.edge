@@ -1,6 +1,11 @@
 @layout('base')
 
 @section('conteudo')
+    <div class="flex justify-center">
+        <div class="container max-w-xs p-2 bg-green-600 rounded-2xl m-5">
+            <h1 class="text-center text-md text-white text-lg">Minhas adoções</h1>
+        </div>
+    </div>
     @include('adocao/listMinhasAbertas')
     @include('adocao/listMinhasEfetivadas')
     @include('adocao/listMinhasRecusadas')

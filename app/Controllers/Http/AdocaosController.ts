@@ -87,6 +87,18 @@ export default class AdocaosController {
     return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }
 
+  private async listOutros(auth: AuthContract){
+    //lista de animais que estão pra doação
+
+    const list = await auth.user?.related('doacao')
+      .query().where('ativo', true)
+      .preload('animal', builder => {
+        builder.preload('tipoAnimal')
+      })
+    
+    return { list }
+  }
+
   private async listAdocaosAbertas(auth: AuthContract) {
     //lista de animais que estão esperando a sua adoção ser efetivada pelo doador.
     const listAdocaos = await auth.user?.related('doacao')
@@ -145,8 +157,9 @@ export default class AdocaosController {
     const aguardando = await this.listAdocaosAbertas(auth)
     const efetivados = await this.listEfetivados(auth)
     const recusados = await this.listRecusados(auth)
+    const outros = await this.listOutros(auth)
 
-    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados });
+    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros });
   }
 
   public async efetivarAdocaoSave({ params, response }: HttpContextContract) {

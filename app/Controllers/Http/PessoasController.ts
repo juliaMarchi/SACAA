@@ -64,6 +64,7 @@ export default class PessoasController {
   public async perfil({ view, auth }: HttpContextContract){
     const { caracteristicas } = await this.renderCaracteristicas(auth);
     const pessoa = auth.user;
+    await pessoa?.preload('telefones')
 
     return view.render('pessoa/edit', { pessoa, caracteristicas });
   }

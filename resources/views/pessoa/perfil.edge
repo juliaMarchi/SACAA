@@ -1,10 +1,10 @@
-<div>
+<div class="grid justify-items-center border-t-2 border-green-200 mt-6">
   <input type="hidden" name="idPessoa" value="{{ pessoa.idPessoa }}"/>
-  <label class="mb-5 text-green-800" for="caracteristicas">Selecione as características que combinam com você!</label>
+  <label class="my-6 text-green-800" for="caracteristicas">Selecione as características que combinam com você!</label>
   
   <div class="flex">
     @each(caract in caracteristicas)
-      <div class="m-5 place-items-start space-y-5">
+      <div class="mx-6 place-items-start space-y-5 text-green-800">
         <input class="mr-3" type="checkbox" value="{{caract.id}}" name="caracteristicas[]" {{ caract.checked }}/>{{caract.descricao}}
       </div> 
     @endeach
