@@ -7,24 +7,24 @@
     
         <div class="space-x-2" data-radio-input-group="pessoa">
             <label for="basic-url" class="text-green-900 text-base">Nascimento</label>
-            <input type="date" name="nascimento" value="{{ pessoa.nascimento  || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
+            <input type="date" name="nascimento" value="{{ pessoa.nascimento.toISODate()  || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
         </div>
     </div>
     
     <div class="flex justify-between">
         <div class="space-x-2">
             <label for="basic-url" class="text-green-900 text-base">Telefone</label>
-            <input type="number" name="telefone1" value="{{ pessoa.telefones[0].numero || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
+            <input type="text" name="telefone1" value="{{ pessoa.telefones[0].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
             <label for="basic-url" class="text-green-900 text-base">Outro telefone</label>
-            <input ty pe="number" name="telefone2" value="{{ pessoa.telefones[1].numero || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
+            <input type="text" name="telefone2" value="{{ pessoa.telefones[1].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
             <label for="basic-url" class="text-green-900 text-base">CEP</label>
-            <input type="number" name="cep" value="{{ pessoa.cep || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="CEP" aria-describedby="basic-addon1">
+            <input type="text" name="cep" value="{{ pessoa.cep || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="CEP" aria-describedby="basic-addon1">
         </div>
     </div>
     
@@ -59,18 +59,6 @@
         <div class="space-x-2">
             <label for="basic-url" class="text-green-900 text-base">Complemento</label>
             <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Complemento" aria-describedby="basic-addon1">
-        </div>
-    </div>
-    
-    <div class="flex justify-start space-x-8">
-        <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Email</label>
-            <input type="email" name="email" value="{{ pessoa.email || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Email" aria-describedby="basic-addon1">
-        </div>
-    
-        <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Senha</label>
-            <input type="password" name="password" value="{{ pessoa.password || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Senha" aria-describedby="basic-addon1">
         </div>
     </div>
 </div>

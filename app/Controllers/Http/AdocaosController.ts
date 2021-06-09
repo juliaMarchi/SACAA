@@ -159,18 +159,30 @@ export default class AdocaosController {
     const recusados = await this.listRecusados(auth)
     const outros = await this.listOutros(auth)
 
+    console.log('estou aqui em list doações');
+
     return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros });
   }
 
-  public async efetivarAdocaoSave({ params, response }: HttpContextContract) {
+  public async efetivarAdocaoSave({ params, response, view, auth }: HttpContextContract) {
     //caso o doador aceite o pedido de adoção
     const dado = await Adocao.find(params.idAdocao)
     dado!.status = 'efetivado'
     dado!.save()
 
+    const aguardando = await this.listAdocaosAbertas(auth)
+    const efetivados = await this.listEfetivados(auth)
+    const recusados = await this.listRecusados(auth)
+    const outros = await this.listOutros(auth)
+
+    console.log('efetivada');
+
+    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros });
+
     //como regarregar a página?
-    response.redirect().toRoute('AdocaosController.listDoacoes')
-    return
+    //console.log('estou aqui 1');
+    //response.redirect().toRoute('AdocaosController.listDoacoes')
+    //return
   }
 
   public async efetivarAdocaoRecusado({ params, response }: HttpContextContract) {

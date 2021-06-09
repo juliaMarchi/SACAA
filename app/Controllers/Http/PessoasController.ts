@@ -69,25 +69,37 @@ export default class PessoasController {
     return view.render('pessoa/edit', { pessoa, caracteristicas });
   }
 
-  public async savePerfil({ request, auth }: HttpContextContract){
-    //COMO ATUALIZAR O TELEFONE?
-    //PQ A DATA NO NASCIMENTO NÃO APARECE?
-    //COMO FAZER A SENHA NÃO APARECER NA HORA DE EDITAR?
+  public async savePerfil({ request, auth, view }: HttpContextContract){
+
     const pessoa = auth.user;
+    await pessoa?.preload('telefones')
     
     const data = request.only(['nome', 'nascimento', 'cep', 'estado', 'cidade', 'bairro', 'rua', 'numero', 'complemento', 'email', 'password']);
     if(pessoa) {
       pessoa.merge(data)
-      pessoa.save();
+      await pessoa.save();
     }
+
+    const tel1 = request.input('telefone1');
+    const objTel1 = pessoa?.telefones[0];
+    objTel1.numero = tel1;
+    objTel1?.save();
+
+    const tel2 = request.input('telefone2');
+    const objTel2 = pessoa?.telefones[1];
+    objTel2.numero = tel2;
+    objTel2?.save();
 
     const selecionadas = request.only(['caracteristicas'])['caracteristicas']
     if(selecionadas)
       await pessoa?.related("caracteristicas").sync(selecionadas)
     
-    await pessoa?.preload("caracteristicas")
-
-    return 'OK'
+    const res = await Pessoa.find(pessoa?.id);
+    await res?.preload('caracteristicas');
+    await res?.preload('telefones');
+    const { caracteristicas } = await this.renderCaracteristicas(auth);
+    
+    return view.render('pessoa/edit', { 'pessoa': res, caracteristicas });
   }
   
   public async login({ auth, request, response }: HttpContextContract){

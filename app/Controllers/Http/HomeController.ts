@@ -13,7 +13,7 @@ export default class AdocaosController {
                         .orderBy('created_at', 'desc')
                         .limit(8)
 
-        const tipoAnimal = await TipoAnimal.all()
-        return view.render('home', { list, tipoAnimal });
+        const tiposAnimais = await TipoAnimal.all()
+        return view.render('home', { list, tiposAnimais });
     }
 }
