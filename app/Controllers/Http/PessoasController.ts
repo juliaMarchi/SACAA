@@ -74,7 +74,7 @@ export default class PessoasController {
     const pessoa = auth.user;
     await pessoa?.preload('telefones')
     
-    const data = request.only(['nome', 'nascimento', 'cep', 'estado', 'cidade', 'bairro', 'rua', 'numero', 'complemento', 'email', 'password']);
+    const data = request.only(['nome', 'nascimento', 'cep', 'estado', 'cidade', 'bairro', 'rua', 'numero', 'complemento']);
     if(pessoa) {
       pessoa.merge(data)
       await pessoa.save();

@@ -27,7 +27,7 @@ input.invalid {
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
-  background-color: #059669;
+  background-color: #ee1a1a;
 }
 
 .hidden_tab {

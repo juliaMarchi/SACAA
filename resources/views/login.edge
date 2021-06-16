@@ -2,44 +2,44 @@
 
 @section('conteudo')
   <div class="min-h-screen flex justify-center items-center">
-    <div class="flex flex-col container max-w-4xl bg-green-100 pt-16 rounded-2xl">
-      <h1 class="self-center text-center text-black text-4xl w-1/2 mb-16">Login</h1>
+    <div class="flex flex-col container max-w-4xl bg-white pt-16 rounded-2xl">
+      <h1 class="self-center text-center text-red-600 text-4xl w-1/2 mb-16">Login</h1>
       <div class="flex justify-center items-start mb-16">
         <form
           action="{{ route('PessoasController.login') }}"
           method="post"
-          class="pr-4 border-r-2 border-green-500"
+          class="pr-4 border-r-2 border-red-600"
         >
           <div class="input-group">
-            <label for="email" class="text-black text-base">E-mail</label>
+            <label for="email" class="text-base">E-mail</label>
             <input
               type="text"
               id="email"
               name="email"
               value="{{ flashMessages.get('email') || '' }}"
-              class="h-8 block mt-2 border border-green-500 bg-green-50 rounded-lg"
+              class="h-8 block mt-2 border border-gray-400 bg-white rounded-lg"
             />
             <p>{{ flashMessages.get('auth.errors.uid') || '' }}</p>
           </div>
           <div class="input-group mt-4">
-            <label for="password" class="text-black text-base">Senha</label>
+            <label for="password" class="text-base">Senha</label>
             <input
               id="password"
               type="password"
               name="password"
-              class="h-8 block mt-2 border border-green-500 bg-green-50 rounded-lg"
+              class="h-8 block mt-2 border border-gray-400 bg-white rounded-lg"
             />
             <p>{{ flashMessages.get('auth.errors.password') || '' }}</p>
           </div>
-          <button class="mt-3 h-10 w-full border-none bg-green-500 text-white font-bold rounded-lg mt-6">
+          <button class="mt-3 h-10 w-full border-none bg-red-600 text-white font-bold rounded-lg mt-6">
             Entrar
           </button>
         </form>
         <section class="flex flex-col justify-center items-center pl-4">
-          <h2 class="subtitle">Bem-vindo ao MeAdote</h2>
-          <h3 class="text-gray-800 text-base mb-2">Entre e adote um animal que precisa de você</h3>
-          <h3 class="text-gray-800 text-base">#MeAdote</h3>
-          <a href="/pessoas/cadastro" class="text-green-500 text-base mt-16">Não tem uma conta? Cadastre-se</a>
+          <h2 class="text-red-600 text-xl mb-5">Bem-vindo ao MeAdote</h2>
+          <h3 class="text-base mb-2">Entre e adote um animal que precisa de você</h3>
+          <h3 class="text-base">#MeAdote</h3>
+          <a href="/pessoas/cadastro" class="hover:text-red-600 text-base mt-16">Não tem uma conta? Cadastre-se</a>
         </section>
       </div>
     </div>

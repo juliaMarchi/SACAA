@@ -1,12 +1,12 @@
 @layout('base')
 @section('conteudo')
     <div class="flex justify-end">
-        <a data-action="adotar" href="/adocaos/realiza/{{ animal.id }}" class="mr-10 my-4 bg-green-600 py-3 px-5 rounded-lg text-white hover:bg-green-50 hover:text-green-800">Quero adotar!</a>
+        <a data-action="adotar" href="/adocaos/realiza/{{ animal.id }}" class="mr-10 my-4 bg-red-600 py-3 px-5 rounded-lg text-white hover:bg-red-200 hover:text-black">Quero adotar!</a>
     </div>
     <div class="flex space-x-8 mx-10">
-        <div class="w-1/3 bg-green-50 p-10 rounded-lg">
-            <h1 class="text-xl text-green-700 pb-5 border-b-2 border-green-200">Informações do doador</h1>
-            <div class="flex flex-row text-green-700">
+        <div class="w-1/3 bg-white p-10 rounded-lg">
+            <h1 class="text-xl pb-5 border-b-2 border-red-200">Informações do doador</h1>
+            <div class="flex flex-row">
                 <div class="flex-1 space-y-3 mt-3">
                     <p>Nome:</p>
                     <p>Estado:</p>
@@ -23,10 +23,10 @@
                 </div>
             </div>
         </div>
-        <div class="w-2/3 bg-green-50 p-10 rounded-lg">
-            <h1 class="text-xl text-green-700 pb-5 border-b-2 border-green-200">Informações do animal</h1>
+        <div class="w-2/3 bg-white p-10 rounded-lg">
+            <h1 class="text-xl pb-5 border-b-2 border-red-200">Informações do animal</h1>
             <div class="flex flex-row">
-                <div class="flex-1 text-green-700 space-y-3 mt-3">
+                <div class="flex-1 space-y-3 mt-3">
                     <p>Nome:</p>
                     <p>Nascimento:</p>
                     <p>Sexo:</p>
@@ -34,7 +34,7 @@
                     <p>Porte:</p>
                     <p>Esse animal é:</p>
                 </div>
-                <div class="text-right text-green-700 space-y-3 mt-3">
+                <div class="text-right space-y-3 mt-3">
                     <p>{{animal.nome}}</p>
                     <p>{{ animal.datanascimento.toLocaleDateString() }}</p>
                     <p>{{ animal.sexo }}</p>

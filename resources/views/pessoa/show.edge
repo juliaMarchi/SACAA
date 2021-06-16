@@ -2,13 +2,13 @@
 
 @section('conteudo')
   <div class="flex justify-center items-center">
-    <div class="flex flex-col container space-y-3 max-w-4xl bg-green-50 p-10 rounded-lg">
-      <div class="flex justify-start pb-5 border-b-2 border-green-200 text-green-700">
+    <div class="flex flex-col container space-y-3 max-w-4xl bg-white p-10 rounded-lg">
+      <div class="flex justify-start pb-5 border-b-2 border-red-200">
         <p class="text-2xl mr-5">{{ pessoa.nome }}</p>
         <p class="text-base flex flex-wrap content-end">{{ pessoa.idade }} anos</p>
       </div>
 
-      <div class="flex flex-row text-green-700">
+      <div class="flex flex-row">
         <div class="flex-1 space-y-3 mt-3">
           <p>Telefone para contato:</p>
           <p>Estado:</p>
@@ -23,7 +23,7 @@
         </div>
       </div>
       
-      <div class="flex flex-row text-green-700">
+      <div class="flex flex-row">
         @if(pessoa.caracteristicas.length > 0)
           <p class="mr-8">{{ pessoa.nome }} é:</p>
           <ul class="flex flex-row space-x-8">

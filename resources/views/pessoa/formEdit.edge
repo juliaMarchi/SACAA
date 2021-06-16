@@ -1,64 +1,64 @@
 <div class="mt-6 space-y-6">
-    <div class="flex justify-between">  
+    <div class="flex justify-between text-base">  
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Nome</label>
-            <input type="text" name="nome" value="{{ pessoa.nome || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Nome" aria-describedby="basic-addon1">
+            <label for="basic-url">Nome</label>
+            <input type="text" name="nome" value="{{ pessoa.nome || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Nome" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2" data-radio-input-group="pessoa">
-            <label for="basic-url" class="text-green-900 text-base">Nascimento</label>
-            <input type="date" name="nascimento" value="{{ pessoa.nascimento.toISODate()  || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
+            <label for="basic-url">Nascimento</label>
+            <input type="date" name="nascimento" value="{{ pessoa.nascimento.toISODate()  || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
         </div>
     </div>
     
-    <div class="flex justify-between">
+    <div class="flex justify-between text-base">
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Telefone</label>
-            <input type="text" name="telefone1" value="{{ pessoa.telefones[0].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
+            <label for="basic-url">Telefone</label>
+            <input type="text" name="telefone1" value="{{ pessoa.telefones[0].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Outro telefone</label>
-            <input type="text" name="telefone2" value="{{ pessoa.telefones[1].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
+            <label for="basic-url">Outro telefone</label>
+            <input type="text" name="telefone2" value="{{ pessoa.telefones[1].numero || '' }}" data-mask="(00) 00000-0000" data-mask-selectonfocus="true" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">CEP</label>
-            <input type="text" name="cep" value="{{ pessoa.cep || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="CEP" aria-describedby="basic-addon1">
-        </div>
-    </div>
-    
-    <div class="flex justify-between">
-        <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Estado</label>
-            <input type="text" name="estado" value="{{ pessoa.estado || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Estado" aria-describedby="basic-addon1">
-        </div>
-    
-        <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Cidade</label>
-            <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Cidade" aria-describedby="basic-addon1">
-        </div>
-    
-        <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Bairro</label>
-            <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Bairro" aria-describedby="basic-addon1">
+            <label for="basic-url">CEP</label>
+            <input type="text" name="cep" value="{{ pessoa.cep || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="CEP" aria-describedby="basic-addon1">
         </div>
     </div>
     
-    <div class="flex justify-between">
+    <div class="flex justify-between text-base">
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Rua</label>
-            <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Rua" aria-describedby="basic-addon1">
+            <label for="basic-url">Estado</label>
+            <input type="text" name="estado" value="{{ pessoa.estado || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Estado" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Número</label>
-            <input type="number" name="numero" value="{{ pessoa.numero || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Número da casa" aria-describedby="basic-addon1">
+            <label for="basic-url">Cidade</label>
+            <input type="text" name="cidade" value="{{ pessoa.cidade || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Cidade" aria-describedby="basic-addon1">
         </div>
     
         <div class="space-x-2">
-            <label for="basic-url" class="text-green-900 text-base">Complemento</label>
-            <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}" class="h-8 border border-green-600 bg-green-50 rounded-lg" aria-label="Complemento" aria-describedby="basic-addon1">
+            <label for="basic-url">Bairro</label>
+            <input type="text" name="bairro" value="{{ pessoa.bairro || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Bairro" aria-describedby="basic-addon1">
+        </div>
+    </div>
+    
+    <div class="flex justify-between text-base">
+        <div class="space-x-2">
+            <label for="basic-url">Rua</label>
+            <input type="text" name="rua" value="{{ pessoa.rua || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Rua" aria-describedby="basic-addon1">
+        </div>
+    
+        <div class="space-x-2">
+            <label for="basic-url">Número</label>
+            <input type="number" name="numero" value="{{ pessoa.numero || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Número da casa" aria-describedby="basic-addon1">
+        </div>
+    
+        <div class="space-x-2">
+            <label for="basic-url">Complemento</label>
+            <input type="text" name="complemento" value="{{ pessoa.complemento || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Complemento" aria-describedby="basic-addon1">
         </div>
     </div>
 </div>
