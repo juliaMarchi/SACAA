@@ -63,15 +63,32 @@ export default class AdocaosController {
         animaisMatch.push(animal)
       }
     }
+    //COMO FAZER UM PRELOAD DE TIPO ANIMAL NESSA LISTA??
+
     return view.render('adocao/listMatch', { animaisMatch, tiposAnimais });
   }
 
-  public async listTipoAnimal({ view, params }: HttpContextContract) {
+  public async listTipoAnimal({ view, params, request }: HttpContextContract) {
     //lista de animais disponiveis conforme o tipo de animal
     const tipoAnimal = params.tipoAnimal;
-    const tiposAnimais = await TipoAnimal.all()
+    const cidade = request.only(['cidade'])['cidade'];
+    const tiposAnimais = await TipoAnimal.all();
 
-    var animaisTipo = await Doacao.query()
+    if(cidade){
+      var animaisTipo = await Doacao.query()
+      .where('ativo', true)
+      .whereHas('animal', (builder) => {
+        builder.whereHas('tipoAnimal', (builder2) => {
+          builder2.where('descricao', tipoAnimal)
+        })
+      }).whereHas('pessoa', (builder) => {
+        builder.where('cidade', cidade)
+      })
+      .preload('animal', (builder) => {
+        builder.preload('tipoAnimal')
+      })
+    }else{
+      var animaisTipo = await Doacao.query()
       .where('ativo', true)
       .whereHas('animal', (builder) => {
         builder.whereHas('tipoAnimal', (builder2) => {
@@ -80,6 +97,7 @@ export default class AdocaosController {
       }).preload('animal', (builder) => {
         builder.preload('tipoAnimal')
       })
+    }
 
     var animaisPorTipo = animaisTipo.map(doacao => 
       ({ ...doacao.animal.serialize(), doacaoId: doacao.id }));
@@ -158,10 +176,9 @@ export default class AdocaosController {
     const efetivados = await this.listEfetivados(auth)
     const recusados = await this.listRecusados(auth)
     const outros = await this.listOutros(auth)
+    const tiposAnimais = await TipoAnimal.all()
 
-    console.log('estou aqui em list doações');
-
-    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros });
+    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros, tiposAnimais });
   }
 
   public async efetivarAdocaoSave({ params, response, view, auth }: HttpContextContract) {
@@ -175,9 +192,9 @@ export default class AdocaosController {
     const recusados = await this.listRecusados(auth)
     const outros = await this.listOutros(auth)
 
-    console.log('efetivada');
+    const tiposAnimais = await TipoAnimal.all()
 
-    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros });
+    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros, tiposAnimais });
 
     //como regarregar a página?
     //console.log('estou aqui 1');
@@ -233,6 +250,8 @@ export default class AdocaosController {
     const efetivados = await this.listMinhasAdocoesEfetivadas(auth)
     const recusados = await this.listMinhasAdocoesRecusadas(auth)
 
-    return view.render('adocao/listAdocoes', { aguardando, efetivados, recusados });
+    const tiposAnimais = await TipoAnimal.all()
+
+    return view.render('adocao/listAdocoes', { aguardando, efetivados, recusados, tiposAnimais });
   }
 }

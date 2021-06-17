@@ -4,6 +4,7 @@ import Pessoa from 'App/Models/Pessoa';
 import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
 import { AuthContract } from '@ioc:Adonis/Addons/Auth'
+import TipoAnimal from 'App/Models/TipoAnimal';
 
 export default class PessoasController {
 
@@ -66,7 +67,9 @@ export default class PessoasController {
     const pessoa = auth.user;
     await pessoa?.preload('telefones')
 
-    return view.render('pessoa/edit', { pessoa, caracteristicas });
+    const tiposAnimais = await TipoAnimal.all()
+
+    return view.render('pessoa/edit', { pessoa, caracteristicas, tiposAnimais });
   }
 
   public async savePerfil({ request, auth, view }: HttpContextContract){
@@ -113,5 +116,19 @@ export default class PessoasController {
   public async logout({ auth, response }: HttpContextContract){
     await auth.logout()
     response.redirect('/')
+  }
+
+  public async listaEstados({}: HttpContextContract){
+    const pessoas = await Pessoa.all();
+    var estados = new Set();
+    pessoas.map(p => estados.add(p.estado));
+    return JSON.stringify([...estados]);
+  }
+
+  public async listaCidades({ params }: HttpContextContract){
+    const pessoas = await Pessoa.query().where('estado', params.estado);
+    var cidades = new Set();
+    pessoas.map(p => cidades.add(p.cidade));
+    return JSON.stringify([...cidades]);
   }
 }

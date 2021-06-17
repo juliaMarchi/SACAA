@@ -4234,7 +4234,7 @@ video {
 }
 
 .bg-fundo2 {
-  background-image: url('/img/background2.png');
+  background-image: url('/img/background2.jpg');
 }
 
 .from-transparent {
@@ -35637,7 +35637,7 @@ video {
   }
 
   .sm\:bg-fundo2 {
-    background-image: url('/img/background2.png');
+    background-image: url('/img/background2.jpg');
   }
 
   .sm\:from-transparent {
@@ -66756,7 +66756,7 @@ video {
   }
 
   .md\:bg-fundo2 {
-    background-image: url('/img/background2.png');
+    background-image: url('/img/background2.jpg');
   }
 
   .md\:from-transparent {
@@ -97875,7 +97875,7 @@ video {
   }
 
   .lg\:bg-fundo2 {
-    background-image: url('/img/background2.png');
+    background-image: url('/img/background2.jpg');
   }
 
   .lg\:from-transparent {
@@ -128994,7 +128994,7 @@ video {
   }
 
   .xl\:bg-fundo2 {
-    background-image: url('/img/background2.png');
+    background-image: url('/img/background2.jpg');
   }
 
   .xl\:from-transparent {
@@ -160113,7 +160113,7 @@ video {
   }
 
   .\32xl\:bg-fundo2 {
-    background-image: url('/img/background2.png');
+    background-image: url('/img/background2.jpg');
   }
 
   .\32xl\:from-transparent {
