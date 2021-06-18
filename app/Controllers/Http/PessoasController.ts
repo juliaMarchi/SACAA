@@ -40,8 +40,9 @@ export default class PessoasController {
     const pessoa =  await Pessoa.find(params.idPessoa)
     await pessoa?.preload('caracteristicas')
     await pessoa?.preload('telefones')
-    //como colocar o quadro no meio da tela
-    return view.render('pessoa/show', { pessoa });
+    const tiposAnimais = await TipoAnimal.all()
+
+    return view.render('pessoa/show', { pessoa, tiposAnimais });
   }
 
   private async renderCaracteristicas(auth: AuthContract){
@@ -104,19 +105,6 @@ export default class PessoasController {
     
     return view.render('pessoa/edit', { 'pessoa': res, caracteristicas });
   }
-  
-  public async login({ auth, request, response }: HttpContextContract){
-    const email = request.input('email')
-    const password = request.input('password')
-    await auth.attempt(email, password)
-
-    response.redirect('/home')
-  }
-
-  public async logout({ auth, response }: HttpContextContract){
-    await auth.logout()
-    response.redirect('/')
-  }
 
   public async listaEstados({}: HttpContextContract){
     const pessoas = await Pessoa.all();
@@ -130,5 +118,17 @@ export default class PessoasController {
     var cidades = new Set();
     pessoas.map(p => cidades.add(p.cidade));
     return JSON.stringify([...cidades]);
+  }
+  public async login({ auth, request, response }: HttpContextContract){
+    const email = request.input('email')
+    const password = request.input('password')
+    await auth.attempt(email, password)
+
+    response.redirect('/home')
+  }
+
+  public async logout({ auth, response }: HttpContextContract){
+    await auth.logout()
+    response.redirect('/')
   }
 }

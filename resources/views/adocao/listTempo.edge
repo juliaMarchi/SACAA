@@ -1,6 +1,14 @@
-<div class="flex justify-center">
-    <div class="container max-w-xs p-2 bg-red-600 rounded-2xl m-5">
+<div class="flex justify-between">
+    <div class="container max-w-xs p-2 bg-red-600 rounded-2xl m-10">
         <h1 class="text-center text-md text-white text-lg">Últimos adicionados no site</h1>
+    </div>
+    <div>
+        <select class="h-8 mt-12 mr-5 p-1 px-3 text-red-600 rounded-2xl shadow-lg" name="estados" id="estados">
+            <option disabled selected>Selecione o estado</option>
+        </select>
+        <select class="h-8 mr-10 p-1 px-3 text-red-600 rounded-2xl shadow-lg" name="cidades" id="cidades">
+            <option disabled selected>Selecione o estado</option>
+        </select>
     </div>
 </div>
 <div>
@@ -8,7 +16,7 @@
         @each(doacao in list)
             @component('components/card')
                 @slot('header')
-                    <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Gatinho">
+                    <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Foto do animal">
                     <h1>{{ doacao.animal.nome }}</h1>
                 @endslot
                 @slot('body')
@@ -24,3 +32,7 @@
         @endeach
     </ul>            
 </div>
+
+@section('scripts')
+    <script src="/js/estado_cidade.js"></script>
+@endsection

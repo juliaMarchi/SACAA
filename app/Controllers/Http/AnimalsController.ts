@@ -87,8 +87,9 @@ export default class AnimalsController {
     const animal =  await Animal.find(params.idAnimal)
     await animal!.preload('tipoAnimal')
     await animal!.preload('caracteristicas')
-  
-    return view.render('animal/show', { animal });
+    const tiposAnimais = await TipoAnimal.all()
+
+    return view.render('animal/show', { animal, tiposAnimais });
   }
 
   public async imagem({ params }: HttpContextContract){

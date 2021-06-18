@@ -30,7 +30,7 @@ Route.get('/animais/:idAnimal/imagem', 'AnimalsController.imagem').middleware('a
 
 Route.get('/home', 'HomeController.index').middleware('auth:web');
 Route.get('/adocaos/list', 'AdocaosController.list').middleware('auth:web');
-Route.get('/adocaos/listMatch', 'AdocaosController.listMatch').middleware('auth:web');
+Route.get('/adocaos/listMatch', 'AdocaosController.listMatch').middleware(['auth:web', 'verificaCaracteristica']);
 Route.get('/adocaos/listTipoAnimal/:tipoAnimal', 'AdocaosController.listTipoAnimal').middleware('auth:web');
 Route.get('/adocaos/listDoacoes', 'AdocaosController.listDoacoes').middleware('auth:web');
 Route.get('/adocaos/listAdocoes', 'AdocaosController.listAdocoes').middleware('auth:web');

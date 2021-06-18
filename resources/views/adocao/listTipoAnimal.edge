@@ -1,25 +1,25 @@
 @layout('base')
 
 @section('conteudo')
-    <div class="flex justify-center">
-        <div class="container max-w-xs p-2 bg-red-600 rounded-2xl m-5">
+    <div class="flex justify-between">
+        <div class="container max-w-xs p-2 bg-red-600 rounded-2xl m-10">
             <h1 class="text-center text-md text-white text-lg">Animais disponíveis por tipo</h1>
         </div>
-    </div>
-    <div>
-        <select name="estados" id="estados">
-            <option disabled selected>Selecione o estado</option>
-        </select>
-        <select name="cidades" id="cidades">
-            <option disabled selected>Selecione o estado</option>
-        </select>
+        <div>
+            <select class="h-8 mt-12 mr-5 p-1 px-3 text-red-600 rounded-2xl shadow-lg" name="estados" id="estados">
+                <option disabled selected>Selecione o estado</option>
+            </select>
+            <select class="h-8 mr-10 p-1 px-3 text-red-600 rounded-2xl shadow-lg" name="cidades" id="cidades">
+                <option disabled selected>Selecione o estado</option>
+            </select>
+        </div>
     </div>
     <div>
         <ul class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4">
             @each(animal in animaisPorTipo)
                 @component('components/card')
                     @slot('header')
-                        <img src="/animais/{{ animal.id }}/imagem" alt="Gatinho">
+                        <img src="/animais/{{ animal.id }}/imagem" alt="Foto do animal">
                         <h1>{{ animal.nome }}</h1>
                     @endslot
                     @slot('body')

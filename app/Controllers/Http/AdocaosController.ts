@@ -59,13 +59,15 @@ export default class AdocaosController {
 
     for (const r in res[0]) {
       const animal = await Animal.find(res[0][r].animal_id)
+      animal?.preload('tipoAnimal')
       if (animal) {
         animaisMatch.push(animal)
       }
     }
+    //Adicionar na consulta somente animais da mesma cidade ou refazer a consulta do jeito adonis?
     //COMO FAZER UM PRELOAD DE TIPO ANIMAL NESSA LISTA??
 
-    return view.render('adocao/listMatch', { animaisMatch, tiposAnimais });
+    return view.render('adocao/listMatch', { animaisMatch, tiposAnimais, 'status': 'ok'});
   }
 
   public async listTipoAnimal({ view, params, request }: HttpContextContract) {
