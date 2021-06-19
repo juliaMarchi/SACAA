@@ -1,7 +1,7 @@
 @layout('base')
 
 @section('conteudo')
-  <div class="flex content-center justify-center items-center">
+  <div class="min-h-screen flex content-center justify-center items-center">
     <div class="flex flex-col container space-y-3 max-w-4xl bg-white p-10 rounded-lg">
       <div class="flex justify-start pb-5 border-b-2 border-red-200">
         <p class="text-2xl mr-5">{{ animal.nome }}</p>
@@ -21,7 +21,7 @@
 
         <div class="text-right space-y-3 mt-3">
             <p>{{animal.nome}}</p>
-            <p>{{ animal.datanascimento.toLocaleDateString() }}</p>
+            <p>{{ animal.datanascimento.toLocaleString() }}</p>
             <p>{{ animal.sexo }}</p>
             <p>{{ animal.raca }}</p>
             <p>{{ animal.porte }}</p>

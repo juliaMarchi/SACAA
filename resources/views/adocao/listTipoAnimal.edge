@@ -19,7 +19,7 @@
             @each(animal in animaisPorTipo)
                 @component('components/card')
                     @slot('header')
-                        <img src="/animais/{{ animal.id }}/imagem" alt="Foto do animal">
+                        <img src="https://images.unsplash.com/photo-1591017320663-dc3334ff1dcc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="Foto do animal">
                         <h1>{{ animal.nome }}</h1>
                     @endslot
                     @slot('body')

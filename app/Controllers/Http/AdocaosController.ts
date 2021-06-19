@@ -196,12 +196,11 @@ export default class AdocaosController {
 
     const tiposAnimais = await TipoAnimal.all()
 
-    return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros, tiposAnimais });
+    //return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros, tiposAnimais });
 
     //como regarregar a página?
     //console.log('estou aqui 1');
-    //response.redirect().toRoute('AdocaosController.listDoacoes')
-    //return
+    response.redirect().toRoute('AdocaosController.listDoacoes')
   }
 
   public async efetivarAdocaoRecusado({ params, response }: HttpContextContract) {

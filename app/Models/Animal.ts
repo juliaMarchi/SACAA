@@ -13,7 +13,7 @@ export default class Animal extends BaseModel {
   @column({ columnName: 'nome' })
   public nome: string[45]
 
-  @column({ columnName: 'nascimento' })
+  @column.date({ columnName: 'nascimento' })
   public datanascimento: DateTime
 
   @column({ columnName: 'sexo'})
@@ -57,7 +57,6 @@ export default class Animal extends BaseModel {
 
   public get idade() {
     console.log(this.datanascimento);
-    //const idade = Math.floor(DateTime.now().diff(this.datanascimento, 'years').years);
-    return 0;
+    return Math.floor(DateTime.now().diff(this.datanascimento, 'years').years)
   }
 }
