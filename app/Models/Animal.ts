@@ -5,6 +5,7 @@ import TipoAnimal from 'App/Models/TipoAnimal'
 import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
 import Caracteristica from 'App/Models/Caracteristica'
+import Imagen from './Imagem'
 
 export default class Animal extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
@@ -55,8 +56,22 @@ export default class Animal extends BaseModel {
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
+  @manyToMany(() => Imagen, {
+    localKey: 'id',
+    pivotForeignKey: 'animal_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'imagem_id',
+    pivotTable: 'animal_imagens'
+  })
+  public imagens: ManyToMany<typeof Imagen>
+
   public get idade() {
-    console.log(this.datanascimento);
-    return Math.floor(DateTime.now().diff(this.datanascimento, 'years').years)
+    const nascimento = 
+      (typeof this.datanascimento === 'string')
+        ? DateTime.fromFormat(this.datanascimento, 'yyyy-MM-dd') 
+        : this.datanascimento
+    
+    console.log(nascimento);
+    return Math.floor(DateTime.now().diff(nascimento, 'years').years)
   }
 }

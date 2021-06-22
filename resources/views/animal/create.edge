@@ -4,7 +4,7 @@
   <div class="min-h-screen flex justify-center items-center">
     <div class="flex flex-col container max-w-6xl bg-white p-10 rounded-2xl">
       <h1 class="text-center text-2xl text-red-600 pb-10">Cadastro de animal</h1>
-      <form action="{{ route('AnimalsController.store') }}" method="POST">
+      <form action="{{ route('AnimalsController.store') }}" method="POST" enctype="multipart/form-data">
         @include('animal/form')
       </form>
     </div>

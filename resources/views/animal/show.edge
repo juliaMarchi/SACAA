@@ -30,6 +30,13 @@
                     <li> {{caract.descricao}} </li>
                 @endeach
             </ul>
+            <ul>
+              @each(imagem in animal.imagens)
+                <li>
+                  <img src="{{ imagem.caminho }}" alt="">
+                </li>
+              @endeach
+            </ul>
         </div>
       </div>
     </div>

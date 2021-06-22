@@ -189,17 +189,6 @@ export default class AdocaosController {
     dado!.status = 'efetivado'
     dado!.save()
 
-    const aguardando = await this.listAdocaosAbertas(auth)
-    const efetivados = await this.listEfetivados(auth)
-    const recusados = await this.listRecusados(auth)
-    const outros = await this.listOutros(auth)
-
-    const tiposAnimais = await TipoAnimal.all()
-
-    //return view.render('adocao/listDoacoes', { aguardando, efetivados, recusados, outros, tiposAnimais });
-
-    //como regarregar a página?
-    //console.log('estou aqui 1');
     response.redirect().toRoute('AdocaosController.listDoacoes')
   }
 
@@ -216,7 +205,7 @@ export default class AdocaosController {
     dado!.status = 'recusado'
     dado!.save()
 
-    return response.redirect().toRoute('/adocaos/listDoacoes')
+    response.redirect().toRoute('AdocaosController.listDoacoes')
   }
 
   private async listMinhasAdocoesAguardando(auth: AuthContract) {

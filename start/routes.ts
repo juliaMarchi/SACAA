@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import Route from '@ioc:Adonis/Core/Route'
+import Application from '@ioc:Adonis/Core/Application'
+//import { cuid } from '@ioc:Adonis/Core/Helpers'
 
 Route.get('/',  async ({response}) => {
     return response.redirect('/home')
@@ -38,3 +40,17 @@ Route.get('/adocaos/realiza/:idAnimal', 'AdocaosController.store').middleware(['
 Route.get('/adocaos/:idDoacao', 'AdocaosController.show').middleware('auth:web');
 Route.get('/adocaos/efetivar/:idAdocao', 'AdocaosController.efetivarAdocaoSave').middleware('auth:web');
 Route.get('/adocaos/recusar/:idAdocao', 'AdocaosController.efetivarAdocaoRecusado').middleware('auth:web');
+
+Route.post('posts', async ({ request }) => {
+  const coverImage = request.file('cover_image')
+
+  if (coverImage) {
+    await coverImage.move(Application.tmpPath('uploads'))
+  }
+})
+
+Route.get('/uploads/:filename', async ({ params, response }) => {
+  return response.attachment(
+    Application.tmpPath('uploads', params.filename)
+  )
+})
