@@ -5,7 +5,7 @@ import TipoAnimal from 'App/Models/TipoAnimal'
 import Adocao from 'App/Models/Adocao'
 import Doacao from 'App/Models/Doacao'
 import Caracteristica from 'App/Models/Caracteristica'
-import Imagen from './Imagem'
+import Imagen from 'App/Models/Imagem'
 
 export default class Animal extends BaseModel {
   @column({ isPrimary: true, columnName: 'id' })
@@ -53,14 +53,8 @@ export default class Animal extends BaseModel {
   } )
   public caracteristicas: ManyToMany<typeof Caracteristica>
 
-  @manyToMany(() => Imagen, {
-    localKey: 'id',
-    pivotForeignKey: 'animal_id',
-    relatedKey: 'id',
-    pivotRelatedForeignKey: 'imagem_id',
-    pivotTable: 'animal_imagens'
-  })
-  public imagens: ManyToMany<typeof Imagen>
+  @hasMany(() => Imagen)
+  public imagens: HasMany<typeof Imagen>
 
   public get imagemPerfil() {
     console.log(this.imagens)

@@ -65,19 +65,21 @@ export default class AnimalsController {
       const hash = randomBytes(8).toString('hex')
       const nomeArquivo = `${hash}_${Date.now()}.${animalPic.extname}`
       const caminho = `/uploads/${nomeArquivo}`
+      const animalfoto = animal.id
       await animalPic.move(
         Application.tmpPath('uploads'),
         { name: nomeArquivo }
       )
 
       const imagem = await Imagem.create({
-        nomeArquivo,
-        caminho
+        animalId: animalfoto,
+        nomeArquivo: nomeArquivo,
+        caminho: caminho
       })
       imagens.push(imagem)
     }
     
-    await animal.related('imagens').attach(imagens.map(imagem => imagem.id))
+    await animal.related('imagens').saveMany(imagens)
 
     //criando doação
     await Doacao.create({ pessoaId: logado?.id, animalId: animal.id, ativo: true });

@@ -9,6 +9,10 @@ export default class Imagens extends BaseSchema {
       table.increments('id').primary
       table.string('nomeArquivo').notNullable
       table.string('caminho').notNullable
+      table.integer('animal_id')
+        .unsigned()
+        .references('id')
+        .inTable('animals')
       table.timestamps(true)
     })
   }
