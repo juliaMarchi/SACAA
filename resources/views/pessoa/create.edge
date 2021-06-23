@@ -4,7 +4,7 @@
   <div class="bg-fundo bg-fixed bg-contain min-h-screen flex justify-center items-center">
     <div class="flex flex-col container max-w-4xl bg-white p-10 rounded-2xl">
       <h2 class="text-center text-2xl	text-red-600 pb-10">Novo Usuário</h2>
-      <form id="js-form-pessoa" action="{{ route('PessoasController.store') }}" method="POST">
+      <form id="js-form-pessoa" action="{{ route('PessoasController.store') }}" method="POST" enctype="multipart/form-data">
         @include('pessoa/form')
       </form>
     </div>

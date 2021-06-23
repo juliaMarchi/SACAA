@@ -12,7 +12,6 @@ export default class Animals extends BaseSchema {
       table.string('sexo').notNullable
       table.string('raca').notNullable
       table.string('porte').notNullable
-      table.string('enderecoFoto')
       table.timestamps(true)
     })
   }

@@ -26,9 +26,7 @@
         </div>
         <div>
             <label for="basic-url" class="text-base mr-3">Selecione uma foto de perfil</label>
-            <form method="POST" action="upload" enctype="multipart/form-data">
-                <input type="file" name="profile_pic" />
-            </form>
+            <input type="file" name="profile_pic" />
         </div> 
     </div>
     
@@ -73,11 +71,11 @@
     <div class="tab hidden_tab text-base " data-step="4">
         <div>
             <label for="basic-url" class="mr-1">Telefone</label>
-            <input type="number" name="telefone" value="{{ pessoa.telefone1 || '' }}" class="mb-4 h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
+            <input type="number" name="telefones[]" value="{{ pessoa.telefone1 || '' }}" class="mb-4 h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 1" aria-describedby="basic-addon1">
         </div>
         <div>
             <label for="basic-url" class="mr-1">Outro telefone(opcional)</label>
-            <input type="number" name="telefone" value="{{ pessoa.telefone2 || '' }}" class="mb-4 h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
+            <input type="number" name="telefones[]" value="{{ pessoa.telefone2 || '' }}" class="mb-4 h-8 border border-gray-400 bg-white rounded-lg" aria-label="Telefone 2" aria-describedby="basic-addon1">
         </div>
     </div>
 

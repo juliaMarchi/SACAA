@@ -33,6 +33,7 @@ export default class AdocaosController {
       .where({ id: params.idDoacao })
       .preload('pessoa', query => query.preload('telefones'))
       .preload('animal', query => query.preload('caracteristicas'))
+      .preload('animal', query => query.preload('imagens'))
       .first()
 
     return view.render('adocao/detalhesAdocao', { pessoa: doacao?.pessoa, animal: doacao?.animal });
@@ -43,6 +44,7 @@ export default class AdocaosController {
     const doacoes = await Doacao.query().where('ativo', true)
       .preload('animal', doacoesQuery => {
         doacoesQuery.preload('tipoAnimal')
+        doacoesQuery.preload('imagens')
       })
     const animais = doacoes.map(doacao => 
       ({ ...doacao.animal.serialize(), doacaoId: doacao.id }));
@@ -60,6 +62,7 @@ export default class AdocaosController {
     for (const r in res[0]) {
       const animal = await Animal.find(res[0][r].animal_id)
       animal?.preload('tipoAnimal')
+      animal?.preload('imagens')
       if (animal) {
         animaisMatch.push(animal)
       }
@@ -88,6 +91,7 @@ export default class AdocaosController {
       })
       .preload('animal', (builder) => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
     }else{
       var animaisTipo = await Doacao.query()
@@ -98,12 +102,12 @@ export default class AdocaosController {
         })
       }).preload('animal', (builder) => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
     }
 
     var animaisPorTipo = animaisTipo.map(doacao => 
-      ({ ...doacao.animal.serialize(), doacaoId: doacao.id }));
-
+      ({ ...doacao.animal.serialize(), imagemPerfil: doacao.animal.imagemPerfil, doacaoId: doacao.id }));
     return view.render('adocao/listTipoAnimal', { animaisPorTipo, tiposAnimais });
   }
 
@@ -114,6 +118,7 @@ export default class AdocaosController {
       .query().where('ativo', true)
       .preload('animal', builder => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
     
     return { list }
@@ -131,6 +136,7 @@ export default class AdocaosController {
           builder2.where('status','aguardando').preload('pessoa')
         })
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
 
     return { listAdocaos }
@@ -148,6 +154,7 @@ export default class AdocaosController {
           builder2.where('status','efetivado').preload('pessoa')
         })
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
 
     return { listAdocaos }
@@ -168,6 +175,7 @@ export default class AdocaosController {
             })
         })
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       })
 
     return { listAdocaos }
@@ -213,6 +221,7 @@ export default class AdocaosController {
     const list = await auth.user!.related('adocao').query().where('status', 'aguardando')
       .preload('animal', (builder) => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       }).preload('pessoa')
     return { list }
   }
@@ -222,6 +231,7 @@ export default class AdocaosController {
     const list = await auth.user!.related('adocao').query().where('status', 'efetivado')
       .preload('animal', (builder) => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       }).preload('pessoa')
     return { list }
   }
@@ -231,6 +241,7 @@ export default class AdocaosController {
     const list = await auth.user!.related('adocao').query().where('status', 'recusado')
       .preload('animal', (builder) => {
         builder.preload('tipoAnimal')
+        builder.preload('imagens')
       }).preload('pessoa')
     return { list }
   }

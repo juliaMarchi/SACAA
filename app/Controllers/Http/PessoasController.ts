@@ -5,6 +5,8 @@ import Telefone from 'App/Models/Telefone';
 import Caracteristica from 'App/Models/Caracteristica';
 import { AuthContract } from '@ioc:Adonis/Addons/Auth'
 import TipoAnimal from 'App/Models/TipoAnimal';
+import Application from '@ioc:Adonis/Core/Application';
+import { randomBytes } from 'crypto'
 
 export default class PessoasController {
 
@@ -14,23 +16,32 @@ export default class PessoasController {
   }
 
   public async store({ request, response }: HttpContextContract) {
-    const dados = request.all();
-    const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','password']));
-    
-    if(dados['telefone1']){
-      const telefone1 = new Telefone();
-      telefone1.numero = dados['telefone1'];
-      await telefone1.save();
+    //const pessoa = await Pessoa.create(request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','password']));
+    const dados = request.only(['nome','cpf','cnpj','nascimento','ong','cep','cidade','estado','bairro','rua','numero','complemento','email','password']);
 
-      await telefone1.related('pessoa').associate(pessoa);
-    }
-    if(dados['telefone2']){
-      const telefone2 = new Telefone();
-      telefone2.numero = dados['telefone2'];
-      telefone2.save();
+    //adicionando imagem de perfil
+    const pessoaPic = request.file('profile_pic')
 
-      await telefone2.related('pessoa').associate(pessoa);
-    }
+    const hash = randomBytes(8).toString('hex')
+    const nomeArquivo = `${hash}_${Date.now()}.${pessoaPic?.extname}`
+    await pessoaPic?.move(
+      Application.tmpPath('uploads'),
+      { name: nomeArquivo }
+    )
+    const pessoa = await Pessoa.create({ ...dados, enderecoFoto: `/uploads/${nomeArquivo}` });
+
+    //adicionando telefones
+    const telefones = request.input('telefones', []).slice(0, 2)
+    console.log(telefones);
+    telefones.forEach(async tel => {
+      if(!tel) return;
+
+      const telefone = new Telefone();
+      telefone.numero = tel;
+      await telefone.save();
+
+      await telefone.related('pessoa').associate(pessoa);
+    });
 
     response.redirect('/login') 
   }

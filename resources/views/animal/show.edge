@@ -1,7 +1,7 @@
 @layout('base')
 
 @section('conteudo')
-  <div class="min-h-screen flex content-center justify-center items-center">
+  <div class="my-10 flex content-center justify-center items-center">
     <div class="flex flex-col container space-y-3 max-w-4xl bg-white p-10 rounded-lg">
       <div class="flex justify-start pb-5 border-b-2 border-red-200">
         <p class="text-2xl mr-5">{{ animal.nome }}</p>
@@ -11,7 +11,6 @@
 
       <div class="flex flex-row">
         <div class="flex-1 space-y-3 mt-3">
-            <p>Nome:</p>
             <p>Nascimento:</p>
             <p>Sexo:</p>
             <p>Raça:</p>
@@ -20,7 +19,6 @@
         </div>
 
         <div class="text-right space-y-3 mt-3">
-            <p>{{animal.nome}}</p>
             <p>{{ animal.datanascimento.toLocaleString() }}</p>
             <p>{{ animal.sexo }}</p>
             <p>{{ animal.raca }}</p>
@@ -30,15 +28,16 @@
                     <li> {{caract.descricao}} </li>
                 @endeach
             </ul>
-            <ul>
-              @each(imagem in animal.imagens)
-                <li>
-                  <img src="{{ imagem.caminho }}" alt="">
-                </li>
-              @endeach
-            </ul>
         </div>
       </div>
+
+      <ul class="flex flex-wrap justify-between">
+        @each(imagem in animal.imagens)
+          <li>
+            <img class="mt-5 w-64 h-64 rounded-lg border-2 border-red-200" src="{{ imagem.caminho }}" alt="Foto do animal">
+          </li>
+        @endeach
+      </ul>
     </div>
   </div>
 @endsection

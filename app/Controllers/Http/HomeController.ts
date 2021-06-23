@@ -17,6 +17,7 @@ export default class AdocaosController {
                 })
                 .preload('animal', (builder) => {
                     builder.preload('tipoAnimal')
+                    builder.preload('imagens')
                 })
                 .orderBy('created_at', 'desc')
                 .limit(8)
@@ -25,6 +26,7 @@ export default class AdocaosController {
                 .where('ativo', true)
                 .preload('animal', (builder) => {
                     builder.preload('tipoAnimal')
+                    builder.preload('imagens')
                 })
                 .orderBy('created_at', 'desc')
                 .limit(8)

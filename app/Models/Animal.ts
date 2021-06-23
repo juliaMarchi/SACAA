@@ -26,9 +26,6 @@ export default class Animal extends BaseModel {
   @column({ columnName: 'porte' })
   public porte: string[45]
 
-  @column({ columnName: 'enderecoFoto' })
-  public enderecoFoto: string[300]
-
   @column({ columnName: 'tipoanimal_id' })
   public tipoAnimalId: number
 
@@ -64,6 +61,14 @@ export default class Animal extends BaseModel {
     pivotTable: 'animal_imagens'
   })
   public imagens: ManyToMany<typeof Imagen>
+
+  public get imagemPerfil() {
+    console.log(this.imagens)
+    if(this.imagens === 0){
+      return "/img/404.jpg"
+    }
+    return this.imagens[0].caminho
+  }
 
   public get idade() {
     const nascimento = 

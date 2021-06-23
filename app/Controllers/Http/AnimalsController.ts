@@ -117,9 +117,4 @@ export default class AnimalsController {
 
     return view.render('animal/show', { animal, tiposAnimais });
   }
-
-  public async imagem({ params }: HttpContextContract){
-    const animal =  await Animal.find(params.idAnimal);
-    return 'https://picsum.photos/200';
-  }
 }
