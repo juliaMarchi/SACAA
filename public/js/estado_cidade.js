@@ -3,6 +3,7 @@
 (function() {
     const select = document.querySelector('#estados')
     select.addEventListener('change', () => {
+        console.log(select.value)
         buscaCidades(select.value);
     })
     fetch('/estados')
@@ -10,8 +11,8 @@
         .then(json => {
             json.forEach(element => {
                 var option = document.createElement('option')
-                option.value = element
-                option.text = element
+                option.value = element.estado
+                option.text = element.estado
                 select.appendChild(option)
             });
         })
@@ -41,8 +42,8 @@ function buscaCidades(estado) {
         .then(json => {
             json.forEach(element => {
                 var option = document.createElement('option')
-                option.value = element
-                option.text = element
+                option.value = element.cidade
+                option.text = element.cidade
                 select.appendChild(option)
             });
         })

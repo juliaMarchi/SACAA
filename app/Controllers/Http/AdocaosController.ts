@@ -32,8 +32,10 @@ export default class AdocaosController {
     const doacao = await Doacao.query()
       .where({ id: params.idDoacao })
       .preload('pessoa', query => query.preload('telefones'))
-      .preload('animal', query => query.preload('caracteristicas'))
-      .preload('animal', query => query.preload('imagens'))
+      .preload('animal', query => {
+        query.preload('imagens')
+        query.preload('caracteristicas')
+      })
       .first()
 
     return view.render('adocao/detalhesAdocao', { pessoa: doacao?.pessoa, animal: doacao?.animal });

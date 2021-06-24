@@ -117,19 +117,19 @@ export default class PessoasController {
     return view.render('pessoa/edit', { 'pessoa': res, caracteristicas });
   }
 
-  public async listaEstados({}: HttpContextContract){
-    const pessoas = await Pessoa.all();
-    var estados = new Set();
-    pessoas.map(p => estados.add(p.estado));
-    return JSON.stringify([...estados]);
+  public async listaEstados({}: HttpContextContract) {
+    const estados = await Pessoa.query().select('estado').distinct()
+    return estados.map(e => e.serialize())
   }
 
   public async listaCidades({ params }: HttpContextContract){
-    const pessoas = await Pessoa.query().where('estado', params.estado);
-    var cidades = new Set();
-    pessoas.map(p => cidades.add(p.cidade));
-    return JSON.stringify([...cidades]);
+    const cidades = await Pessoa.query()
+      .select('cidade')
+      .where('estado', decodeURIComponent(params.estado))
+      .distinct()
+    return cidades.map(c => c.serialize())
   }
+  
   public async login({ auth, request, response }: HttpContextContract){
     const email = request.input('email')
     const password = request.input('password')
