@@ -4,11 +4,12 @@
             <label for="basic-url">Nome</label>
             <input type="text" name="nome" value="{{ pessoa.nome || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Nome" aria-describedby="basic-addon1">
         </div>
-    
-        <div class="space-x-2" data-radio-input-group="pessoa">
-            <label for="basic-url">Nascimento</label>
-            <input type="date" name="nascimento" value="{{ pessoa.nascimento.toISODate()  || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
-        </div>
+        @if(pessoa.nascimento)
+            <div class="space-x-2" data-radio-input-group="pessoa">
+                <label for="basic-url">Nascimento</label>
+                <input type="date" name="nascimento" value="{{ pessoa.nascimento.toISODate()  || '' }}" class="h-8 border border-gray-400 bg-white rounded-lg" aria-label="Nascimento" aria-describedby="basic-addon1">
+            </div>
+        @endif
     </div>
     
     <div class="flex justify-between text-base">

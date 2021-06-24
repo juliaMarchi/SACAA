@@ -57,7 +57,6 @@ export default class Animal extends BaseModel {
   public imagens: HasMany<typeof Imagen>
 
   public get imagemPerfil() {
-    console.log(this.imagens)
     if(this.imagens === 0){
       return "/img/404.jpg"
     }

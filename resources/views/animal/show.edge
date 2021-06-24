@@ -34,7 +34,7 @@
       <ul class="flex flex-wrap justify-between">
         @each(imagem in animal.imagens)
           <li>
-            <img class="mt-5 w-64 h-64 rounded-lg border-2 border-red-200" src="{{ imagem.caminho }}" alt="Foto do animal">
+            <img class="object-contain mt-5 w-64 h-64 rounded-lg border-2 border-red-200" src="{{ imagem.caminho }}" alt="Foto do animal">
           </li>
         @endeach
       </ul>
